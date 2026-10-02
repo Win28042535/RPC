@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RPCG PCL — บริษัท อาร์พีซีจี จำกัด (มหาชน)</title>
+<meta name="description" content="อาร์พีซีจี โฮลดิ้งคอมพานีที่ลงทุนในธุรกิจพลังงาน (PTEC/Caltex) และธุรกิจพัฒนาอสังหาริมทรัพย์ (SAMCO) เพื่อการเติบโตที่มั่นคงและยั่งยืน">
+
+<!-- Fonts -->
+<link rel="stylesheet" href="assets/font/fonts.css">
+
+<!-- Bootstrap 5 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="data:,">
+</head>
+<body>
+
+<!-- Preloader -->
+<div id="preloader">
+  <div class="preloader-mark">RPC<span>G</span></div>
+  <div class="preloader-bar"><i></i></div>
+</div>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg rpcg-nav">
+  <div class="container container-xl">
+    <a class="rpcg-logo" href="#home">
+      RPC<span class="dot">G</span>
+      <small>HOLDING&nbsp;COMPANY</small>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <i class="bi bi-list"></i>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navMain">
+      <ul class="navbar-nav align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link active" href="#history">เกี่ยวกับเรา</a></li>
+        <li class="nav-item"><a class="nav-link" href="#business">ธุรกิจของเรา</a></li>
+        <li class="nav-item"><a class="nav-link" href="#performance">ผลประกอบการ</a></li>
+        <li class="nav-item"><a class="nav-link" href="#trust">ความยั่งยืน</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">ติดต่อเรา</a></li>
+        <li class="nav-item ms-lg-3">
+          <a class="btn-rpcg btn-amber" href="index-ir.html" id="irOffcanvasTrigger" aria-haspopup="dialog" aria-controls="irOffcanvas">นักลงทุนสัมพันธ์ <i class="bi bi-arrow-up-right"></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- INVESTOR RELATIONS — off-canvas menu -->
+<div class="ir-oc" id="irOffcanvas" role="dialog" aria-modal="true" aria-label="เมนูเว็บไซต์" aria-hidden="true">
+  <div class="ir-oc-panel">
+    <button type="button" class="ir-oc-close" id="irOffcanvasClose" aria-label="ปิดเมนู"><i class="bi bi-x-lg"></i></button>
+
+    <div class="ir-oc-col ir-oc-col-pages">
+      <a class="ir-oc-pages-media" href="index-ir.html">
+        <img src="assets/img/2151871172.webp" alt="ข้อมูลนักลงทุนสัมพันธ์ RPCG">
+        <span class="ir-oc-pages-media-caption">นักลงทุนสัมพันธ์<br>RPCG</span>
+      </a>
+    </div>
+
+    <div class="ir-oc-col ir-oc-col-ir">
+      <div class="ir-oc-col-head">
+        <span class="ir-oc-col-title">ข้อมูลนักลงทุนสัมพันธ์</span>
+        <a class="ir-oc-see-all" href="index-ir.html">ดูข้อมูลนักลงทุนทั้งหมด</a>
+      </div>
+      <div class="ir-oc-ir-master">
+        <div class="ir-oc-ir-tabs" role="tablist" aria-orientation="vertical">
+          <button type="button" class="ir-oc-ir-tab is-active" role="tab" aria-selected="true" aria-controls="irPanel-doc" id="irTab-doc" data-ir-tab="doc">เอกสารเผยแพร่ <i class="bi bi-chevron-right"></i></button>
+          <button type="button" class="ir-oc-ir-tab" role="tab" aria-selected="false" aria-controls="irPanel-finance" id="irTab-finance" data-ir-tab="finance">ข้อมูลทางการเงิน <i class="bi bi-chevron-right"></i></button>
+          <button type="button" class="ir-oc-ir-tab" role="tab" aria-selected="false" aria-controls="irPanel-shareholder" id="irTab-shareholder" data-ir-tab="shareholder">ข้อมูลผู้ถือหุ้น <i class="bi bi-chevron-right"></i></button>
+          <button type="button" class="ir-oc-ir-tab" role="tab" aria-selected="false" aria-controls="irPanel-governance" id="irTab-governance" data-ir-tab="governance">การกำกับดูแลกิจการ <i class="bi bi-chevron-right"></i></button>
+          <button type="button" class="ir-oc-ir-tab" role="tab" aria-selected="false" aria-controls="irPanel-price" id="irTab-price" data-ir-tab="price">ข้อมูลราคาหลักทรัพย์ <i class="bi bi-chevron-right"></i></button>
+          <button type="button" class="ir-oc-ir-tab" role="tab" aria-selected="false" aria-controls="irPanel-news" id="irTab-news" data-ir-tab="news">ห้องข่าวประชาสัมพันธ์ <i class="bi bi-chevron-right"></i></button>
+        </div>
+        <div class="ir-oc-ir-panels">
+          <div class="ir-oc-ir-panel is-active" role="tabpanel" id="irPanel-doc" aria-labelledby="irTab-doc" data-ir-panel="doc">
+            <span class="ir-oc-ir-panel-title">เอกสารเผยแพร่</span>
+            <a href="20260403-rpc-ar2025-th.pdf" target="_blank" rel="noopener">แบบ 56-1 One Report</a>
+            <a href="https://www.rpcthai.com" target="_blank" rel="noopener">หนังสือชี้ชวน</a>
+          </div>
+          <div class="ir-oc-ir-panel" role="tabpanel" id="irPanel-finance" aria-labelledby="irTab-finance" data-ir-panel="finance">
+            <span class="ir-oc-ir-panel-title">ข้อมูลทางการเงิน</span>
+            <a href="https://www.rpcthai.com" target="_blank" rel="noopener">งบการเงิน</a>
+            <a href="https://www.rpcthai.com" target="_blank" rel="noopener">ข้อมูลสถิติสำคัญ</a>
+          </div>
+          <div class="ir-oc-ir-panel" role="tabpanel" id="irPanel-shareholder" aria-labelledby="irTab-shareholder" data-ir-panel="shareholder">
+            <span class="ir-oc-ir-panel-title">ข้อมูลผู้ถือหุ้น</span>
+            <a href="https://www.rpcthai.com" target="_blank" rel="noopener">โครงสร้างผู้ถือหุ้น</a>
+            <a href="https://www.rpcthai.com" target="_blank" rel="noopener">นโยบายจ่ายเงินปันผล</a>
+          </div>
+          <div class="ir-oc-ir-panel" role="tabpanel" id="irPanel-governance" aria-labelledby="irTab-governance" data-ir-panel="governance">
+            <span class="ir-oc-ir-panel-title">การกำกับดูแลกิจการ</span>
+            <a href="https://www.rpcthai.com" target="_blank" rel="noopener">นโยบายกำกับดูแลกิจการ</a>
+            <a href="https://www.rpcthai.com" target="_blank" rel="noopener">จรรยาบรรณทางธุรกิจ</a>
+          </div>
+          <div class="ir-oc-ir-panel" role="tabpanel" id="irPanel-price" aria-labelledby="irTab-price" data-ir-panel="price">
+            <span class="ir-oc-ir-panel-title">ข้อมูลราคาหลักทรัพย์</span>
+            <a href="https://www.rpcthai.com" target="_blank" rel="noopener">ราคาหลักทรัพย์ RPCG</a>
+            <a href="https://www.rpcthai.com" target="_blank" rel="noopener">ปฏิทินนักลงทุน</a>
+          </div>
+          <div class="ir-oc-ir-panel" role="tabpanel" id="irPanel-news" aria-labelledby="irTab-news" data-ir-panel="news">
+            <span class="ir-oc-ir-panel-title">ห้องข่าวประชาสัมพันธ์</span>
+            <a href="https://www.rpcthai.com" target="_blank" rel="noopener">ข่าวแจ้งตลาดหลักทรัพย์</a>
+            <a href="#contact">สอบถามข้อมูลนักลงทุน</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ir-oc-veil" id="irOffcanvasVeil" aria-hidden="true"></div>
+
+<!-- HERO -->
+<header class="hero" id="home">
+  <div class="hero-media" data-parallax="0.12" data-parallax-clamp="50"><img src="assets/img/skyline.jpg" alt="อาคารสำนักงานและเมือง สะท้อนภาพรวมของกลุ่มบริษัท อาร์พีซีจี"></div>
+  <div class="hero-media-overlay"></div>
+  <div class="hero-grain"></div>
+
+  <div class="container container-xl hero-content">
+    <div class="hero-main">
+      <h1 class="hero-title" id="heroTitle">
+        <span class="line"><span class="line-inner">โฮลดิ้งคอมพานีที่เชื่อมโยงธุรกิจ</span></span>
+        <span class="line"><span class="line-inner">พลังงานและอสังหาริมทรัพย์</span></span>
+      </h1>
+      <p class="hero-intro reveal in">อาร์พีซีจี ลงทุน กำกับดูแล และบริหารพอร์ตโฟลิโอมากว่า 30 ปี เพื่อสร้างคุณค่าและการเติบโตที่มั่นคงแก่ผู้มีส่วนได้เสียทุกฝ่าย</p>
+      <div class="hero-cta reveal in">
+        <a class="btn-rpcg btn-amber" href="#business">สำรวจพอร์ตโฟลิโอ <i class="bi bi-arrow-up-right"></i></a>
+        <a class="btn-rpcg btn-outline-light" href="index-ir.html">ข้อมูลนักลงทุน <i class="bi bi-arrow-up-right"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-stats container container-xl" aria-label="ข้อมูลสำคัญของบริษัท">
+    <div><strong>฿8,370.69</strong><span>ล้านบาท รายได้รวม ปี 2568</span></div>
+    <div><strong>1995</strong><span>ปีที่ก่อตั้ง · 30+ ปีแห่งประสบการณ์</span></div>
+    <div><strong>2 กลุ่มธุรกิจ</strong><span>พลังงาน · อสังหาริมทรัพย์</span></div>
+  </div>
+</header>
+
+
+<!-- GROUP MAP -->
+<section class="section" id="business">
+  <div class="container container-xl">
+    <div class="row mb-5">
+      <div class="col-lg-8">
+        <span class="section-tag reveal">ภาพรวมกลุ่ม</span>
+        <h2 class="section-title reveal">โครงสร้างกลุ่ม RPCG</h2>
+        <p class="section-desc reveal">อาร์พีซีจีกำกับดูแลบริษัทย่อยผ่านการกำหนดกลยุทธ์และนโยบายร่วมกัน เพื่อให้แต่ละธุรกิจแข่งขันได้อย่างมีประสิทธิภาพในอุตสาหกรรมของตนเอง</p>
+      </div>
+    </div>
+
+    <div class="group-map reveal" aria-label="โครงสร้างกลุ่มอาร์พีซีจี">
+      <div class="group-map-top">RPCG<small>Holding Company</small></div>
+      <div class="group-map-groups">
+        <a class="group-map-node" href="#bizDetail" data-biz-link="energy">
+          <span class="gm-img"><img src="assets/img/733.jpg" alt="สถานีบริการคาลเท็กซ์ของ PTEC"></span>
+          <span class="gm-name">ธุรกิจพลังงาน</span>
+          <span class="gm-co">PTEC × คาลเท็กซ์</span>
+          <span class="gm-fig"><b>81.9%</b> ของรายได้ ปี 2568</span>
+          <span class="gm-brands">คาลเท็กซ์ 80+ สถานี · Techron® EURO 5 · Non-Oil “ชาวดอย”</span>
+        </a>
+        <a class="group-map-node" href="#bizDetail" data-biz-link="estate">
+          <span class="gm-img"><img src="assets/img/house-modern.jpg" alt="โครงการที่อยู่อาศัยของ SAMCO"></span>
+          <span class="gm-name">ธุรกิจอสังหาริมทรัพย์</span>
+          <span class="gm-co">SAMCO สัมมากร</span>
+          <span class="gm-fig"><b>17.7%</b> ของรายได้ ปี 2568</span>
+          <span class="gm-brands">สัมมากร · มิตติ · อนาพนา · สัมมากร อเวนิว · S9 คอนโดมิเนียม</span>
+        </a>
+      </div>
+      <p class="group-map-role">บทบาทของ RPCG: กำหนดกลยุทธ์ บริหารพอร์ตโฟลิโอ และกำกับดูแลให้แต่ละธุรกิจแข่งขันได้</p>
+      <div class="text-center mt-3">
+        <button class="btn-rpcg btn-outline-ink" type="button" data-bs-toggle="collapse" data-bs-target="#bizDetail" aria-expanded="false" aria-controls="bizDetail">ดูรายละเอียดธุรกิจ <i class="bi bi-chevron-down"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="collapse mt-5" id="bizDetail">
+  <div class="container-fluid px-lg-5 mb-5">
+    <div class="biz-show reveal" id="bizShow">
+      <div class="biz-show-bg" aria-hidden="true">
+        <img class="is-active" data-biz="energy" src="assets/img/733.jpg" alt="">
+        <img data-biz="estate" src="assets/img/project_featured_image_3.webp" alt="">
+      </div>
+      <div class="biz-show-shade" aria-hidden="true"></div>
+
+      <div class="biz-show-thumbs" role="tablist" aria-label="เลือกกลุ่มธุรกิจ">
+        <button type="button" class="biz-thumb is-active" role="tab" aria-selected="true" data-biz="energy">
+          <small>01</small>
+          <span>ธุรกิจพลังงาน</span>
+          <i class="bi bi-arrow-up-right"></i>
+        </button>
+        <button type="button" class="biz-thumb" role="tab" aria-selected="false" data-biz="estate">
+          <small>02</small>
+          <span>อสังหาริมทรัพย์</span>
+          <i class="bi bi-arrow-up-right"></i>
+        </button>
+      </div>
+
+      <div class="biz-show-panels">
+        <article class="biz-panel is-active" data-biz="energy">
+          <span class="biz-kicker">ธุรกิจพลังงาน</span>
+          <h3 class="biz-h">PTEC × คาลเท็กซ์</h3>
+          <p class="biz-p">บริษัท เพียวพลังงานไทย จำกัด (PTEC) เป็นบริษัทแกนของกลุ่ม ดำเนินธุรกิจค้าปลีกน้ำมันเชื้อเพลิงภายใต้แบรนด์ระดับโลก “คาลเท็กซ์” พร้อมน้ำมันเทคโนโลยี Techron® มาตรฐาน EURO 5 และต่อยอดธุรกิจ Non-Oil อาทิ ร้านกาแฟ “ชาวดอย”</p>
+          <div class="biz-figures">
+            <div><b>81.9<small>%</small></b><span>ส่วนแบ่งรายได้ ปี 2568</span></div>
+            <div><b>80<small>+</small></b><span>สถานีบริการคาลเท็กซ์</span></div>
+          </div>
+        </article>
+        <article class="biz-panel" data-biz="estate">
+          <span class="biz-kicker">ธุรกิจพัฒนาอสังหาริมทรัพย์</span>
+          <h3 class="biz-h">SAMCO สัมมากร</h3>
+          <p class="biz-p">บริษัท สัมมากร จำกัด (มหาชน) พัฒนาอสังหาริมทรัพย์เพื่อที่อยู่อาศัยมายาวนานกว่า 55 ปี ทั้งบ้านเดี่ยวแบรนด์ สัมมากร มิตติ อนาพนา ทาวน์โฮม สัมมากร อเวนิว และคอนโดมิเนียม S9</p>
+          <div class="biz-figures">
+            <div><b>17.7<small>%</small></b><span>ส่วนแบ่งรายได้ ปี 2568</span></div>
+            <div><b>55<small>+</small></b><span>ปีประสบการณ์พัฒนาที่อยู่อาศัย</span></div>
+          </div>
+        </article>
+        <div class="biz-show-ctrl">
+          <span class="biz-count" id="bizCount">01/02</span>
+          <button type="button" class="biz-arrow" id="bizPrev" aria-label="ก่อนหน้า"><i class="bi bi-arrow-left"></i></button>
+          <button type="button" class="biz-arrow is-primary" id="bizNext" aria-label="ถัดไป"><i class="bi bi-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+</section>
+
+<!-- PERFORMANCE SNAPSHOT -->
+<section class="section perf" id="performance">
+  <div class="container container-xl">
+    <div class="row mb-5">
+      <div class="col-lg-8">
+        <span class="section-tag reveal">ผลประกอบการ</span>
+        <h2 class="section-title reveal">ผลการดำเนินงานโดยสรุป</h2>
+        <p class="section-desc reveal">ภาพรวมผลการดำเนินงานของกลุ่ม พร้อมระบุงวดข้อมูล เพื่อให้ตรวจสอบกับรายงานฉบับเต็มได้</p>
+      </div>
+    </div>
+
+    <p class="mock-note reveal"><i class="bi bi-info-circle"></i> ข้อมูลในส่วนนี้ ยกเว้นรายได้รวมปี 2568 และสัดส่วนรายได้ เป็นข้อมูลจำลองเพื่อการออกแบบ ไม่ใช่ตัวเลขจริงของบริษัท</p>
+
+    <div class="perf-grid stagger reveal">
+      <div class="perf-card stagger-item">
+        <span class="perf-label">รายได้รวม</span>
+        <strong class="perf-num">฿8,370.69</strong>
+        <span class="perf-unit">ล้านบาท</span>
+        <span class="perf-delta">+5.9% จากปี 2567</span>
+        <span class="perf-period">งวด: ปี 2568</span>
+      </div>
+      <div class="perf-card stagger-item is-mock">
+        <span class="perf-label">กำไรสุทธิ</span>
+        <strong class="perf-num">฿412.35</strong>
+        <span class="perf-unit">ล้านบาท</span>
+        <span class="perf-delta">+8.2% จากปี 2567</span>
+        <span class="perf-period">งวด: ปี 2568 · ข้อมูลจำลอง</span>
+      </div>
+      <div class="perf-card stagger-item is-mock">
+        <span class="perf-label">สินทรัพย์รวม</span>
+        <strong class="perf-num">฿9,846.20</strong>
+        <span class="perf-unit">ล้านบาท</span>
+        <span class="perf-delta">+3.4% จากปี 2567</span>
+        <span class="perf-period">ณ 31 ธ.ค. 2568 · ข้อมูลจำลอง</span>
+      </div>
+      <div class="perf-card stagger-item is-mock">
+        <span class="perf-label">เงินปันผล</span>
+        <strong class="perf-num">0.12</strong>
+        <span class="perf-unit">บาทต่อหุ้น</span>
+        <span class="perf-delta">คงที่จากปี 2567</span>
+        <span class="perf-period">งวด: ปี 2568 · ข้อมูลจำลอง</span>
+      </div>
+    </div>
+
+    <div class="perf-split reveal" role="img" aria-label="สัดส่วนรายได้ ปี 2568: พลังงาน 81.9% อสังหาริมทรัพย์ 17.7%">
+      <div class="perf-split-head"><span>สัดส่วนรายได้แยกตามกลุ่มธุรกิจ</span><span>ปี 2568</span></div>
+      <div class="perf-split-bar">
+        <span class="seg seg-energy" style="flex:81.9"><b>81.9%</b> พลังงาน</span>
+        <span class="seg seg-estate" style="flex:17.7"><b>17.7%</b></span>
+        <span class="seg seg-other" style="flex:.4"></span>
+      </div>
+      <div class="perf-split-legend"><span><i class="k k-energy"></i>ธุรกิจพลังงาน (PTEC)</span><span><i class="k k-estate"></i>อสังหาริมทรัพย์ (SAMCO)</span></div>
+    </div>
+
+    <div class="perf-trend reveal" role="img" aria-label="แนวโน้มรายได้รวม ปี 2564–2568 แยกตามกลุ่มธุรกิจ (ข้อมูลจำลอง ยกเว้นปี 2568)">
+      <div class="perf-split-head"><span>แนวโน้มรายได้รวม 5 ปี แยกตามกลุ่มธุรกิจ (ล้านบาท)</span><span>ปี 2564–2568</span></div>
+      <div class="trend-plot">
+        <div class="trend-col">
+          <span class="trend-total">5,120</span>
+          <div class="trend-stack" style="--p:58.2"><i class="seg-energy" style="flex:4310"></i><i class="seg-estate" style="flex:780"></i><i class="seg-other" style="flex:30"></i></div>
+          <span class="trend-year">2564</span>
+        </div>
+        <div class="trend-col">
+          <span class="trend-total">6,380</span>
+          <div class="trend-stack" style="--p:72.5"><i class="seg-energy" style="flex:5320"></i><i class="seg-estate" style="flex:1010"></i><i class="seg-other" style="flex:50"></i></div>
+          <span class="trend-year">2565</span>
+        </div>
+        <div class="trend-col">
+          <span class="trend-total">7,240</span>
+          <div class="trend-stack" style="--p:82.3"><i class="seg-energy" style="flex:5960"></i><i class="seg-estate" style="flex:1240"></i><i class="seg-other" style="flex:40"></i></div>
+          <span class="trend-year">2566</span>
+        </div>
+        <div class="trend-col">
+          <span class="trend-total">7,905</span>
+          <div class="trend-stack" style="--p:89.8"><i class="seg-energy" style="flex:6420"></i><i class="seg-estate" style="flex:1440"></i><i class="seg-other" style="flex:45"></i></div>
+          <span class="trend-year">2567</span>
+        </div>
+        <div class="trend-col is-latest">
+          <span class="trend-total">8,371</span>
+          <div class="trend-stack" style="--p:95.1"><i class="seg-energy" style="flex:6855.6"></i><i class="seg-estate" style="flex:1481.6"></i><i class="seg-other" style="flex:33.5"></i></div>
+          <span class="trend-year">2568</span>
+        </div>
+      </div>
+      <div class="perf-split-legend"><span><i class="k k-energy"></i>ธุรกิจพลังงาน</span><span><i class="k k-estate"></i>อสังหาริมทรัพย์</span><span><i class="k k-other"></i>อื่น ๆ</span></div>
+    </div>
+
+    <p class="perf-source reveal">แหล่งที่มา: รอยืนยันเอกสารอ้างอิง (เช่น แบบ 56-1 One Report) · <a class="btn-rpcg btn-outline-ink ms-2" href="index-ir.html">ดูงบการเงินทั้งหมด <i class="bi bi-arrow-up-right"></i></a></p>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section class="section journey" id="history">
+  <div class="container container-xl">
+    <div class="row mb-5">
+      <div class="col-lg-8">
+        <span class="section-tag reveal">เส้นทางองค์กร</span>
+        <h2 class="section-title reveal">จากโรงกลั่นสู่โฮลดิ้งคอมพานี</h2>
+      </div>
+    </div>
+
+    <ol class="journey-strip stagger reveal">
+      <li class="stagger-item"><b>1995</b><span>ก่อตั้ง</span></li>
+      <li class="stagger-item"><b>2003</b><span>จดทะเบียน</span></li>
+      <li class="stagger-item"><b>2012</b><span>ปรับโครงสร้าง</span></li>
+      <li class="stagger-item"><b>2017</b><span>ค้าปลีกน้ำมัน</span></li>
+      <li class="stagger-item"><b>2023</b><span>Holding เต็มรูปแบบ</span></li>
+      <li class="stagger-item is-now"><b>2025</b><span>ปัจจุบัน → ทิศทางอนาคต</span></li>
+    </ol>
+
+    <p class="journey-next reveal">ทิศทางต่อไป: ลงทุนในธุรกิจใหม่ที่หลากหลาย อย่างสร้างสรรค์และยั่งยืน</p>
+    <div class="reveal"><button class="btn-rpcg btn-outline-ink" type="button" data-bs-toggle="collapse" data-bs-target="#historyFull" aria-expanded="false" aria-controls="historyFull">อ่านประวัติฉบับเต็ม <i class="bi bi-chevron-down"></i></button></div>
+  </div>
+
+  <div class="collapse mt-5" id="historyFull">
+    <div class="history-band">
+  <div class="history-directory">
+    <div class="history-cover">
+      <div class="history-tile history-tile-a"><img src="assets/img/856.jpg" alt=""></div>
+      <div class="history-tile history-tile-b"><img src="assets/img/villa-pool.jpg" alt=""></div>
+      <div class="history-tile history-tile-c"><img src="assets/img/skyline.jpg" alt=""></div>
+      <span class="history-cover-kicker">RPCG / TIMELINE</span>
+      <h2>จากโรงกลั่น<br>สู่โฮลดิ้งคอมพานี</h2>
+      <span class="history-cover-date">1995 — TODAY</span>
+    </div>
+
+    <div class="history-index">
+      <div class="history-index-header"><span>เส้นทางการเติบโตของอาร์พีซีจี</span><span>YEAR</span></div>
+      <details class="history-entry" name="history-entries" open>
+        <summary><span>ก่อตั้งบริษัท</span><strong>1995</strong><i class="bi bi-plus-lg"></i></summary>
+        <div class="history-entry-body"><p>ก่อตั้งบริษัท ระยองเพียวริฟายเออร์ จำกัด (มหาชน) จากการร่วมทุนของนักธุรกิจไทยด้านปิโตรเลียมและปิโตรเคมี เพื่อแปรสภาพคอนเดนเสทเรสซิดิวเป็นผลิตภัณฑ์ปิโตรเลียมคุณภาพสูง</p></div>
+      </details>
+      <details class="history-entry" name="history-entries">
+        <summary><span>จดทะเบียนและปรับโครงสร้างธุรกิจ</span><strong>2003–2012</strong><i class="bi bi-plus-lg"></i></summary>
+        <div class="history-entry-body"><p>เข้าจดทะเบียนในตลาดหลักทรัพย์แห่งประเทศไทยในปี 2003 และปรับโครงสร้างการดำเนินงานครั้งสำคัญในปี 2012 เพื่อมุ่งแสวงหาการลงทุนใหม่และการเติบโตระยะยาว</p></div>
+      </details>
+      <details class="history-entry" name="history-entries">
+        <summary><span>รุกธุรกิจค้าปลีกน้ำมัน</span><strong>2017</strong><i class="bi bi-plus-lg"></i></summary>
+        <div class="history-entry-body"><p>เข้าสู่ธุรกิจค้าปลีกน้ำมันเชื้อเพลิงผ่านเครือข่ายสถานีบริการ วางรากฐานธุรกิจพลังงานของกลุ่มบริษัทฯ</p></div>
+      </details>
+      <details class="history-entry" name="history-entries">
+        <summary><span>ก้าวสู่ Holding Company เต็มรูปแบบ</span><strong>2023</strong><i class="bi bi-plus-lg"></i></summary>
+        <div class="history-entry-body"><p>SAMCO เข้าเป็นบริษัทย่อยของกลุ่มอาร์พีซีจี ขยายพอร์ตสู่ธุรกิจพัฒนาอสังหาริมทรัพย์อย่างเต็มตัว</p></div>
+      </details>
+      <details class="history-entry" name="history-entries">
+        <summary><span>เปลี่ยนสู่แบรนด์ระดับโลก</span><strong>2024</strong><i class="bi bi-plus-lg"></i></summary>
+        <div class="history-entry-body"><p>PTEC เปลี่ยนสถานีบริการทั้งหมดสู่แบรนด์คาลเท็กซ์ เพื่อยกระดับคุณภาพผลิตภัณฑ์และประสบการณ์ลูกค้า</p></div>
+      </details>
+      <details class="history-entry" name="history-entries">
+        <summary><span>ปัจจุบัน และทิศทางต่อไป</span><strong>2025</strong><i class="bi bi-plus-lg"></i></summary>
+        <div class="history-entry-body"><p>อาร์พีซีจีขับเคลื่อนสองกลุ่มธุรกิจหลัก คือพลังงานและพัฒนาอสังหาริมทรัพย์ พร้อมมุ่งกระจายการลงทุนในธุรกิจใหม่ที่หลากหลาย อย่างสร้างสรรค์และยั่งยืน</p></div>
+      </details>
+    </div>
+  </div>
+    </div>
+  </div>
+</section>
+
+<!-- INVESTOR HUB -->
+<section class="section investor-hub" id="investor">
+  <div class="container container-xl">
+    <div class="row mb-5">
+      <div class="col-lg-8">
+        <span class="section-tag reveal">นักลงทุนสัมพันธ์</span>
+        <h2 class="section-title reveal">ข้อมูลสำหรับนักลงทุน</h2>
+        <p class="section-desc reveal">เข้าถึงข้อมูลสำคัญได้จากหน้าแรก โดยไม่ต้องค้นหาเองในระบบ IR</p>
+      </div>
+    </div>
+
+    <div class="hub-grid stagger reveal">
+      <a class="hub-card stagger-item" href="https://www.rpcthai.com" target="_blank" rel="noopener">
+        <i class="bi bi-graph-up-arrow"></i>
+        <h4>ข้อมูลราคาหลักทรัพย์</h4>
+        <p>ราคาหลักทรัพย์ RPCG และปฏิทินนักลงทุน</p>
+        <span class="hub-go">ดูข้อมูล <i class="bi bi-arrow-up-right"></i></span>
+      </a>
+      <a class="hub-card stagger-item" href="20260403-rpc-ar2025-th.pdf" target="_blank" rel="noopener">
+        <i class="bi bi-file-earmark-text"></i>
+        <h4>เอกสารเผยแพร่</h4>
+        <p>แบบ 56-1 One Report และหนังสือชี้ชวน</p>
+        <span class="hub-go">เปิดเอกสาร <i class="bi bi-arrow-up-right"></i></span>
+      </a>
+      <a class="hub-card stagger-item" href="https://www.rpcthai.com" target="_blank" rel="noopener">
+        <i class="bi bi-bar-chart-line"></i>
+        <h4>ข้อมูลทางการเงิน</h4>
+        <p>งบการเงินและข้อมูลสถิติสำคัญ</p>
+        <span class="hub-go">ดูข้อมูล <i class="bi bi-arrow-up-right"></i></span>
+      </a>
+      <a class="hub-card stagger-item" href="https://www.rpcthai.com" target="_blank" rel="noopener">
+        <i class="bi bi-megaphone"></i>
+        <h4>ห้องข่าวประชาสัมพันธ์</h4>
+        <p>ข่าวแจ้งตลาดหลักทรัพย์และข่าวล่าสุด</p>
+        <span class="hub-go">อ่านข่าว <i class="bi bi-arrow-up-right"></i></span>
+      </a>
+    </div>
+
+    <div class="hub-cta reveal"><a href="index-ir.html" class="btn-rpcg btn-amber">เข้าสู่หน้านักลงทุนสัมพันธ์ <i class="bi bi-arrow-up-right"></i></a></div>
+  </div>
+</section>
+
+<!-- GOVERNANCE / SUSTAINABILITY -->
+<section class="section trust" id="trust">
+  <div class="container container-xl">
+    <div class="row mb-5">
+      <div class="col-lg-8">
+        <span class="section-tag reveal">ความน่าเชื่อถือ</span>
+        <h2 class="section-title reveal">กำกับดูแลกิจการ<br>และความยั่งยืน</h2>
+      </div>
+    </div>
+
+    <div class="row g-4 stagger reveal">
+      <div class="col-md-4 stagger-item">
+        <div class="contact-card">
+          <div class="ic"><i class="bi bi-shield-check"></i></div>
+          <h4>การกำกับดูแลกิจการ</h4>
+          <p>นโยบายกำกับดูแลกิจการและจรรยาบรรณทางธุรกิจ</p>
+          <a class="line" href="https://www.rpcthai.com" target="_blank" rel="noopener">ดูนโยบาย</a>
+        </div>
+      </div>
+      <div class="col-md-4 stagger-item">
+        <div class="contact-card">
+          <div class="ic"><i class="bi bi-tree"></i></div>
+          <h4>ความยั่งยืนและ ESG</h4>
+          <p>ลดความเข้มข้นการปล่อยก๊าซเรือนกระจก และยกระดับมาตรฐานความปลอดภัยทุกสถานีบริการ</p>
+          <a class="line" href="index-ir.html">ดูรายละเอียด</a>
+        </div>
+      </div>
+      <div class="col-md-4 stagger-item">
+        <div class="contact-card">
+          <div class="ic"><i class="bi bi-people"></i></div>
+          <h4>คู่ค้าและสื่อมวลชน</h4>
+          <p>ติดต่อฝ่ายสื่อสารองค์กร สำหรับความร่วมมือทางธุรกิจและข่าวสาร</p>
+          <a class="line" href="#contact">ติดต่อเรา</a>
+        </div>
+      </div>
+    </div>
+
+    <p class="mock-note mt-5 reveal"><i class="bi bi-info-circle"></i> ตัวชี้วัด ESG ด้านล่างเป็นข้อมูลจำลองเพื่อการออกแบบ ไม่ใช่ตัวเลขจริงของบริษัท</p>
+    <div class="esg-kpis stagger reveal">
+      <div class="esg-kpi stagger-item"><b>−12<small>%</small></b><span>ความเข้มข้นการปล่อยก๊าซเรือนกระจก (Scope 1+2) เทียบปีฐาน 2565</span></div>
+      <div class="esg-kpi stagger-item"><b>92<small>%</small></b><span>สถานีบริการผ่านการตรวจประเมินด้านความปลอดภัยประจำปี</span></div>
+      <div class="esg-kpi stagger-item"><b>38<small>%</small></b><span>สัดส่วนผู้บริหารระดับสูงที่เป็นผู้หญิง</span></div>
+      <div class="esg-kpi stagger-item"><b>0</b><span>กรณีข้อร้องเรียนด้านจรรยาบรรณที่พิสูจน์ได้ว่าเป็นความผิด</span></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="container container-xl">
+    <div class="row mb-5">
+      <div class="col-lg-7">
+        <span class="section-tag reveal">ติดต่อเรา</span>
+        <h2 class="section-title reveal">พูดคุยกับทีมอาร์พีซีจี</h2>
+      </div>
+    </div>
+
+    <div class="row g-4 mb-5 stagger reveal">
+      <div class="col-md-4 stagger-item">
+        <div class="contact-card">
+          <div class="ic"><i class="bi bi-building"></i></div>
+          <h4>สำนักงานใหญ่</h4>
+          <p>86/2 อาคารสัมมากรเพลส ถนนรามคำแหง<br>แขวงสะพานสูง เขตสะพานสูง กรุงเทพฯ 10240</p>
+          <a class="line" href="tel:023723600">02-372-3600</a>
+        </div>
+      </div>
+      <div class="col-md-4 stagger-item">
+        <div class="contact-card">
+          <div class="ic"><i class="bi bi-building-gear"></i></div>
+          <h4>ที่ตั้งโรงงาน</h4>
+          <p>7/3 ถนนปกรณ์สงเคราะห์ราษฎร์ ตำบลมาบตาพุด<br>อำเภอเมืองระยอง จังหวัดระยอง 21150</p>
+          <a class="line" href="tel:038685816">038-685-816</a>
+        </div>
+      </div>
+      <div class="col-md-4 stagger-item">
+        <div class="contact-card">
+          <div class="ic"><i class="bi bi-display"></i></div>
+          <h4>ออนไลน์</h4>
+          <p>เยี่ยมชมเว็บไซต์หลักของบริษัทฯ สำหรับข้อมูลนักลงทุนและข่าวสารล่าสุด</p>
+          <a class="line" href="https://www.rpcthai.com" target="_blank" rel="noopener">www.rpcthai.com</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mb-4 reveal">
+      <button class="btn-rpcg btn-outline-ink" type="button" data-bs-toggle="collapse" data-bs-target="#contactFormWrap" aria-expanded="false" aria-controls="contactFormWrap">ส่งข้อความถึงเรา <i class="bi bi-chevron-down"></i></button>
+    </div>
+
+    <div class="row collapse" id="contactFormWrap">
+      <div class="col-lg-8 mx-auto">
+        <form class="rpcg-form row g-4" id="contactForm">
+          <div class="col-md-6">
+            <label>ชื่อ-นามสกุล</label>
+            <input type="text" class="form-control" required>
+          </div>
+          <div class="col-md-6">
+            <label>อีเมล</label>
+            <input type="email" class="form-control" required>
+          </div>
+          <div class="col-12">
+            <label>หัวข้อ</label>
+            <input type="text" class="form-control" placeholder="เช่น ข้อมูลนักลงทุน, ความร่วมมือทางธุรกิจ">
+          </div>
+          <div class="col-12">
+            <label>ข้อความ</label>
+            <textarea class="form-control" rows="4" required></textarea>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn-rpcg btn-outline-ink">ส่งข้อความ <i class="bi bi-send"></i></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="rpcg-footer">
+  <div class="ft-wrap">
+    <div class="ft-cards">
+      <div class="ft-brand">
+        <span class="ft-logo">RPCG</span>
+        <p class="ft-tagline">ลงทุนอย่างมีวิสัยทัศน์<br><em>เติบโตอย่างยั่งยืน</em></p>
+        <div class="ft-social">
+          <span class="ft-touch">ติดตามเรา</span>
+          <a href="#" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          <a href="#" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" target="_blank" rel="noopener" aria-label="X"><i class="bi bi-twitter-x"></i></a>
+        </div>
+      </div>
+
+      <div class="ft-panel">
+        <div class="ft-links">
+          <div>
+            <h5>เมนูหลัก</h5>
+            <ul>
+              <li><a href="#home">หน้าแรก</a></li>
+              <li><a href="#history">เกี่ยวกับเรา</a></li>
+              <li><a href="#business">ธุรกิจของเรา</a></li>
+              <li><a href="#performance">ผลประกอบการ</a></li>
+              <li><a href="#trust">ความยั่งยืน</a></li>
+              <li><a href="index-ir.html">นักลงทุนสัมพันธ์</a></li>
+              <li><a href="#contact">ติดต่อเรา</a></li>
+            </ul>
+          </div>
+          <div>
+            <h5>กลุ่มธุรกิจ</h5>
+            <ul>
+              <li><a href="#business">PTEC — คาลเท็กซ์</a></li>
+              <li><a href="#business">SAMCO — สัมมากร</a></li>
+              <li><a href="#business">มิตติ / อนาพนา</a></li>
+              <li><a href="#business">S9 คอนโดมิเนียม</a></li>
+            </ul>
+          </div>
+          <div>
+            <h5>ข้อมูลติดต่อ</h5>
+            <ul>
+              <li>86/2 อาคารสัมมากรเพลส ถนนรามคำแหง เขตสะพานสูง กรุงเทพฯ 10240</li>
+              <li><a href="tel:023723600">02-372-3600</a></li>
+              <li><a href="https://www.rpcthai.com" target="_blank" rel="noopener">www.rpcthai.com</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="ft-sub">
+          <small>ไม่พลาดทุกความเคลื่อนไหว</small>
+          <strong>รับข่าวสารจากอาร์พีซีจี</strong>
+          <form class="ft-form" id="footerSubscribeForm">
+            <input type="email" placeholder="กรอกอีเมลของคุณ" required aria-label="อีเมล">
+            <button type="submit">สมัครรับข่าวสาร</button>
+          </form>
+        </div>
+
+        <p class="ft-copy">© <span id="year">2569</span> บริษัท อาร์พีซีจี จำกัด (มหาชน). สงวนลิขสิทธิ์.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="bi bi-arrow-up"></i></button>
+
+<div class="rpcg-toast" id="rpcgToast"><i class="bi bi-check-circle-fill"></i> ส่งข้อความเรียบร้อยแล้ว ขอบคุณที่ติดต่ออาร์พีซีจี</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

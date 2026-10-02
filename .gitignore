@@ -1,0 +1,8 @@
+# licensed font files (FC Minimal) are not committed to this public repo
+*.woff2
+*.woff
+*.ttf
+*.otf
+# local tooling
+.claude/
+node_modules/

@@ -1,0 +1,255 @@
+<title>RPCG Homepage Wireframe</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap">
+<style>
+/* Layout: wireframe frame on the left, annotation margin on the right per section; stacks on phones */
+/* Design DNA from the RPCG demo: navy #0055a4 + ink #12141c, white/cream paper, green/lime accents, square corners, hairlines, wide-tracked eyebrows.
+   FC Minimal is not on Google Fonts, so Noto Sans Thai stands in until the font file is supplied. */
+:root{
+  --bg:#efe9dd; --ink:#12141c; --mute:#6b6e60; --line:rgba(18,20,28,.16);
+  --frame:#ffffff; --block:#f4f0e6; --block2:#e3dccb; --brand:#0055a4; --brand-ink:#ffffff;
+  --accent:#2fa84f; --lime:#b9f04d;
+  --note:#f7ebd0; --note-ink:#5a3d0c; --chg:#e1f2e5; --chg-ink:#1f5a30;
+  --f-body:"Noto Sans Thai",system-ui,sans-serif; --ease:cubic-bezier(.65,0,.35,1);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1424; --ink:#f2f1ea; --mute:#9093a6; --line:rgba(255,255,255,.14);
+  --frame:#161d34; --block:#1d2644; --block2:#27325a; --brand:#4d94e0; --brand-ink:#0f1424;
+  --accent:#5fc47a; --lime:#b9f04d;
+  --note:#33291a; --note-ink:#f0d9a0; --chg:#143a24; --chg-ink:#b5e8c5; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1424; --ink:#f2f1ea; --mute:#9093a6; --line:rgba(255,255,255,.14);
+  --frame:#161d34; --block:#1d2644; --block2:#27325a; --brand:#4d94e0; --brand-ink:#0f1424;
+  --accent:#5fc47a; --lime:#b9f04d;
+  --note:#33291a; --note-ink:#f0d9a0; --chg:#143a24; --chg-ink:#b5e8c5; color-scheme:dark}
+body{line-height:1.7;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.6;padding-inline:16px;padding-block:32px}
+.wrap{max-width:1180px;margin-inline:auto}
+h1{font-weight:600;letter-spacing:-.01em;font-size:clamp(1.6rem,4vw,2.3rem);line-height:1.3;margin:0 0 8px;text-wrap:balance}
+.lead{color:var(--mute);max-width:70ch;margin:0 0 24px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13px;color:var(--mute);margin-bottom:28px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:14px;height:14px;border:1px solid var(--line);display:inline-block}
+.row{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:20px;margin-bottom:20px}
+.frame{background:var(--frame);border:1px solid var(--line);padding:20px;min-width:0}
+.tag{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--mute);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.tag::before{content:"";width:8px;height:8px;background:var(--lime);border:1px solid var(--accent);flex:none}
+.ph{background:var(--block);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--mute);font-size:12px;text-align:center;padding:8px}
+.h{font-weight:600;letter-spacing:-.01em;line-height:1.25}
+.h1{font-size:clamp(1.4rem,3.2vw,2rem)}
+.h2{font-size:1.15rem}
+.sub{color:var(--mute);font-size:13px}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{background:var(--block);padding:14px;min-width:0}
+.card.line{background:transparent;border:1px solid var(--line)}
+.num{color:var(--brand);font-size:1.6rem;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.1}
+.btn{display:inline-block;transition:background .2s var(--ease);padding:8px 16px;font-size:13px;font-weight:600;border:1px solid var(--brand)}
+.btn.p{background:var(--brand);color:var(--brand-ink)}
+.btn.s{color:var(--brand)}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.nav{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;font-size:13px}
+.nav b{margin-right:auto;font-size:15px}
+.nav .btn{padding:4px 12px}
+.tl{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin-top:10px}
+.tl div{border-top:3px solid var(--brand);padding-top:6px;font-size:12px}
+.tl b{display:block;font-family:var(--f-body)}
+.note{background:var(--note);color:var(--note-ink);padding:14px;font-size:13px;align-self:start;min-width:0}
+.note h3{margin:0 0 6px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:600}
+.note ul{margin:0;padding-left:18px}
+.note li{margin-bottom:4px}
+.chg{border-left:3px solid var(--accent);background:var(--chg);color:var(--chg-ink);padding:8px 10px;margin-top:10px;font-size:12.5px}
+.ref{font-size:11px;letter-spacing:.12em;opacity:.8;display:block;margin-top:8px}
+.org{display:grid;gap:8px;justify-items:center;margin-top:8px}
+.org .top{background:var(--brand);color:var(--brand-ink);padding:8px 24px;font-weight:700}
+.org .two{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%}
+.org .two>div{border:1px solid var(--brand);padding:10px;text-align:center}
+.org small{display:block;color:var(--mute);font-size:12px;font-weight:400;margin-top:4px}
+.flow{margin-top:28px;display:flex;flex-wrap:wrap;gap:6px;font-size:12px;letter-spacing:.08em}
+.flow span{background:var(--block2);padding:4px 10px}
+@media (max-width:860px){
+  .row{grid-template-columns:minmax(0,1fr)}
+  .g4,.g3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tl{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:520px){
+  .g2,.g3,.g4{grid-template-columns:minmax(0,1fr)}
+  .org .two{grid-template-columns:minmax(0,1fr)}
+}
+</style>
+
+<div class="wrap">
+  <h1>Wireframe หน้าแรก RPCG · Direction A "เชื่อมโยงธุรกิจ สร้างคุณค่า"</h1>
+  <p class="lead">ปรับจาก demo ตามแนวทางใน PDF: Group-first, Evidence-based, Contemporary Corporate และ UX Opportunity Map 6 ขั้น (Brand → Business → Portfolio → Performance → Trust → Future) แกนหลักคือทิศทาง A เสริมข้อมูลนักลงทุนจาก C และเก็บ Timeline จาก B ไว้เป็นส่วนย่อย</p>
+  <div class="legend">
+    <span><i class="sw" style="background:var(--block)"></i>ตำแหน่งภาพ/ข้อมูล</span>
+    <span><i class="sw" style="background:var(--note)"></i>เหตุผลอ้างอิง PDF</span>
+    <span><i class="sw" style="background:var(--chg)"></i>สิ่งที่เปลี่ยนจาก demo</span>
+  </div>
+
+  <!-- 0 NAV -->
+  <section class="row">
+    <div class="frame">
+      <span class="tag">0 · Navigation</span>
+      <div class="nav"><b>RPCG</b><span>เกี่ยวกับเรา</span><span>ธุรกิจ</span><span>ผลประกอบการ</span><span>ความยั่งยืน</span><span>ข่าวสาร</span><span class="btn p">นักลงทุนสัมพันธ์</span></div>
+    </div>
+    <aside class="note">
+      <h3>เหตุผล</h3>
+      <ul><li>เมนูเรียงตามลำดับ Opportunity Map ไม่ใช่ตามหน่วยงาน</li><li>IR เป็นปุ่มเด่น ไม่ใช่ลิงก์ธรรมดา</li></ul>
+      <div class="chg">เดิม: หน้าแรก / เกี่ยวกับเรา / ประวัติ / ธุรกิจ / IR / ติดต่อ</div>
+      <span class="ref">Group-first · Investor Experience</span>
+    </aside>
+  </section>
+
+  <!-- 1 HERO -->
+  <section class="row">
+    <div class="frame">
+      <span class="tag">1 · Hero · Brand: RPCG คือใคร</span>
+      <div class="grid g2" style="align-items:center">
+        <div>
+          <div class="h h1">โฮลดิ้งคอมพานีที่เชื่อมโยงธุรกิจพลังงานและอสังหาริมทรัพย์ สร้างคุณค่าเพื่อการเติบโตที่มั่นคง</div>
+          <p class="sub">อาร์พีซีจี ลงทุน กำกับดูแล และบริหารพอร์ตโฟลิโอมากว่า 30 ปี</p>
+          <div class="btns"><span class="btn p">สำรวจพอร์ตโฟลิโอ</span><span class="btn s">ข้อมูลนักลงทุน</span></div>
+        </div>
+        <div class="ph" style="min-height:190px">ภาพรวมกลุ่ม: สถานีบริการ + โครงการที่อยู่อาศัย<br>(แทนภาพโรงกลั่น)</div>
+      </div>
+      <div class="grid g3" style="margin-top:14px">
+        <div class="card line"><div class="num">฿8,370.69 ล้าน</div><div class="sub">รายได้รวม ปี 2568</div></div>
+        <div class="card line"><div class="num">1995</div><div class="sub">ก่อตั้ง · 30+ ปี</div></div>
+        <div class="card line"><div class="num">2 กลุ่มธุรกิจ</div><div class="sub">พลังงาน · อสังหาฯ</div></div>
+      </div>
+    </div>
+    <aside class="note">
+      <h3>เหตุผล</h3>
+      <ul><li>Primary = Headline ใหญ่ + CTA ชัด ตอบได้ใน 5 วินาที</li><li>แถบตัวเลข 3 ค่าช่วยสร้าง Trust ตั้งแต่จอแรก</li></ul>
+      <div class="chg">ตัด: ข้อความแนวตั้ง "Moving Forward", ป้าย Public Company, ตัวอักษร RPCG ขนาดใหญ่ และภาพโรงกลั่น<br>เปลี่ยน: การ์ดสโลแกนเป็นตัวเลขจริง</div>
+      <span class="ref">Core Objective · Modern ≠ Motion-heavy</span>
+    </aside>
+  </section>
+
+  <!-- 2 GROUP MAP -->
+  <section class="row">
+    <div class="frame">
+      <span class="tag">2 · Group Map · Portfolio: สร้างคุณค่าที่ไหน</span>
+      <div class="h h2">โครงสร้างกลุ่ม RPCG</div>
+      <div class="org">
+        <div class="top">RPCG · Holding Company</div>
+        <div class="two">
+          <div><b>ธุรกิจพลังงาน</b><small>PTEC × คาลเท็กซ์ · สัดส่วนรายได้ 81.9%</small></div>
+          <div><b>อสังหาริมทรัพย์</b><small>SAMCO สัมมากร · สัดส่วนรายได้ 17.7%</small></div>
+        </div>
+        <div class="two">
+          <div class="ph">คาลเท็กซ์ 80+ สถานี · Non-Oil ชาวดอย</div>
+          <div class="ph">สัมมากร · มิตติ · อนาพนา · อเวนิว · S9</div>
+        </div>
+      </div>
+      <p class="sub" style="margin-top:12px">บทบาทของ RPCG: กำหนดกลยุทธ์ บริหารพอร์ตโฟลิโอ และกำกับดูแลให้แต่ละธุรกิจแข่งขันได้ <span class="btn s" style="padding:2px 10px">ดูรายละเอียดธุรกิจ</span></p>
+    </div>
+    <aside class="note">
+      <h3>เหตุผล</h3>
+      <ul><li>ภาพ Holding ต้องมาก่อนรายธุรกิจ (องค์กร → พอร์ตโฟลิโอ → ธุรกิจ → ผลิตภัณฑ์)</li><li>คลิกบล็อกเพื่อเจาะลึกแบบ Expand/Reveal</li></ul>
+      <div class="chg">รวมส่วน About, Business และ Highlight เดิมที่ซ้ำกัน (~3,600px) เป็นส่วนเดียว</div>
+      <span class="ref">ทิศทาง A · Group-first</span>
+    </aside>
+  </section>
+
+  <!-- 3 PERFORMANCE -->
+  <section class="row">
+    <div class="frame">
+      <span class="tag">3 · Performance Snapshot · ผลงานเป็นอย่างไร (ส่วนใหม่)</span>
+      <div class="h h2">ผลการดำเนินงานโดยสรุป</div>
+      <div class="grid g4" style="margin-top:10px">
+        <div class="card"><div class="num">฿—</div><div class="sub">รายได้รวม<br>งวด ____ </div></div>
+        <div class="card"><div class="num">—%</div><div class="sub">กำไรสุทธิ<br>งวด ____</div></div>
+        <div class="card"><div class="num">—</div><div class="sub">สินทรัพย์รวม<br>งวด ____</div></div>
+        <div class="card"><div class="num">—</div><div class="sub">เงินปันผล<br>งวด ____</div></div>
+      </div>
+      <div class="ph" style="min-height:110px;margin-top:12px">กราฟแท่งรายได้แยกกลุ่มธุรกิจ 3–5 ปี</div>
+      <p class="sub" style="margin-top:10px">แหล่งที่มา: งบการเงิน / แบบ 56-1 <span class="btn s" style="padding:2px 10px">ดูงบการเงินทั้งหมด</span></p>
+    </div>
+    <aside class="note">
+      <h3>เหตุผล</h3>
+      <ul><li>ขั้น 04 ของ Opportunity Map ที่ demo ไม่มี</li><li>ทุกตัวเลขระบุงวดและแหล่งที่มา</li></ul>
+      <div class="chg">ใหม่ ต้องขอตัวเลขจริงจากฝ่าย IR ช่อง "—" เป็นตำแหน่งสำรอง</div>
+      <span class="ref">Evidence-based · ทิศทาง C</span>
+    </aside>
+  </section>
+
+  <!-- 4 TIMELINE -->
+  <section class="row">
+    <div class="frame">
+      <span class="tag">4 · Journey · Future: ไปทางไหนต่อ</span>
+      <div class="h h2">จากโรงกลั่นสู่โฮลดิ้งคอมพานี</div>
+      <div class="tl">
+        <div><b>1995</b>ก่อตั้ง</div><div><b>2003</b>จดทะเบียน</div><div><b>2012</b>ปรับโครงสร้าง</div>
+        <div><b>2017</b>ค้าปลีกน้ำมัน</div><div><b>2023</b>Holding เต็มรูปแบบ</div><div><b>2025</b>ปัจจุบัน → ทิศทางอนาคต</div>
+      </div>
+      <p class="sub" style="margin-top:12px">ทิศทางต่อไป: ลงทุนในธุรกิจใหม่ที่หลากหลาย อย่างสร้างสรรค์และยั่งยืน <span class="btn s" style="padding:2px 10px">อ่านประวัติฉบับเต็ม</span></p>
+    </div>
+    <aside class="note">
+      <h3>เหตุผล</h3>
+      <ul><li>เก็บเรื่องเล่าจากทิศทาง B แต่ย่อเป็นแถบเดียว</li><li>ปิดท้ายด้วย Future เพื่อเชื่อมไปส่วนถัดไป</li></ul>
+      <div class="chg">เดิมเป็น Section สูง ~840px ให้ย่อ และใส่หน้าประวัติเต็มแยก</div>
+      <span class="ref">ทิศทาง B · Reveal</span>
+    </aside>
+  </section>
+
+  <!-- 5 INVESTOR HUB -->
+  <section class="row">
+    <div class="frame">
+      <span class="tag">5 · Investor Hub · Trust: เหตุใดจึงไว้วางใจ (ส่วนใหม่)</span>
+      <div class="h h2">ข้อมูลสำหรับนักลงทุน</div>
+      <div class="grid g2" style="margin-top:10px">
+        <div class="card"><b>ข้อมูลหลักทรัพย์</b><div class="sub">ราคาล่าสุด · ปริมาณซื้อขาย · ลิงก์ SET</div></div>
+        <div class="card"><b>เอกสารสำคัญ</b><div class="sub">แบบ 56-1 · รายงานประจำปี · งบการเงิน</div></div>
+        <div class="card"><b>ปฏิทินนักลงทุน</b><div class="sub">ประชุมผู้ถือหุ้น · ประกาศผลประกอบการ</div></div>
+        <div class="card"><b>ข่าวและประกาศ</b><div class="sub">ข่าวตลท. · ข่าวประชาสัมพันธ์ล่าสุด 3 รายการ</div></div>
+      </div>
+      <div class="btns"><span class="btn p">เข้าสู่หน้านักลงทุนสัมพันธ์</span></div>
+    </div>
+    <aside class="note">
+      <h3>เหตุผล</h3>
+      <ul><li>Investor เป็นกลุ่มเป้าหมายหลักแต่ demo ซ่อนไว้ในเมนู</li><li>ลดการค้นหาเองในระบบ IR ที่แยกส่วน</li></ul>
+      <div class="chg">ใหม่ ดึงข้อมูลจาก index-ir.html เดิมมาแสดงสรุป</div>
+      <span class="ref">Investor Experience · Intent-based UX</span>
+    </aside>
+  </section>
+
+  <!-- 6 TRUST -->
+  <section class="row">
+    <div class="frame">
+      <span class="tag">6 · Governance &amp; Sustainability (ส่วนใหม่)</span>
+      <div class="grid g3">
+        <div class="card"><b>กำกับดูแลกิจการ</b><div class="sub">นโยบาย · คณะกรรมการ · โครงสร้างผู้ถือหุ้น</div></div>
+        <div class="card"><b>ความยั่งยืน / ESG</b><div class="sub">เป้าหมายและผลดำเนินงานประจำปี</div></div>
+        <div class="card"><b>คู่ค้าและสื่อ</b><div class="sub">ศูนย์ข่าว · ติดต่อฝ่ายสื่อสารองค์กร</div></div>
+      </div>
+    </div>
+    <aside class="note">
+      <h3>เหตุผล</h3>
+      <ul><li>ครบกลุ่มเป้าหมายที่สอง–สาม: คู่ค้าและสื่อ</li><li>ตรงกับแผนผังเส้นทางผู้ใช้ 3 กลุ่มใน PDF</li></ul>
+      <span class="ref">ขั้น 05 Trust</span>
+    </aside>
+  </section>
+
+  <!-- 7 CONTACT -->
+  <section class="row">
+    <div class="frame">
+      <span class="tag">7 · Contact &amp; Footer</span>
+      <div class="grid g3">
+        <div class="card line"><b>สำนักงานใหญ่</b><div class="sub">86/2 อาคารสัมมากรเพลส ถ.รามคำแหง กรุงเทพฯ · 02-372-3600</div></div>
+        <div class="card line"><b>ที่ตั้งโรงงาน</b><div class="sub">มาบตาพุด ระยอง · 038-685-816</div></div>
+        <div class="card line"><b>ส่งข้อความ</b><div class="sub">ลิงก์ไปหน้าติดต่อ (ฟอร์มแยกหน้า)</div></div>
+      </div>
+    </div>
+    <aside class="note">
+      <h3>เหตุผล</h3>
+      <ul><li>ย่อเหลือข้อมูลติดต่อ เพื่อให้หน้าแรกโฟกัสที่เรื่องหลัก</li></ul>
+      <div class="chg">เดิมฟอร์มเต็มใช้พื้นที่ ~1,064px ย้ายฟอร์มไปหน้าติดต่อ</div>
+    </aside>
+  </section>
+
+  <div class="flow" aria-label="ลำดับหน้า">
+    <span>Hero</span><span>Group Map</span><span>Performance</span><span>Journey</span><span>Investor Hub</span><span>Governance</span><span>Contact</span>
+  </div>
+</div>

@@ -1,0 +1,98 @@
+@font-face {
+    font-family: 'FC Minimal';
+    src: url('FC-Minimal-ExtraLight-ver-110.woff2') format('woff2');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'FC Minimal';
+    src: url('FC-Minimal-ExtraLight-Italic-ver-110.woff2') format('woff2');
+    font-weight: 200;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'FC Minimal';
+    src: url('FC-Minimal-Light-ver-110.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'FC Minimal';
+    src: url('FC-Minimal-Light-Italic-ver-110.woff2') format('woff2');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'FC Minimal';
+    src: url('FC-Minimal-Regular-ver-110.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'FC Minimal';
+    src: url('FC-Minimal-Italic-ver-110.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'FC Minimal';
+    src: url('FC-Minimal-Medium-ver-110.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'FC Minimal';
+    src: url('FC-Minimal-Medium-Italic-ver-110.woff2') format('woff2');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'FC Minimal';
+    src: url('FC-Minimal-Bold-ver-110.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'FC Minimal';
+    src: url('FC-Minimal-Bold-Italic-ver-110.woff2') format('woff2');
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'FC Minimal';
+    src: url('FC-Minimal-ExtraBold-ver-110.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'FC Minimal';
+    src: url('FC-Minimal-ExtraBold-Italic-ver-110.woff2') format('woff2');
+    font-weight: 800;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'FC Minimal';
+    src: url('FC-Minimal-Black-ver-110.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'FC Minimal';
+    src: url('FC-Minimal-Black-Italic-ver-110.woff2') format('woff2');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}

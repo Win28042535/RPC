@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>นักลงทุนสัมพันธ์ — RPCG PCL</title>
+<meta name="description" content="ศูนย์รวมข้อมูลนักลงทุนสัมพันธ์ของ บริษัท อาร์พีซีจี จำกัด (มหาชน) ราคาหลักทรัพย์ ปฏิทินนักลงทุน รายงานประจำปี และข้อมูลความยั่งยืน">
+
+<link rel="stylesheet" href="assets/font/fonts.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/ir.css">
+<link rel="icon" href="data:,">
+</head>
+<body class="irp-page">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="irp-arrow" viewBox="0 0 40 16"><path d="M0 8h38M31 1l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="miter"/></symbol>
+  <symbol id="irp-download" viewBox="0 0 24 24"><path d="M12 3v13M6 10l6 6 6-6M4 21h16" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+</svg>
+
+<!-- Preloader -->
+<div id="preloader">
+  <div class="preloader-mark">RPC<span>G</span></div>
+  <div class="preloader-bar"><i></i></div>
+</div>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg rpcg-nav">
+  <div class="container container-xl">
+    <a class="rpcg-logo" href="index.html">
+      RPC<span class="dot">G</span>
+      <small>HOLDING&nbsp;COMPANY</small>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+      <i class="bi bi-list"></i>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navMain">
+      <ul class="navbar-nav align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link" href="index.html#home">หน้าแรก</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#about">เกี่ยวกับเรา</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#history">ประวัติองค์กร</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#business">ธุรกิจของเรา</a></li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#investor" id="irOffcanvasTrigger" aria-haspopup="dialog" aria-controls="irOffcanvas">นักลงทุนสัมพันธ์ <i class="bi bi-chevron-down ir-trigger-ic"></i></a>
+        </li>
+        <li class="nav-item ms-lg-3">
+          <a class="btn-rpcg btn-amber" href="index.html#contact">ติดต่อเรา <i class="bi bi-arrow-up-right"></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Persistent side rail — desktop/tablet only, opens the site mega-menu -->
+<button type="button" class="side-rail side-rail-right" id="sideMenuTab" aria-haspopup="dialog" aria-controls="irOffcanvas" aria-label="เปิดเมนู">
+  <span>Moving Forward</span>
+</button>
+
+<!-- INVESTOR RELATIONS — off-canvas menu -->
+<div class="ir-oc" id="irOffcanvas" role="dialog" aria-modal="true" aria-label="เมนูเว็บไซต์" aria-hidden="true">
+  <div class="ir-oc-panel">
+    <button type="button" class="ir-oc-close" id="irOffcanvasClose" aria-label="ปิดเมนู"><i class="bi bi-x-lg"></i></button>
+
+    <div class="ir-oc-col ir-oc-col-pages">
+      <a class="ir-oc-pages-media" href="#investor">
+        <img src="assets/img/2151871172.webp" alt="ข้อมูลนักลงทุนสัมพันธ์ RPCG">
+        <span class="ir-oc-pages-media-caption">นักลงทุนสัมพันธ์<br>RPCG</span>
+      </a>
+    </div>
+
+    <div class="ir-oc-col ir-oc-col-ir">
+      <div class="ir-oc-col-head">
+        <span class="ir-oc-col-title">ข้อมูลนักลงทุนสัมพันธ์</span>
+        <a class="ir-oc-see-all" href="#investor">ดูข้อมูลนักลงทุนทั้งหมด</a>
+      </div>
+      <div class="ir-oc-ir-master">
+        <div class="ir-oc-ir-tabs" role="tablist" aria-orientation="vertical">
+          <button type="button" class="ir-oc-ir-tab is-active" role="tab" aria-selected="true" aria-controls="irPanel-doc" id="irTab-doc" data-ir-tab="doc">เอกสารเผยแพร่ <i class="bi bi-chevron-right"></i></button>
+          <button type="button" class="ir-oc-ir-tab" role="tab" aria-selected="false" aria-controls="irPanel-finance" id="irTab-finance" data-ir-tab="finance">ข้อมูลทางการเงิน <i class="bi bi-chevron-right"></i></button>
+          <button type="button" class="ir-oc-ir-tab" role="tab" aria-selected="false" aria-controls="irPanel-shareholder" id="irTab-shareholder" data-ir-tab="shareholder">ข้อมูลผู้ถือหุ้น <i class="bi bi-chevron-right"></i></button>
+          <button type="button" class="ir-oc-ir-tab" role="tab" aria-selected="false" aria-controls="irPanel-governance" id="irTab-governance" data-ir-tab="governance">การกำกับดูแลกิจการ <i class="bi bi-chevron-right"></i></button>
+          <button type="button" class="ir-oc-ir-tab" role="tab" aria-selected="false" aria-controls="irPanel-price" id="irTab-price" data-ir-tab="price">ข้อมูลราคาหลักทรัพย์ <i class="bi bi-chevron-right"></i></button>
+          <button type="button" class="ir-oc-ir-tab" role="tab" aria-selected="false" aria-controls="irPanel-news" id="irTab-news" data-ir-tab="news">ห้องข่าวประชาสัมพันธ์ <i class="bi bi-chevron-right"></i></button>
+        </div>
+        <div class="ir-oc-ir-panels">
+          <div class="ir-oc-ir-panel is-active" role="tabpanel" id="irPanel-doc" aria-labelledby="irTab-doc" data-ir-panel="doc">
+            <span class="ir-oc-ir-panel-title">เอกสารเผยแพร่</span>
+            <a href="20260403-rpc-ar2025-th.pdf" target="_blank" rel="noopener">แบบ 56-1 One Report</a>
+            <a href="https://www.rpcthai.com" target="_blank" rel="noopener">หนังสือชี้ชวน</a>
+          </div>
+          <div class="ir-oc-ir-panel" role="tabpanel" id="irPanel-finance" aria-labelledby="irTab-finance" data-ir-panel="finance">
+            <span class="ir-oc-ir-panel-title">ข้อมูลทางการเงิน</span>
+            <a href="https://www.rpcthai.com" target="_blank" rel="noopener">งบการเงิน</a>
+            <a href="https://www.rpcthai.com" target="_blank" rel="noopener">ข้อมูลสถิติสำคัญ</a>
+          </div>
+          <div class="ir-oc-ir-panel" role="tabpanel" id="irPanel-shareholder" aria-labelledby="irTab-shareholder" data-ir-panel="shareholder">
+            <span class="ir-oc-ir-panel-title">ข้อมูลผู้ถือหุ้น</span>
+            <a href="https://www.rpcthai.com" target="_blank" rel="noopener">โครงสร้างผู้ถือหุ้น</a>
+            <a href="https://www.rpcthai.com" target="_blank" rel="noopener">นโยบายจ่ายเงินปันผล</a>
+          </div>
+          <div class="ir-oc-ir-panel" role="tabpanel" id="irPanel-governance" aria-labelledby="irTab-governance" data-ir-panel="governance">
+            <span class="ir-oc-ir-panel-title">การกำกับดูแลกิจการ</span>
+            <a href="https://www.rpcthai.com" target="_blank" rel="noopener">นโยบายกำกับดูแลกิจการ</a>
+            <a href="https://www.rpcthai.com" target="_blank" rel="noopener">จรรยาบรรณทางธุรกิจ</a>
+          </div>
+          <div class="ir-oc-ir-panel" role="tabpanel" id="irPanel-price" aria-labelledby="irTab-price" data-ir-panel="price">
+            <span class="ir-oc-ir-panel-title">ข้อมูลราคาหลักทรัพย์</span>
+            <a href="https://www.rpcthai.com" target="_blank" rel="noopener">ราคาหลักทรัพย์ RPCG</a>
+            <a href="https://www.rpcthai.com" target="_blank" rel="noopener">ปฏิทินนักลงทุน</a>
+          </div>
+          <div class="ir-oc-ir-panel" role="tabpanel" id="irPanel-news" aria-labelledby="irTab-news" data-ir-panel="news">
+            <span class="ir-oc-ir-panel-title">ห้องข่าวประชาสัมพันธ์</span>
+            <a href="https://www.rpcthai.com" target="_blank" rel="noopener">ข่าวแจ้งตลาดหลักทรัพย์</a>
+            <a href="index.html#contact">สอบถามข้อมูลนักลงทุน</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ir-oc-veil" id="irOffcanvasVeil" aria-hidden="true"></div>
+
+
+<!-- HERO -->
+<header class="irp-hero" id="investor">
+  <div class="irp-hero-copy">
+    <span class="irp-hero-eyebrow">ข้อเสนอพิเศษ</span>
+    <div class="irp-hero-slides" id="irpHeroCopy">
+      <div class="irp-hero-slide is-active">
+        <h1 class="irp-hero-title">RPCG</h1>
+        <p class="irp-hero-sub">ข้อมูลนักลงทุนสัมพันธ์<br>ครบในที่เดียว</p>
+        <a class="irp-pill" href="#irpStrategy">รายละเอียด <svg class="irp-arrow"><use href="#irp-arrow"/></svg></a>
+      </div>
+      <div class="irp-hero-slide">
+        <h2 class="irp-hero-title">PTEC</h2>
+        <p class="irp-hero-sub">พลังงานเพื่ออนาคต<br>สถานีบริการคาลเท็กซ์กว่า 80 แห่ง</p>
+        <a class="irp-pill" href="index.html#business">รายละเอียด <svg class="irp-arrow"><use href="#irp-arrow"/></svg></a>
+      </div>
+      <div class="irp-hero-slide">
+        <h2 class="irp-hero-title">SAMCO</h2>
+        <p class="irp-hero-sub">พัฒนาอสังหาริมทรัพย์<br>ประสบการณ์กว่า 55 ปี</p>
+        <a class="irp-pill" href="index.html#business">รายละเอียด <svg class="irp-arrow"><use href="#irp-arrow"/></svg></a>
+      </div>
+    </div>
+    <div class="irp-hero-ctrl">
+      <button type="button" class="irp-round" id="irpHeroPrev" aria-label="ก่อนหน้า"><i class="bi bi-chevron-left"></i></button>
+      <button type="button" class="irp-round" id="irpHeroNext" aria-label="ถัดไป"><i class="bi bi-chevron-right"></i></button>
+      <span class="irp-hero-count" id="irpHeroCount">01/03</span>
+    </div>
+  </div>
+
+  <div class="irp-hero-media" id="irpHeroMedia">
+    <div class="irp-hero-shot is-active"><img src="assets/img/856.jpg" alt="โรงกลั่นและธุรกิจพลังงานของกลุ่มอาร์พีซีจี"></div>
+    <div class="irp-hero-shot"><img src="assets/img/733.jpg" alt="ถังเก็บน้ำมันของกลุ่มธุรกิจพลังงาน"></div>
+    <div class="irp-hero-shot"><img src="assets/img/villa-pool.jpg" alt="โครงการที่อยู่อาศัยของ SAMCO"></div>
+    <a class="irp-hero-card" href="#irpQuotes">
+      <span class="irp-hero-card-title">ตลาดหลักทรัพย์<br>«RPCG»</span>
+      <span class="irp-hero-card-foot"><small>ดูราคาหลักทรัพย์</small><svg class="irp-arrow"><use href="#irp-arrow"/></svg></span>
+    </a>
+  </div>
+</header>
+
+<!-- INVESTMENT STRATEGY -->
+<section class="irp-intro" id="irpStrategy">
+  <div class="irp-intro-grid">
+    <div class="irp-intro-head reveal">
+      <span class="irp-eyebrow">นักลงทุนสัมพันธ์</span>
+      <h2 class="irp-h2">กลยุทธ์<br><b>การลงทุน</b></h2>
+    </div>
+    <div class="irp-intro-body reveal">
+      <p class="irp-lead">เรามุ่งมั่นเป็นผู้นำโฮลดิ้งคอมพานีที่สร้างมูลค่าเพิ่ม และผลตอบแทนที่มั่นคงแก่ผู้มีส่วนได้เสียทุกฝ่าย</p>
+      <p class="irp-small">กลุ่มบริษัทฯ ขับเคลื่อนธุรกิจหลัก 2 กลุ่ม คือ ธุรกิจพลังงานภายใต้แบรนด์คาลเท็กซ์ และธุรกิจพัฒนาอสังหาริมทรัพย์ภายใต้แบรนด์สัมมากร</p>
+      <p class="irp-small">รายได้รวมปี 2568 อยู่ที่ 8,370.69 ล้านบาท โดยธุรกิจพลังงานคิดเป็นสัดส่วนรายได้ร้อยละ 81.9 ภายใต้หลักการกำกับดูแลกิจการที่ดี</p>
+      <a class="irp-pill irp-pill-ink" href="#irpHub">นักลงทุนสัมพันธ์ <svg class="irp-arrow"><use href="#irp-arrow"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- IR HUB -->
+<section class="irp-hub" id="irpHub">
+  <div class="irp-hub-bg" aria-hidden="true"><div class="irp-hub-img" data-irp-parallax></div></div>
+
+  <a class="irp-tile irp-tile-navy irp-feature-card reveal" href="index.html#contact">
+    <span class="irp-tile-title">Opportunity Day<br>2569</span>
+    <svg class="irp-arrow irp-tile-arrow"><use href="#irp-arrow"/></svg>
+  </a>
+
+  <div class="irp-hub-grid stagger reveal">
+    <!-- Stock quotes -->
+    <article class="irp-card irp-quotes" id="irpQuotes">
+      <header class="irp-card-head">
+        <h3>ราคาหลักทรัพย์</h3>
+        <a class="irp-goto" href="index.html#investor">ดูทั้งหมด <svg class="irp-arrow"><use href="#irp-arrow"/></svg></a>
+      </header>
+      <div class="irp-quote">
+        <span class="irp-quote-date">29 ก.ย. 2569 16:30</span>
+        <div class="irp-quote-row">
+          <div class="irp-quote-name">RPCG<small>ตลาดหลักทรัพย์แห่งประเทศไทย</small></div>
+          <div class="irp-quote-price"><b>4.32</b><span class="irp-quote-cur">บาท<em class="up">▲ +1.18%</em></span></div>
+        </div>
+      </div>
+      <div class="irp-quote">
+        <span class="irp-quote-date">29 ก.ย. 2569 16:30</span>
+        <div class="irp-quote-row">
+          <div class="irp-quote-name">SAMCO<small>บริษัทย่อย · ตลาดหลักทรัพย์ฯ</small></div>
+          <div class="irp-quote-price"><b>1.86</b><span class="irp-quote-cur">บาท<em class="down">▼ -0.53%</em></span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Calendar -->
+    <article class="irp-card irp-calendar">
+      <header class="irp-card-head">
+        <h3>ปฏิทินนักลงทุน</h3>
+        <a class="irp-goto" href="index.html#investor">ดูทั้งหมด <svg class="irp-arrow"><use href="#irp-arrow"/></svg></a>
+      </header>
+      <div class="irp-cal-nav">
+        <button type="button" class="irp-round irp-round-sm irp-round-ink" id="irpCalPrev" aria-label="ก่อนหน้า"><i class="bi bi-chevron-left"></i></button>
+        <button type="button" class="irp-round irp-round-sm irp-round-ink" id="irpCalNext" aria-label="ถัดไป"><i class="bi bi-chevron-right"></i></button>
+      </div>
+      <div class="irp-cal-slides" id="irpCal">
+        <div class="irp-cal-slide is-active">
+          <p class="irp-cal-title">ผลการดำเนินงาน <em>ไตรมาส 3/2569</em></p>
+          <div class="irp-cal-date"><b>12</b><span>พ.ย.</span></div>
+        </div>
+        <div class="irp-cal-slide">
+          <p class="irp-cal-title">นำเสนอข้อมูลนักลงทุน <em>Opportunity Day</em></p>
+          <div class="irp-cal-date"><b>25</b><span>พ.ย.</span></div>
+        </div>
+        <div class="irp-cal-slide">
+          <p class="irp-cal-title">ประกาศ <em>งบการเงินประจำปี 2569</em></p>
+          <div class="irp-cal-date"><b>26</b><span>ก.พ.</span></div>
+        </div>
+      </div>
+      <a class="irp-more" href="index.html#investor">เพิ่มเติม <svg class="irp-arrow"><use href="#irp-arrow"/></svg></a>
+    </article>
+
+    <!-- Annual report -->
+    <a class="irp-tile irp-report" href="20260403-rpc-ar2025-th.pdf" target="_blank" rel="noopener">
+      <span class="irp-report-copy">
+        <b>รายงานประจำปี 2568</b>
+        <span>Moving Forward<br>เติบโตอย่างยั่งยืน</span>
+      </span>
+      <span class="irp-report-year" aria-hidden="true">2568</span>
+      <span class="irp-report-img"><img src="assets/img/skyline.jpg" alt=""></span>
+      <span class="irp-report-cut" aria-hidden="true"></span>
+      <span class="irp-report-dl"><span class="irp-report-size">PDF</span><svg><use href="#irp-download"/></svg></span>
+    </a>
+
+    <!-- ESG -->
+    <a class="irp-tile irp-esg" href="#irpFuture">
+      <img src="assets/img/seedling.jpg" alt="">
+      <span class="irp-tile-title">ESG</span>
+      <svg class="irp-arrow irp-tile-arrow"><use href="#irp-arrow"/></svg>
+    </a>
+
+    <!-- Governance + Policies -->
+    <div class="irp-stack">
+      <a class="irp-tile irp-tile-deep irp-arcs" href="index.html#contact">
+        <span class="irp-tile-title">การกำกับดูแล<br>กิจการ</span>
+        <svg class="irp-arrow irp-tile-arrow"><use href="#irp-arrow"/></svg>
+      </a>
+      <a class="irp-tile irp-tile-blue" href="index.html#contact">
+        <span class="irp-tile-title">นโยบายและ<br>เอกสาร</span>
+        <svg class="irp-arrow irp-tile-arrow"><use href="#irp-arrow"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- LOOKING INTO THE FUTURE -->
+<section class="irp-intro irp-intro-future" id="irpFuture">
+  <div class="irp-intro-grid">
+    <div class="irp-intro-head reveal">
+      <span class="irp-eyebrow">การพัฒนาอย่างยั่งยืน</span>
+      <h2 class="irp-h2">มองไปข้างหน้า<br>สู่<b>อนาคต</b></h2>
+    </div>
+    <div class="irp-intro-body reveal">
+      <p class="irp-lead">การพัฒนาอย่างยั่งยืนคือหนึ่งในองค์ประกอบสำคัญของวัฒนธรรมองค์กรอาร์พีซีจี</p>
+      <p class="irp-small">บริษัทฯ ประกาศใช้นโยบายการบริหารจัดการความยั่งยืน พร้อมจัดตั้งคณะกรรมการพัฒนาความยั่งยืน เพื่อขับเคลื่อนการดำเนินงานให้ครอบคลุมทั้งด้านเศรษฐกิจ สังคม และสิ่งแวดล้อม โดยเปิดเผยข้อมูลอย่างโปร่งใสและตรวจสอบได้</p>
+      <a class="irp-pill irp-pill-ink" href="#irpLand">ความยั่งยืน <svg class="irp-arrow"><use href="#irp-arrow"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section class="irp-land" id="irpLand">
+  <div class="irp-land-media" aria-hidden="true"><img class="irp-land-bg" data-irp-parallax src="assets/img/forest-wide.jpg" alt=""></div>
+  <a class="irp-tile irp-tile-navy irp-feature-card reveal" href="20260403-rpc-ar2025-th.pdf" target="_blank" rel="noopener">
+    <span class="irp-tile-title">รายงาน<br>ความยั่งยืน<br>ประจำปี</span>
+    <svg class="irp-arrow irp-tile-arrow"><use href="#irp-arrow"/></svg>
+  </a>
+  <div class="irp-land-panels stagger reveal">
+    <article class="irp-panel">
+      <h3>สิ่งแวดล้อม</h3>
+      <p>ใช้ทรัพยากรธรรมชาติอย่างมีความรับผิดชอบ ติดตั้งโซลาร์รูฟท็อปแล้ว 12 จาก 80 สถานีบริการ ผลิตไฟฟ้าสะอาด 248,116 kWh ต่อปี</p>
+    </article>
+    <article class="irp-panel irp-panel-social">
+      <h3>สังคม</h3>
+      <p>ส่งเสริมความหลากหลายในสถานที่ทำงาน สัดส่วนพนักงานหญิงร้อยละ 60 (679 จาก 1,127 คน) และดูแลชุมชนรอบพื้นที่ดำเนินงาน</p>
+      <span class="irp-panel-cut" aria-hidden="true"></span>
+    </article>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="rpcg-footer">
+  <div class="ft-wrap">
+    <div class="ft-cards">
+      <div class="ft-brand">
+        <span class="ft-logo">RPCG</span>
+        <p class="ft-tagline">ลงทุนอย่างมีวิสัยทัศน์<br><em>เติบโตอย่างยั่งยืน</em></p>
+        <div class="ft-social">
+          <span class="ft-touch">ติดตามเรา</span>
+          <a href="#" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          <a href="#" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" target="_blank" rel="noopener" aria-label="X"><i class="bi bi-twitter-x"></i></a>
+        </div>
+      </div>
+
+      <div class="ft-panel">
+        <div class="ft-links">
+          <div>
+            <h5>เมนูหลัก</h5>
+            <ul>
+              <li><a href="index.html#home">หน้าแรก</a></li>
+              <li><a href="index.html#about">เกี่ยวกับเรา</a></li>
+              <li><a href="index.html#history">ประวัติองค์กร</a></li>
+              <li><a href="index.html#business">ธุรกิจของเรา</a></li>
+              <li><a href="index-ir.html">นักลงทุนสัมพันธ์</a></li>
+              <li><a href="index.html#contact">ติดต่อเรา</a></li>
+            </ul>
+          </div>
+          <div>
+            <h5>กลุ่มธุรกิจ</h5>
+            <ul>
+              <li><a href="index.html#business">PTEC — คาลเท็กซ์</a></li>
+              <li><a href="index.html#business">SAMCO — สัมมากร</a></li>
+              <li><a href="index.html#business">มิตติ / อนาพนา</a></li>
+              <li><a href="index.html#business">S9 คอนโดมิเนียม</a></li>
+            </ul>
+          </div>
+          <div>
+            <h5>ข้อมูลติดต่อ</h5>
+            <ul>
+              <li>86/2 อาคารสัมมากรเพลส ถนนรามคำแหง เขตสะพานสูง กรุงเทพฯ 10240</li>
+              <li><a href="tel:023723600">02-372-3600</a></li>
+              <li><a href="https://www.rpcthai.com" target="_blank" rel="noopener">www.rpcthai.com</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="ft-sub">
+          <small>ไม่พลาดทุกความเคลื่อนไหว</small>
+          <strong>รับข่าวสารจากอาร์พีซีจี</strong>
+          <form class="ft-form" id="footerSubscribeForm">
+            <input type="email" placeholder="กรอกอีเมลของคุณ" required aria-label="อีเมล">
+            <button type="submit">สมัครรับข่าวสาร</button>
+          </form>
+        </div>
+
+        <p class="ft-copy">© <span id="year">2569</span> บริษัท อาร์พีซีจี จำกัด (มหาชน). สงวนลิขสิทธิ์.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="bi bi-arrow-up"></i></button>
+
+<div class="rpcg-toast" id="rpcgToast"><i class="bi bi-check-circle-fill"></i> ส่งข้อความเรียบร้อยแล้ว ขอบคุณที่ติดต่ออาร์พีซีจี</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/ir.js"></script>
+</body>
+</html>

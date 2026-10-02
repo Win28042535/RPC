@@ -1,0 +1,243 @@
+<title>RPCG Wireframe Direction B</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap">
+<style>
+/* Layout: wireframe frame on the left, annotation margin on the right per section; stacks on phones */
+/* Design DNA from the RPCG demo: navy #0055a4 + ink #12141c, white/cream paper, green/lime accents, square corners, hairlines, wide-tracked eyebrows.
+   FC Minimal is not on Google Fonts, so Noto Sans Thai stands in until the font file is supplied. */
+:root{
+  --bg:#efe9dd; --ink:#12141c; --mute:#6b6e60; --line:rgba(18,20,28,.16);
+  --frame:#ffffff; --block:#f4f0e6; --block2:#e3dccb; --brand:#0055a4; --brand-ink:#ffffff;
+  --accent:#2fa84f; --lime:#b9f04d;
+  --note:#f7ebd0; --note-ink:#5a3d0c; --chg:#e1f2e5; --chg-ink:#1f5a30;
+  --f-body:"Noto Sans Thai",system-ui,sans-serif; --ease:cubic-bezier(.65,0,.35,1);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1424; --ink:#f2f1ea; --mute:#9093a6; --line:rgba(255,255,255,.14);
+  --frame:#161d34; --block:#1d2644; --block2:#27325a; --brand:#4d94e0; --brand-ink:#0f1424;
+  --accent:#5fc47a; --lime:#b9f04d;
+  --note:#33291a; --note-ink:#f0d9a0; --chg:#143a24; --chg-ink:#b5e8c5; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1424; --ink:#f2f1ea; --mute:#9093a6; --line:rgba(255,255,255,.14);
+  --frame:#161d34; --block:#1d2644; --block2:#27325a; --brand:#4d94e0; --brand-ink:#0f1424;
+  --accent:#5fc47a; --lime:#b9f04d;
+  --note:#33291a; --note-ink:#f0d9a0; --chg:#143a24; --chg-ink:#b5e8c5; color-scheme:dark}
+body{line-height:1.7;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.6;padding-inline:16px;padding-block:32px}
+.wrap{max-width:1180px;margin-inline:auto}
+h1{font-weight:600;letter-spacing:-.01em;font-size:clamp(1.6rem,4vw,2.3rem);line-height:1.3;margin:0 0 8px;text-wrap:balance}
+.lead{color:var(--mute);max-width:70ch;margin:0 0 24px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13px;color:var(--mute);margin-bottom:28px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:14px;height:14px;border:1px solid var(--line);display:inline-block}
+.row{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:20px;margin-bottom:20px}
+.frame{background:var(--frame);border:1px solid var(--line);padding:20px;min-width:0}
+.tag{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--mute);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.tag::before{content:"";width:8px;height:8px;background:var(--lime);border:1px solid var(--accent);flex:none}
+.ph{background:var(--block);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--mute);font-size:12px;text-align:center;padding:8px}
+.h{font-weight:600;letter-spacing:-.01em;line-height:1.25}
+.h1{font-size:clamp(1.4rem,3.2vw,2rem)}
+.h2{font-size:1.15rem}
+.sub{color:var(--mute);font-size:13px}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{background:var(--block);padding:14px;min-width:0}
+.card.line{background:transparent;border:1px solid var(--line)}
+.num{color:var(--brand);font-size:1.6rem;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.1}
+.btn{display:inline-block;transition:background .2s var(--ease);padding:8px 16px;font-size:13px;font-weight:600;border:1px solid var(--brand)}
+.btn.p{background:var(--brand);color:var(--brand-ink)}
+.btn.s{color:var(--brand)}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.nav{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;font-size:13px}
+.nav b{margin-right:auto;font-size:15px}
+.nav .btn{padding:4px 12px}
+.tl{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin-top:10px}
+.tl div{border-top:3px solid var(--brand);padding-top:6px;font-size:12px}
+.tl b{display:block;font-family:var(--f-body)}
+.note{background:var(--note);color:var(--note-ink);padding:14px;font-size:13px;align-self:start;min-width:0}
+.note h3{margin:0 0 6px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:600}
+.note ul{margin:0;padding-left:18px}
+.note li{margin-bottom:4px}
+.chg{border-left:3px solid var(--accent);background:var(--chg);color:var(--chg-ink);padding:8px 10px;margin-top:10px;font-size:12.5px}
+.ref{font-size:11px;letter-spacing:.12em;opacity:.8;display:block;margin-top:8px}
+.org{display:grid;gap:8px;justify-items:center;margin-top:8px}
+.org .top{background:var(--brand);color:var(--brand-ink);padding:8px 24px;font-weight:700}
+.org .two{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%}
+.org .two>div{border:1px solid var(--brand);padding:10px;text-align:center}
+.org small{display:block;color:var(--mute);font-size:12px;font-weight:400;margin-top:4px}
+.flow{margin-top:28px;display:flex;flex-wrap:wrap;gap:6px;font-size:12px;letter-spacing:.08em}
+.flow span{background:var(--block2);padding:4px 10px}
+@media (max-width:860px){
+  .row{grid-template-columns:minmax(0,1fr)}
+  .g4,.g3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tl{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:520px){
+  .g2,.g3,.g4{grid-template-columns:minmax(0,1fr)}
+  .org .two{grid-template-columns:minmax(0,1fr)}
+}
+.chap{display:flex;gap:12px;align-items:center;margin-bottom:10px}
+.chap b{font-size:12px;letter-spacing:.12em;background:var(--brand);color:var(--brand-ink);padding:2px 8px}
+.stick{background:var(--brand);color:var(--brand-ink);padding:6px 12px;font-size:12px;letter-spacing:.06em;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:-20px -20px 14px}
+.prog{display:flex;gap:4px;margin-top:14px}.prog i{flex:1;height:4px;background:var(--block2)}.prog i.on{background:var(--accent)}
+.step{display:grid;grid-template-columns:90px minmax(0,1fr) minmax(0,1fr);gap:12px;padding:12px 0;border-top:1px solid var(--line);align-items:start}
+.step .y{font-weight:600;font-size:1.3rem;color:var(--brand);font-variant-numeric:tabular-nums}
+@media (max-width:600px){.step{grid-template-columns:minmax(0,1fr)}}
+</style>
+
+<div class="wrap">
+  <h1>Wireframe หน้าแรก RPCG · Direction B "ก้าวไปข้างหน้า"</h1>
+  <p class="lead">แกนเรื่องเล่า: จุดเริ่มต้น → ประสบการณ์ → วันนี้ → โอกาส → อนาคต ใช้ "ประสบการณ์ + การพัฒนา + อนาคต" เป็น Storytelling หลัก และเสริมแถบตัวเลขกับทางลัด IR เพื่อรักษา Trust ตามหลัก Evidence-based ใน PDF แยกจากฉบับ A</p>
+  <div class="legend">
+    <span><i class="sw" style="background:var(--block)"></i>ตำแหน่งภาพ/ข้อมูล</span>
+    <span><i class="sw" style="background:var(--note)"></i>เหตุผลอ้างอิง PDF</span>
+    <span><i class="sw" style="background:var(--chg)"></i>สิ่งที่เปลี่ยนจาก demo</span>
+  </div>
+
+  <section class="row">
+    <div class="frame">
+      <span class="tag">0 · Navigation (sticky)</span>
+      <div class="nav"><b>RPCG</b><span>เรื่องราวของเรา</span><span>ธุรกิจวันนี้</span><span>โอกาส</span><span>ความยั่งยืน</span><span class="btn p">นักลงทุนสัมพันธ์</span></div>
+      <div class="prog" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+      <p class="sub" style="margin:6px 0 0">แถบความคืบหน้า 5 ช่วงของเรื่อง บอกผู้ใช้ว่าอยู่ตรงไหน</p>
+    </div>
+    <aside class="note">
+      <h3>เหตุผล</h3>
+      <ul><li>เมนูเรียงตามช่วงของเรื่อง ปุ่ม IR ค้างไว้ตลอด ลดความเสี่ยงที่นักลงทุนหลงทางในหน้าเล่าเรื่อง</li></ul>
+      <div class="chg">เพิ่ม: Progress bar และเมนู sticky</div>
+      <span class="ref">Motion: Navigate</span>
+    </aside>
+  </section>
+
+  <section class="row">
+    <div class="frame">
+      <span class="tag">1 · Hero · จุดเริ่มต้น</span>
+      <div class="grid g2" style="align-items:center">
+        <div>
+          <div class="h h1">30 ปีแห่งประสบการณ์ สู่โอกาสข้างหน้า</div>
+          <p class="sub">อาร์พีซีจี โฮลดิ้งคอมพานีที่ต่อยอดจากธุรกิจปิโตรเลียมสู่พลังงานและอสังหาริมทรัพย์ เพื่อการเติบโตที่มั่นคง</p>
+          <div class="btns"><span class="btn p">อ่านเรื่องราวของเรา</span><span class="btn s">ข้อมูลนักลงทุน</span></div>
+        </div>
+        <div class="ph" style="min-height:190px">ภาพเชิงบรรณาธิการ: ภาพเก่า (โรงกลั่น 1995) ซ้อนภาพปัจจุบัน (สถานี/โครงการ)</div>
+      </div>
+      <div class="grid g3" style="margin-top:14px">
+        <div class="card line"><div class="num">฿8,370.69 ล้าน</div><div class="sub">รายได้รวม ปี 2568</div></div>
+        <div class="card line"><div class="num">1995</div><div class="sub">ปีที่ก่อตั้ง</div></div>
+        <div class="card line"><div class="num">80+ · 55+</div><div class="sub">สถานีคาลเท็กซ์ · ปีพัฒนาที่อยู่อาศัย</div></div>
+      </div>
+    </div>
+    <aside class="note">
+      <h3>เหตุผล</h3>
+      <ul><li>ประโยคเปิดเป็นเรื่องเล่า แต่แถบตัวเลขรักษา Trust 80%</li><li>ภาพโรงกลั่นเก่าถูกใช้เป็น "อดีต" ไม่ใช่ตัวตนปัจจุบัน แก้ปัญหา Refinery identity</li></ul>
+      <div class="chg">เปลี่ยน: ภาพโรงกลั่นเดี่ยว เป็นภาพเก่า-ใหม่ซ้อนกัน</div>
+      <span class="ref">ทิศทาง B · Visual Tone</span>
+    </aside>
+  </section>
+
+  <section class="row">
+    <div class="frame">
+      <div class="stick"><span>เรื่องราวของเรา · ช่วงที่ 2 จาก 5</span><span>ข้อมูลนักลงทุน →</span></div>
+      <div class="chap"><b>02</b><span class="tag" style="margin:0">ประสบการณ์ · Journey</span></div>
+      <div class="h h2">จากโรงกลั่นสู่โฮลดิ้งคอมพานี</div>
+      <div class="step"><div class="y">1995</div><div><b>ก่อตั้ง</b><div class="sub">ระยองเพียวริฟายเออร์ แปรสภาพคอนเดนเสทเรสซิดิว</div></div><div class="ph" style="min-height:70px">ภาพ/ตัวเลขช่วงนั้น</div></div>
+      <div class="step"><div class="y">2003–12</div><div><b>จดทะเบียน และปรับโครงสร้าง</b><div class="sub">เตรียมรับความท้าทายของตลาด</div></div><div class="ph" style="min-height:70px">ภาพ/ตัวเลขช่วงนั้น</div></div>
+      <div class="step"><div class="y">2017</div><div><b>รุกค้าปลีกน้ำมัน</b><div class="sub">ขยายฐานสู่พลังงานและอสังหาริมทรัพย์</div></div><div class="ph" style="min-height:70px">ภาพ/ตัวเลขช่วงนั้น</div></div>
+      <div class="step"><div class="y">2023–24</div><div><b>Holding เต็มรูปแบบ และแบรนด์ระดับโลก</b><div class="sub">คาลเท็กซ์ · Techron® EURO 5</div></div><div class="ph" style="min-height:70px">ภาพ/ตัวเลขช่วงนั้น</div></div>
+    </div>
+    <aside class="note">
+      <h3>เหตุผล</h3>
+      <ul><li>แต่ละช่วงเปิดรายละเอียดทีละส่วน (Reveal) ไม่ใช่ทุกอย่างพร้อมกัน</li><li>ผูกภาพและตัวเลขทุกช่วง เพื่อไม่ให้เป็นเรื่องเล่าลอย ๆ</li><li>จำกัดไม่เกิน 4 จอ</li></ul>
+      <div class="chg">เปลี่ยน: Timeline เดิมที่เป็นแถบข้อความ เป็นส่วนหลักที่อ่านต่อเนื่อง</div>
+      <span class="ref">Motion: Reveal · Subtle → Smooth</span>
+    </aside>
+  </section>
+
+  <section class="row">
+    <div class="frame">
+      <div class="chap"><b>03</b><span class="tag" style="margin:0">วันนี้ · Portfolio</span></div>
+      <div class="h h2">RPCG วันนี้: โฮลดิ้งที่ขับเคลื่อน 2 กลุ่มธุรกิจ</div>
+      <div class="org">
+        <div class="top">RPCG · Holding Company</div>
+        <div class="two">
+          <div><b>ธุรกิจพลังงาน</b><small>PTEC × คาลเท็กซ์ · 81.9% ของรายได้ ปี 2568</small></div>
+          <div><b>อสังหาริมทรัพย์</b><small>SAMCO · 17.7% ของรายได้ ปี 2568</small></div>
+        </div>
+      </div>
+      <div class="grid g2" style="margin-top:12px">
+        <div class="card line"><b>ผลการดำเนินงานโดยสรุป</b><div class="sub">รายได้ · กำไร · สินทรัพย์ (ระบุงวด) · ดูงบฉบับเต็ม</div></div>
+        <div class="card line"><b>ผลิตภัณฑ์และแบรนด์</b><div class="sub">คาลเท็กซ์ · ชาวดอย · สัมมากร · มิตติ · S9</div></div>
+      </div>
+    </div>
+    <aside class="note">
+      <h3>เหตุผล</h3>
+      <ul><li>ภาพโฮลดิ้งเป็นบทที่ 3 ของเรื่อง แต่ยังเต็มรูปแบบ</li><li>ผลงานย่อรวมที่นี่ ไม่แยกส่วน เพื่อคุมความยาว</li></ul>
+      <div class="chg">ต้องใช้ตัวเลขจริงจากฝ่าย IR ในช่องผลงาน</div>
+      <span class="ref">Group-first · Evidence-based</span>
+    </aside>
+  </section>
+
+  <section class="row">
+    <div class="frame">
+      <div class="chap"><b>04</b><span class="tag" style="margin:0">โอกาส · Opportunity (ส่วนใหม่)</span></div>
+      <div class="h h2">โอกาสข้างหน้าของกลุ่ม</div>
+      <div class="grid g3" style="margin-top:10px">
+        <div class="card"><b>ขยายธุรกิจพลังงาน</b><div class="sub">เครือข่ายสถานี · Non-Oil · [รอข้อมูลจากบริษัท]</div></div>
+        <div class="card"><b>พัฒนาที่อยู่อาศัยยุคใหม่</b><div class="sub">ครอบครัวรุ่นใหม่ · ใจกลางเมือง · [รอข้อมูล]</div></div>
+        <div class="card"><b>ลงทุนธุรกิจใหม่</b><div class="sub">กระจายการลงทุนอย่างสร้างสรรค์และยั่งยืน · [รอข้อมูล]</div></div>
+      </div>
+    </div>
+    <aside class="note">
+      <h3>เหตุผล</h3>
+      <ul><li>ตอบ "Where is RPCG going" ตรง ๆ</li><li>ความเสี่ยงหลักของ B: ถ้าไม่มีเนื้อหาจริง ส่วนนี้จะว่าง</li></ul>
+      <div class="chg">ใหม่ ต้องขอเนื้อหาทิศทางที่เปิดเผยได้จากผู้บริหาร</div>
+      <span class="ref">ขั้น 06 Future</span>
+    </aside>
+  </section>
+
+  <section class="row">
+    <div class="frame">
+      <div class="chap"><b>05</b><span class="tag" style="margin:0">อนาคต · Future &amp; Trust</span></div>
+      <div class="grid g2" style="align-items:center">
+        <div>
+          <div class="h h2">เติบโตอย่างยั่งยืน ด้วยมาตรฐานสากล</div>
+          <p class="sub">วิสัยทัศน์ ความยั่งยืน/ESG และการกำกับดูแลกิจการ</p>
+          <div class="btns"><span class="btn s">ความยั่งยืน</span><span class="btn s">กำกับดูแลกิจการ</span></div>
+        </div>
+        <div class="ph" style="min-height:120px">ภาพ/ตัวชี้วัด ESG</div>
+      </div>
+    </div>
+    <aside class="note">
+      <h3>เหตุผล</h3>
+      <ul><li>ตอบ Brand Attribute Sustainable และ International ซึ่ง B โดดเด่นที่สุด</li></ul>
+      <span class="ref">ทิศทาง B · Best Fit</span>
+    </aside>
+  </section>
+
+  <section class="row">
+    <div class="frame">
+      <span class="tag">6 · Investor Hub · ปิดท้าย (ย่อ)</span>
+      <div class="grid g4">
+        <div class="card"><b>หลักทรัพย์</b><div class="sub">ราคาล่าสุด</div></div>
+        <div class="card"><b>เอกสาร</b><div class="sub">56-1 · รายงานประจำปี</div></div>
+        <div class="card"><b>ปฏิทิน</b><div class="sub">ประชุมผู้ถือหุ้น</div></div>
+        <div class="card"><b>ข่าว</b><div class="sub">ล่าสุด 3 รายการ</div></div>
+      </div>
+      <div class="btns"><span class="btn p">เข้าสู่หน้านักลงทุนสัมพันธ์</span></div>
+      <div class="grid g3" style="margin-top:14px">
+        <div class="card line"><b>สำนักงานใหญ่</b><div class="sub">86/2 อาคารสัมมากรเพลส · 02-372-3600</div></div>
+        <div class="card line"><b>โรงงาน</b><div class="sub">มาบตาพุด ระยอง · 038-685-816</div></div>
+        <div class="card line"><b>ติดต่อเรา</b><div class="sub">ลิงก์ไปหน้าฟอร์ม</div></div>
+      </div>
+    </div>
+    <aside class="note">
+      <h3>เหตุผล</h3>
+      <ul><li>นักลงทุนที่อ่านจบเรื่องเจอทางไปต่อทันที ส่วนคนที่ข้ามเรื่องใช้ปุ่ม IR ใน Nav</li></ul>
+      <div class="chg">ย่อ Contact เหลือข้อมูลติดต่อ ย้ายฟอร์มไปหน้าแยก</div>
+      <span class="ref">Investor Experience</span>
+    </aside>
+  </section>
+
+  <div class="flow" aria-label="ลำดับหน้า">
+    <span>Hero</span><span>Journey</span><span>วันนี้</span><span>โอกาส</span><span>อนาคต</span><span>Investor Hub + Contact</span>
+  </div>
+</div>

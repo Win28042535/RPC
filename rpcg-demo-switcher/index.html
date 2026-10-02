@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RPCG Demo Switcher</title>
+<link rel="stylesheet" href="../rpcg-demo-A/assets/font/fonts.css">
+<style>
+/* Panel uses the demo's own tokens: navy #0055a4, ink #12141c, cream #efe9dd, green/lime accents, square corners, FC Minimal */
+:root{
+  --navy:#0055a4; --ink:#12141c; --paper:#ffffff; --cream:#efe9dd; --green:#2fa84f; --lime:#b9f04d; --muted:#6b6e60;
+  --bar:#0f1424; --bar-2:#161d34; --bar-line:rgba(255,255,255,.14); --bar-ink:#f2f1ea; --bar-mute:#9093a6;
+  --stage:#d9d4c7;
+  --ff:'FC Minimal',system-ui,sans-serif; --ease:cubic-bezier(.65,0,.35,1);
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{font-family:var(--ff);background:var(--stage);color:var(--ink);display:flex;flex-direction:column;overflow:hidden}
+
+/* top panel */
+.panel{background:var(--bar);color:var(--bar-ink);border-bottom:1px solid var(--bar-line);padding:10px 16px;display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;flex:none}
+.brand{display:flex;flex-direction:column;line-height:1.15;margin-right:6px}
+.brand b{font-size:1.15rem;font-weight:700;letter-spacing:.02em}
+.brand b i{font-style:normal;color:var(--green)}
+.brand span{font-size:.7rem;letter-spacing:.2em;color:var(--bar-mute);text-transform:uppercase}
+.group{display:flex;align-items:center;gap:6px}
+.group > label{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--bar-mute);margin-right:4px}
+button{font-family:inherit;color:inherit;background:transparent;border:1px solid var(--bar-line);padding:7px 14px;font-size:.92rem;cursor:pointer;transition:background .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease)}
+button:hover{border-color:rgba(255,255,255,.4)}
+button:focus-visible{outline:2px solid var(--lime);outline-offset:2px}
+button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.ver{display:flex;flex-direction:column;align-items:flex-start;text-align:left;padding:6px 14px;min-width:150px}
+.ver b{font-size:.98rem;font-weight:600}
+.ver small{font-size:.72rem;color:var(--bar-mute);margin-top:1px}
+.ver[aria-pressed="true"] small{color:rgba(255,255,255,.8)}
+.ver .k{display:inline-block;width:8px;height:8px;background:var(--lime);margin-right:8px}
+.spacer{flex:1}
+.hint{font-size:.72rem;color:var(--bar-mute)}
+kbd{font-family:inherit;border:1px solid var(--bar-line);padding:0 5px;font-size:.7rem}
+
+/* stage */
+.stage{flex:1;min-height:0;display:flex;gap:16px;justify-content:center;align-items:flex-start;padding:16px;overflow:auto}
+.slot{display:flex;flex-direction:column;gap:8px;min-width:0;flex:0 0 auto}
+.slot[hidden]{display:none}
+.slot-head{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.slot-head b{font-weight:700}
+.slot-head a{color:var(--navy);font-weight:600;letter-spacing:.04em;text-transform:none;border-bottom:1px solid currentColor}
+.viewport{position:relative;background:var(--bar);box-shadow:0 24px 60px -28px rgba(18,20,28,.5);overflow:hidden}
+.viewport iframe{position:absolute;left:0;top:0;border:0;background:var(--bar);transform-origin:0 0}
+.size-note{font-size:.72rem;color:var(--muted)}
+
+@media (max-width:760px){
+  .panel{padding:10px 12px}
+  .hint{display:none}
+  .ver{min-width:0;flex:1}
+  .group.versions{width:100%}
+  .group.versions .ver{flex:1}
+  .stage{padding:10px}
+}
+</style>
+</head>
+<body>
+
+<header class="panel" role="toolbar" aria-label="แผงควบคุมการแสดงผลเดโม">
+  <div class="brand"><b>RPC<i>G</i></b><span>Demo Switcher</span></div>
+
+  <div class="group versions" role="group" aria-label="เลือกเวอร์ชัน">
+    <button class="ver" data-ver="A" aria-pressed="true"><b><span class="k"></span>Direction A</b><small>เชื่อมโยงธุรกิจ สร้างคุณค่า</small></button>
+    <button class="ver" data-ver="B" aria-pressed="false"><b><span class="k"></span>Direction B</b><small>ก้าวไปข้างหน้า</small></button>
+    <button data-ver="AB" aria-pressed="false" title="เปรียบเทียบ A และ B เคียงกัน">A | B</button>
+  </div>
+
+  <div class="group" role="group" aria-label="ขนาดหน้าจอ">
+    <label>หน้าจอ</label>
+    <button data-dev="desktop" aria-pressed="true">Desktop</button>
+    <button data-dev="tablet" aria-pressed="false">Tablet</button>
+    <button data-dev="mobile" aria-pressed="false">Mobile</button>
+  </div>
+
+  <div class="group">
+    <button id="reload" title="โหลดใหม่">โหลดใหม่</button>
+  </div>
+
+  <span class="spacer"></span>
+  <span class="hint"><kbd>1</kbd> A · <kbd>2</kbd> B · <kbd>3</kbd> A|B · <kbd>D</kbd> <kbd>T</kbd> <kbd>M</kbd> ขนาดจอ</span>
+</header>
+
+<main class="stage" id="stage">
+  <section class="slot" data-slot="A">
+    <div class="slot-head"><span><b>A</b> · เชื่อมโยงธุรกิจ สร้างคุณค่า</span><a href="../rpcg-demo-A/index.html" target="_blank" rel="noopener">เปิดในแท็บใหม่</a></div>
+    <div class="viewport"><iframe title="RPCG Direction A" data-src="../rpcg-demo-A/index.html"></iframe></div>
+    <span class="size-note"></span>
+  </section>
+  <section class="slot" data-slot="B" hidden>
+    <div class="slot-head"><span><b>B</b> · ก้าวไปข้างหน้า</span><a href="../rpcg-demo-B/index.html" target="_blank" rel="noopener">เปิดในแท็บใหม่</a></div>
+    <div class="viewport"><iframe title="RPCG Direction B" data-src="../rpcg-demo-B/index.html"></iframe></div>
+    <span class="size-note"></span>
+  </section>
+</main>
+
+<script>
+(() => {
+  const DEVICES = { desktop: { w: 1440, label: 'Desktop 1440px' }, tablet: { w: 820, label: 'Tablet 820px' }, mobile: { w: 390, label: 'Mobile 390px' } };
+  const stage = document.getElementById('stage');
+  const slots = { A: stage.querySelector('[data-slot="A"]'), B: stage.querySelector('[data-slot="B"]') };
+  const state = { ver: 'A', dev: 'desktop' };
+  const store = {
+    get(){ try { return JSON.parse(localStorage.getItem('rpcg-demo-switcher') || '{}'); } catch (e) { return {}; } },
+    set(){ try { localStorage.setItem('rpcg-demo-switcher', JSON.stringify(state)); } catch (e) {} }
+  };
+  const saved = store.get();
+  if (['A','B','AB'].includes(saved.ver)) state.ver = saved.ver;
+  if (DEVICES[saved.dev]) state.dev = saved.dev;
+  const hash = location.hash.replace('#', '').toUpperCase();
+  if (['A','B','AB'].includes(hash)) state.ver = hash;
+
+  const loaded = {};
+  // Same-origin: hide the page's own scrollbar inside the mock viewport (scrolling still works)
+  const hideScrollbar = (f) => {
+    try {
+      const d = f.contentDocument, st = d.createElement('style');
+      st.textContent = 'html{scrollbar-width:none}::-webkit-scrollbar{display:none;width:0;height:0}';
+      d.head.appendChild(st);
+    } catch (e) {}
+  };
+  Object.values(slots).forEach(s => { const f = s.querySelector('iframe'); f.addEventListener('load', () => hideScrollbar(f)); });
+  const load = (k) => { const f = slots[k].querySelector('iframe'); if (!loaded[k]) { f.src = f.dataset.src; loaded[k] = true; } };
+
+  function layout() {
+    const showing = state.ver === 'AB' ? ['A', 'B'] : [state.ver];
+    ['A', 'B'].forEach(k => { slots[k].hidden = !showing.includes(k); if (showing.includes(k)) load(k); });
+    const dev = DEVICES[state.dev];
+    const cs = getComputedStyle(stage);
+    const padX = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight);
+    const gap = parseFloat(cs.columnGap) || 16;
+    const availW = stage.clientWidth - padX - gap * (showing.length - 1);
+    const perSlotW = availW / showing.length;
+    const scale = Math.max(0.3, Math.min(1, perSlotW / dev.w));   // floor keeps tiny windows scrollable, not unreadable
+    const headH = 28 + 24;                       // slot head + note
+    const availH = stage.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom) - headH;
+    const vpH = Math.max(320, availH);           // viewport height in screen px
+    showing.forEach(k => {
+      const slot = slots[k], vp = slot.querySelector('.viewport'), f = slot.querySelector('iframe');
+      vp.style.width = Math.round(dev.w * scale) + 'px';
+      vp.style.height = Math.round(vpH) + 'px';
+      f.style.width = dev.w + 'px';
+      f.style.height = Math.round(vpH / scale) + 'px';
+      f.style.transform = 'scale(' + scale + ')';
+      slot.style.width = Math.round(dev.w * scale) + 'px';
+      slot.querySelector('.size-note').textContent = dev.label + (scale < 1 ? ' · ย่อ ' + Math.round(scale * 100) + '%' : ' · 100%');
+    });
+    document.querySelectorAll('[data-ver]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.ver === state.ver)));
+    document.querySelectorAll('[data-dev]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.dev === state.dev)));
+    store.set();
+  }
+
+  document.querySelectorAll('[data-ver]').forEach(b => b.addEventListener('click', () => { state.ver = b.dataset.ver; layout(); }));
+  document.querySelectorAll('[data-dev]').forEach(b => b.addEventListener('click', () => { state.dev = b.dataset.dev; layout(); }));
+  document.getElementById('reload').addEventListener('click', () => {
+    ['A', 'B'].forEach(k => { if (loaded[k] && !slots[k].hidden) { const f = slots[k].querySelector('iframe'); f.src = f.dataset.src + '?r=' + Date.now(); } });
+  });
+  window.addEventListener('keydown', (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    const m = { '1': ['ver', 'A'], '2': ['ver', 'B'], '3': ['ver', 'AB'], d: ['dev', 'desktop'], t: ['dev', 'tablet'], m: ['dev', 'mobile'] }[e.key.toLowerCase()];
+    if (m) { state[m[0]] = m[1]; layout(); }
+  });
+  window.addEventListener('resize', layout);
+  if (window.ResizeObserver) new ResizeObserver(layout).observe(stage);
+  layout();
+})();
+</script>
+</body>
+</html>
