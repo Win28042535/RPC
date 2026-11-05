@@ -29,7 +29,7 @@ Open http://localhost:5172 and http://localhost:5172/compare.html
 
 ## Notes
 
-- **Fonts are not included.** FC Minimal and the Material Symbols subset are licensed / build assets and are kept out of this public repo; place the `.woff2` files in `assets/font/` (see `fonts.css`). Without them the page falls back to a system font and icons show as text.
+- **Fonts are included** (FC Minimal and the Material Symbols subset in `assets/font/`) so Git-based Vercel deployments render the same as local previews. FC Minimal is a licensed font; this was the repo owner's decision.
 - Figures: revenue 10,280 / 8,980 / 8,371 MB (2566–2568), history and licence come from rpc-th.listedcompany.com; 81.9% / 17.7% / 80 stations / 12 solar-rooftop stations from the original demo.
 - Section backgrounds use blue duotone crops of the existing Caltex photo (`assets/img/energy/`) instead of city imagery.
 - The solar-rooftop card uses an existing demo image (city with wind turbines) as a stand-in.
