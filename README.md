@@ -20,7 +20,7 @@ Open http://localhost:5172 and http://localhost:5172/compare.html
 ## What changed from the demo
 
 - Section order: Hero → energy business (PTEC) → energy products → investors → about RPC → ESG → opportunity → news / contact.
-- Hero: a simulated motion placeholder replaces the video (to be swapped for the real video); one energy card with 81.9% / 80 stations / EURO 5, SAMCO as a small affiliate link.
+- Hero: a 10-second simulated film replaces the video (to be swapped for the real one), following the Energy-Led Ecosystem script: Establish → Reveal → Expand → Unify → lockup. It loops in the background; "ดูภาพจำลองวิดีโอ 10 วินาที" opens a full-screen player with the script captions, stage bar and notes on which shots still need real footage (`assets/js/film.js`). One energy card with 81.9% / 80 stations / EURO 5, SAMCO as a small affiliate link.
 - Energy business: single PTEC panel, no slider.
 - Products: four energy items on the Moving Forward rail (01 / 04), real-estate items removed.
 - About: shortened; SAMCO shown as one affiliate tile.
@@ -32,3 +32,4 @@ Open http://localhost:5172 and http://localhost:5172/compare.html
 - **Fonts are not included.** FC Minimal and the Material Symbols subset are licensed / build assets and are kept out of this public repo; place the `.woff2` files in `assets/font/` (see `fonts.css`). Without them the page falls back to a system font and icons show as text.
 - Figures (81.9%, 17.7%, 80 stations, 12 solar-rooftop stations, revenue bars) come from the original demo.
 - The solar-rooftop card uses an existing demo image (city with wind turbines) as a stand-in.
+- Film stills in `assets/img/film/` are frames taken from the original demo video; the energy-infrastructure shots (0–4s) still need real footage.

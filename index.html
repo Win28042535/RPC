@@ -36,26 +36,9 @@
 
 <!-- HERO -->
 <header class="hero theme-dark" id="home" data-nav="หน้าแรก" data-nav-desc="RPC — Holding Company ที่มีธุรกิจพลังงานเป็นแกนหลัก">
-  <!-- ภาพจำลองแทนวิดีโอ (รอวิดีโอจริง): ภาพธุรกิจพลังงานค่อย ๆ เปลี่ยน + เส้นพลังงานวิ่งทับ -->
+  <!-- ภาพจำลองแทนวิดีโอ (รอวิดีโอจริง) ตามสคริปต์ 10 วินาที — ดู assets/js/film.js -->
   <div class="hero-media hero-sim" data-parallax="0.12" data-parallax-clamp="50" role="img" aria-label="ภาพจำลองธุรกิจพลังงานของกลุ่มบริษัท อาร์พีซี">
-    <div class="hero-sim-slides" aria-hidden="true">
-      <img src="assets/img/CALTEX-0221-1536x1024.webp" alt="">
-      <img src="assets/img/50882.webp" alt="">
-      <img src="assets/img/9747.webp" alt="">
-    </div>
-    <svg class="hero-sim-flow" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <g class="base">
-        <path d="M-60 640 C 260 560, 520 720, 820 610 S 1320 470, 1660 540"/>
-        <path d="M-60 520 C 300 470, 620 600, 920 500 S 1360 380, 1660 420"/>
-        <path d="M-60 780 C 380 720, 720 830, 1020 730 S 1420 660, 1660 700"/>
-      </g>
-      <g class="flow">
-        <path pathLength="1000" d="M-60 640 C 260 560, 520 720, 820 610 S 1320 470, 1660 540"/>
-        <path pathLength="1000" d="M-60 520 C 300 470, 620 600, 920 500 S 1360 380, 1660 420"/>
-        <path pathLength="1000" d="M-60 780 C 380 720, 720 830, 1020 730 S 1420 660, 1660 700"/>
-      </g>
-      <g class="node"><circle cx="820" cy="610" r="5"/><circle cx="920" cy="500" r="5"/><circle cx="1320" cy="470" r="5"/><circle cx="1020" cy="730" r="5"/></g>
-    </svg>
+    <div class="rpc-film" data-film="bg" aria-hidden="true"></div>
     <span class="hero-sim-tag">ภาพจำลอง · รอวิดีโอจริง</span>
   </div>
   <div class="hero-media-overlay"></div>
@@ -69,6 +52,7 @@
     <div class="hero-lead">
       <p class="hero-statement reveal in">ขับเคลื่อนพลังงาน<br>เพื่อการเติบโตอย่างยั่งยืน</p>
       <a class="button button-primary hero-cta reveal in" href="#business">สำรวจธุรกิจพลังงาน <i class="icon" aria-hidden="true">arrow_outward</i></a>
+      <button type="button" class="hero-film-btn reveal in" data-film-open aria-haspopup="dialog" aria-controls="filmModal"><span class="hero-film-play" aria-hidden="true"></span>ดูภาพจำลองวิดีโอ 10 วินาที</button>
     </div>
     <p class="hero-intro reveal in">Holding Company ที่มี<span class="nowrap">ธุรกิจพลังงานเป็นแกนหลัก</span> <span class="nowrap">ผ่าน PTEC × คาลเท็กซ์</span> <span class="nowrap">ก่อตั้งเมื่อปี 2538</span></p>
     <a class="hero-scroll-prompt" href="#business"><span>SCROLL TO EXPLORE</span><i class="icon" aria-hidden="true">arrow_downward</i></a>
@@ -464,6 +448,25 @@
   </div>
 </section>
 
+
+<!-- ภาพจำลองวิดีโอแบบเต็มจอ: ตรวจ storyboard ตามสคริปต์ -->
+<div class="film-modal" id="filmModal" role="dialog" aria-modal="true" aria-label="ภาพจำลองวิดีโอ hero 10 วินาที" hidden>
+  <div class="film-box">
+    <div class="film-head">
+      <span class="film-title"><span class="film-title-en">ENERGY-LED ECOSYSTEM · </span>ภาพจำลอง 10 วินาที</span>
+      <span class="film-time" data-film-time>0.0 / 10.0s</span>
+      <button type="button" class="film-btn" data-film-replay>เล่นใหม่</button>
+      <button type="button" class="film-btn film-close" data-film-close aria-label="ปิด"><i class="icon" aria-hidden="true">close</i></button>
+    </div>
+    <div class="film-stage">
+      <div class="rpc-film" data-film="player"></div>
+      <p class="film-caption" data-film-caption aria-live="polite"></p>
+    </div>
+    <ol class="film-stages" data-film-stages></ol>
+    <p class="film-note" data-film-note></p>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <script>rpcgInclude('footer')</script>
 
@@ -473,5 +476,6 @@
 <script src="assets/js/menu.js?v=10"></script>
 <script src="assets/js/ir-data.js?v=8"></script>
 <script src="assets/js/main.js?v=32"></script>
+<script src="assets/js/film.js"></script>
 </body>
 </html>
