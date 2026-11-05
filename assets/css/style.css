@@ -2177,3 +2177,12 @@ body.ck-open .back-top{ opacity:0; visibility:hidden; }
 .biz-affil-go{ flex:none; display:inline-flex; align-items:center; gap:8px; font-family:var(--ff-display); font-weight:var(--fw-semibold); color:var(--ink); border-bottom:1px solid currentColor; padding:4px 0; }
 @media (max-width:575.98px){ .biz-affil{ flex-wrap:wrap; } .biz-affil-go{ margin-left:calc(clamp(96px,12vw,168px) + 16px); } }
 @media (max-width:575.98px){ .hero-sim-more{ display:none; } }
+
+/* ESG now has 5 cards (solar rooftop added), so wide screens overflow too: show the arrows and counter at every width */
+@media (min-width:992px){
+  .esg-nav{ display:flex; align-items:center; justify-content:flex-end; gap:10px; margin-top:clamp(16px,2vw,24px); }
+  .esg-count{ margin-right:auto; font-size:var(--fs-xs); letter-spacing:.08em; color:var(--muted-2); }
+  .esg-arrow{ width:44px; height:44px; flex:none; display:grid; place-items:center; border:1px solid var(--line-dark-strong); border-radius:var(--btn-radius-icon); background:transparent; color:var(--ink); cursor:pointer; transition:background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease), opacity .3s var(--ease); }
+  .esg-arrow:hover:not(:disabled){ background:var(--primary); border-color:var(--primary); color:var(--text-inverse); }
+  .esg-arrow:disabled{ opacity:.35; cursor:default; }
+}
