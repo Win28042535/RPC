@@ -9,6 +9,7 @@ Mockup preview of the RPC homepage, built on the latest demo at `design.onlineas
 | About-us pages | `about-history.html`, `company-information.html`, `vision-and-mission.html` (energy-first rework); `chairman-statement.html`, `board-of-directors.html`, `organization-chart.html`, `shareholding.html` (name + banner only) |
 | Investor relations | `index-ir.html` (energy-first rework, revenue-by-segment bar); 9 sub-pages (name + banner only) |
 | Contact and policies | `contact.html` (energy line, plant tag, affiliate contacts); `documents-company-policy`, `cookie-policy`, `privacy-policy`, `complaint-channel`, `read-detail`, `unsub-email-alert` (name + banner only) |
+| English | All 26 `*-en.html` pages and `partials/*-en.html`: the 7 main pages mirror the Thai v2 structure, the rest get naming + banner; years in CE |
 | `compare.html` | Before / after screenshots and the change list for the web team |
 | `_compare/` | Screenshots used by `compare.html` |
 | `serve.js` | Static dev server (port 5172) |

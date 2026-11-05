@@ -1,0 +1,180 @@
+<!-- ==========================================================================
+     partials/header-en.html — navbar ภาษาอังกฤษ (หน้า *-en.html)
+     • เกี่ยวกับเรา / การกำกับดูแลกิจการ / ข่าว = dropdown ปกติ (Bootstrap)
+     • นักลงทุนสัมพันธ์ = mega-menu (.mm-pane ด้านล่าง, พฤติกรรมที่ assets/js/menu.js)
+     แก้เมนูที่ไฟล์นี้ (คู่กับ header.html) แล้วรัน  python3 tools/build.py
+     หน้าที่เปิดอยู่ไฮไลต์ตาม active=KEY ใน marker (เทียบกับ data-key)
+     ========================================================================== -->
+<nav class="navbar navbar-expand-lg rpcg-nav">
+  <div class="container container-xl">
+    <a class="rpcg-logo" href="index-en.html">
+      <img src="assets/img/rpcg-logo.webp" alt="RPC" width="74" height="48">
+    </a>
+    <button type="button" class="lang-switch lang-switch-m ms-auto me-2 d-lg-none" data-lang-toggle aria-label="เปลี่ยนเป็นภาษาไทย" lang="th">TH</button>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain" aria-label="Open menu">
+      <span class="burger" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navMain">
+      <ul class="navbar-nav align-items-lg-center gap-lg-1">
+        <li class="nav-item"><a class="nav-link" href="index-en.html" data-key="home">Home</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-key="about">About Us <i class="icon ir-trigger-ic" aria-hidden="true">expand_more</i></a>
+          <ul class="dropdown-menu rpcg-dropdown">
+            <li><a class="dropdown-item" href="chairman-statement-en.html">Chairman's Statement</a></li>
+            <li><a class="dropdown-item" href="company-information-en.html">Company Information</a></li>
+            <li><a class="dropdown-item" href="vision-and-mission-en.html">Vision &amp; Mission</a></li>
+            <li><a class="dropdown-item" href="about-history-en.html">Company History</a></li>
+            <li><a class="dropdown-item" href="organization-chart-en.html">Organization Chart</a></li>
+            <li><a class="dropdown-item" href="shareholding-en.html">Shareholding Structure</a></li>
+            <li><a class="dropdown-item" href="board-of-directors-en.html">Board of Directors &amp; Management</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="business-en.html" data-key="business">Our Business</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link d-none d-lg-block" href="index-ir-en.html" data-key="ir" data-menu="ir" aria-haspopup="dialog" aria-expanded="false" aria-controls="siteMenu">Investor Relations <i class="icon ir-trigger-ic" aria-hidden="true">expand_more</i></a>
+          <a class="nav-link dropdown-toggle d-lg-none" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" data-key="ir">Investor Relations <i class="icon ir-trigger-ic" aria-hidden="true">expand_more</i></a>
+          <div class="dropdown-menu rpcg-dropdown ir-nested d-lg-none">
+            <a class="dropdown-item" href="index-ir-en.html">IR Home</a>
+            <details class="ir-group">
+              <summary>Financial Information <i class="icon" aria-hidden="true">expand_more</i></summary>
+              <a class="dropdown-item" href="#">Financial Statements</a>
+              <a class="dropdown-item" href="financial-highlights-en.html">Financial Highlights</a>
+              <a class="dropdown-item" href="mda-en.html">MD&amp;A</a>
+              <a class="dropdown-item" href="#">Stock Health</a>
+            </details>
+            <details class="ir-group">
+              <summary>Publications <i class="icon" aria-hidden="true">expand_more</i></summary>
+              <a class="dropdown-item" href="one-report-en.html">Form 56-1 One Report</a>
+              <a class="dropdown-item" href="filing-en.html">Prospectus</a>
+              <a class="dropdown-item" href="#">ESG Structured Data Report</a>
+              <a class="dropdown-item" href="#">Multimedia Presentations</a>
+            </details>
+            <details class="ir-group">
+              <summary>Shareholder Information <i class="icon" aria-hidden="true">expand_more</i></summary>
+              <a class="dropdown-item" href="#">Shareholders' Meetings</a>
+              <a class="dropdown-item" href="#">Shareholding Structure</a>
+              <a class="dropdown-item" href="rights-offering-en.html">Rights Offering (RO)</a>
+              <a class="dropdown-item" href="#">Major Shareholders</a>
+              <a class="dropdown-item" href="dividend-policy-payment-en.html">Dividend Policy &amp; History</a>
+              <a class="dropdown-item" href="#">IR Calendar</a>
+              <a class="dropdown-item" href="#">Fact Sheet</a>
+            </details>
+            <details class="ir-group">
+              <summary>Stock Information <i class="icon" aria-hidden="true">expand_more</i></summary>
+              <a class="dropdown-item" href="#">Latest Stock Price</a>
+              <a class="dropdown-item" href="#">Historical Price</a>
+              <a class="dropdown-item" href="#">Investment Calculator</a>
+            </details>
+            <details class="ir-group">
+              <summary>IR Contact <i class="icon" aria-hidden="true">expand_more</i></summary>
+              <a class="dropdown-item" href="ir-contact-en.html">Contact Investor Relations</a>
+              <a class="dropdown-item" href="e-mail-alert-en.html">E-mail Alerts</a>
+              <a class="dropdown-item" href="faqs-en.html">FAQ</a>
+            </details>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-key="cg">Corporate Governance <i class="icon ir-trigger-ic" aria-hidden="true">expand_more</i></a>
+          <ul class="dropdown-menu rpcg-dropdown">
+            <li><a class="dropdown-item" href="documents-company-policy-en.html">Documents &amp; Policies</a></li>
+            <li><a class="dropdown-item" href="cookie-policy-en.html">Cookie Policy</a></li>
+            <li><a class="dropdown-item" href="privacy-policy-en.html">Privacy Policy</a></li>
+            <li><a class="dropdown-item" href="complaint-channel-en.html">Whistleblowing Channel</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="index-en.html#esg" data-key="sustain">Sustainability</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-key="news">News <i class="icon ir-trigger-ic" aria-hidden="true">expand_more</i></a>
+          <ul class="dropdown-menu rpcg-dropdown">
+            <li><a class="dropdown-item" href="https://rpc-th.listedcompany.com" target="_blank" rel="noopener">SET Announcements</a></li>
+            <li><a class="dropdown-item" href="#">Latest News</a></li>
+            <li><a class="dropdown-item" href="#">Press Room</a></li>
+            <li><a class="dropdown-item" href="#">News Clipping</a></li>
+          </ul>
+        </li>
+        <li class="nav-item lang-item d-none d-lg-flex">
+          <button type="button" class="lang-switch" data-lang-toggle aria-label="เปลี่ยนเป็นภาษาไทย" lang="th">TH</button>
+        </li>
+        <li class="nav-item ms-lg-3"><a class="button button-primary" href="contact-en.html">Contact Us <i class="icon" aria-hidden="true">arrow_outward</i></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Mega-menu (เฉพาะนักลงทุนสัมพันธ์) -->
+<div class="ir-oc" id="siteMenu" role="dialog" aria-modal="true" aria-label="Investor Relations menu" aria-hidden="true">
+  <div class="ir-oc-panel">
+    <button type="button" class="ir-oc-close" id="siteMenuClose" aria-label="Close menu"><i class="icon" aria-hidden="true">close</i></button>
+    <div class="mm-pane" data-mm="ir" hidden>
+      <div class="ir-oc-col mm-intro">
+        <h3 class="mm-title">Investor Relations</h3>
+        <p class="mm-desc">Financials, publications, shareholder and stock information in one place</p>
+        <ul class="mm-quick">
+          <li><a href="one-report-en.html"><i class="icon" aria-hidden="true">description</i>Form 56-1 One Report</a></li>
+          <li><a href="ir-contact-en.html"><i class="icon" aria-hidden="true">mail</i>Contact Investor Relations</a></li>
+        </ul>
+      </div>
+      <div class="ir-oc-col ir-oc-col-ir">
+        <div class="ir-oc-ir-master">
+          <div class="tabs tabs-vertical" role="tablist" aria-orientation="vertical" aria-label="Investor information categories">
+            <a class="tab mm-tab-home" href="index-ir-en.html" role="presentation" style="--i:0"><span class="mm-tab-label">IR Home</span><i class="icon" aria-hidden="true">arrow_outward</i></a>
+            <button type="button" class="tab is-active" role="tab" aria-selected="true" tabindex="0" aria-controls="mmPanel-ir-0" id="mmTab-ir-0" data-mm-tab="0" style="--i:1"><span class="mm-tab-label">Financial Information</span><i class="icon" aria-hidden="true">chevron_right</i></button>
+            <button type="button" class="tab" role="tab" aria-selected="false" tabindex="-1" aria-controls="mmPanel-ir-1" id="mmTab-ir-1" data-mm-tab="1" style="--i:2"><span class="mm-tab-label">Publications</span><i class="icon" aria-hidden="true">chevron_right</i></button>
+            <button type="button" class="tab" role="tab" aria-selected="false" tabindex="-1" aria-controls="mmPanel-ir-2" id="mmTab-ir-2" data-mm-tab="2" style="--i:3"><span class="mm-tab-label">Shareholder Information</span><i class="icon" aria-hidden="true">chevron_right</i></button>
+            <button type="button" class="tab" role="tab" aria-selected="false" tabindex="-1" aria-controls="mmPanel-ir-3" id="mmTab-ir-3" data-mm-tab="3" style="--i:4"><span class="mm-tab-label">Stock Information</span><i class="icon" aria-hidden="true">chevron_right</i></button>
+            <button type="button" class="tab" role="tab" aria-selected="false" tabindex="-1" aria-controls="mmPanel-ir-4" id="mmTab-ir-4" data-mm-tab="4" style="--i:5"><span class="mm-tab-label">IR Contact</span><i class="icon" aria-hidden="true">chevron_right</i></button>
+          </div>
+          <div class="ir-oc-ir-panels">
+            <div class="tab-panel ir-oc-ir-panel is-active" role="tabpanel" id="mmPanel-ir-0" aria-labelledby="mmTab-ir-0" data-mm-panel="0" style="--i:1">
+              <div class="mm-panel-head"><strong>Financial Information</strong></div>
+              <div class="mm-panel-links">
+                <a href="#">Financial Statements</a>
+                <a href="financial-highlights-en.html">Financial Highlights</a>
+                <a href="mda-en.html">MD&amp;A</a>
+                <a href="#">Stock Health</a>
+              </div>
+            </div>
+            <div class="tab-panel ir-oc-ir-panel" role="tabpanel" id="mmPanel-ir-1" aria-labelledby="mmTab-ir-1" data-mm-panel="1" style="--i:2">
+              <div class="mm-panel-head"><strong>Publications</strong></div>
+              <div class="mm-panel-links">
+                <a href="one-report-en.html">Form 56-1 One Report</a>
+                <a href="filing-en.html">Prospectus</a>
+                <a href="#">ESG Structured Data Report</a>
+                <a href="#">Multimedia Presentations</a>
+              </div>
+            </div>
+            <div class="tab-panel ir-oc-ir-panel" role="tabpanel" id="mmPanel-ir-2" aria-labelledby="mmTab-ir-2" data-mm-panel="2" style="--i:3">
+              <div class="mm-panel-head"><strong>Shareholder Information</strong></div>
+              <div class="mm-panel-links is-two">
+                <a href="#">Shareholders' Meetings</a>
+                <a href="#">Shareholding Structure</a>
+                <a href="rights-offering-en.html">Rights Offering (RO)</a>
+                <a href="#">Major Shareholders</a>
+                <a href="dividend-policy-payment-en.html">Dividend Policy &amp; History</a>
+                <a href="#">IR Calendar</a>
+                <a href="#">Fact Sheet</a>
+              </div>
+            </div>
+            <div class="tab-panel ir-oc-ir-panel" role="tabpanel" id="mmPanel-ir-3" aria-labelledby="mmTab-ir-3" data-mm-panel="3" style="--i:4">
+              <div class="mm-panel-head"><strong>Stock Information</strong></div>
+              <div class="mm-panel-links">
+                <a href="#">Latest Stock Price</a>
+                <a href="#">Historical Price</a>
+                <a href="#">Investment Calculator</a>
+              </div>
+            </div>
+            <div class="tab-panel ir-oc-ir-panel" role="tabpanel" id="mmPanel-ir-4" aria-labelledby="mmTab-ir-4" data-mm-panel="4" style="--i:5">
+              <div class="mm-panel-head"><strong>IR Contact</strong></div>
+              <div class="mm-panel-links">
+                <a href="ir-contact-en.html">Contact Investor Relations</a>
+                <a href="e-mail-alert-en.html">E-mail Alerts</a>
+                <a href="faqs-en.html">FAQ</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ir-oc-veil" id="siteMenuVeil" aria-hidden="true"></div>

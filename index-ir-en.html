@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Investor Relations — RPC PCL</title>
+<meta name="description" content="Investor Relations hub of RPC Public Company Limited: share price, investor event calendar, financial statements, documents and news">
+<link rel="alternate" hreflang="th" href="index-ir.html">
+<link rel="alternate" hreflang="en" href="index-ir-en.html">
+
+<link rel="stylesheet" href="assets/font/fonts.css?v=3">
+<link href="assets/vendor/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css?v=10">
+<link rel="stylesheet" href="assets/css/components.css?v=20">
+<link rel="stylesheet" href="assets/css/style.css?v=156">
+<link rel="stylesheet" href="assets/css/ir.css?v=98">
+<script src="assets/js/include.js"></script>
+<link rel="icon" href="favicon.ico" sizes="any">
+</head>
+<body class="irp-page has-sec-nav">
+
+
+<!-- Navbar -->
+<script>rpcgInclude('header-en','ir')</script>
+
+
+
+
+
+<!-- Section progress nav — สร้างจาก [data-nav] ด้วย main.js -->
+<nav class="sec-nav" id="secNav" aria-label="สารบัญหน้า"></nav>
+<div class="sec-nav-tip" id="secNavTip" role="status" aria-live="polite"></div>
+
+<!-- HERO — สูง 500px · ราคาหุ้น SET : RPC เป็นตัวเอก (ข้อมูลจาก assets/js/ir-data.js) -->
+<header class="irp-hero theme-dark" id="investor" data-nav="Investor Relations" data-nav-desc="SET : RPC share price and investor information in one place">
+  <div class="irp-hero-media" aria-hidden="true"><img src="assets/img/energy/canopy-deep.webp" alt=""></div>
+  <div class="container container-xl irp-hero-inner">
+    <div class="irp-hero-copy">
+      <span class="section-tag">Investor Relations</span>
+      <h1 class="irp-hero-title">Investor Relations<br>Information</h1>
+      <p class="irp-hero-lead">A holding company with <span class="nowrap">energy at its core</span></p>
+    </div>
+    <div class="irp-quote" role="group" aria-label="RPC share price">
+      <span class="irp-quote-sym">SET : RPC</span>
+      <span class="irp-quote-main" data-stock="quote">
+        <b data-stock="price">—</b>
+        <span class="irp-quote-delta" data-stock="delta"></span>
+      </span>
+      <dl class="irp-quote-stats">
+        <div><dt>Last price</dt><dd data-stock="price2">—</dd></div>
+        <div><dt>Change</dt><dd data-stock="change">—</dd></div>
+        <div><dt>High</dt><dd data-stock="high">—</dd></div>
+        <div><dt>Low</dt><dd data-stock="low">—</dd></div>
+      </dl>
+      <span class="irp-quote-time">Last updated <time data-stock="asof">Awaiting data</time></span>
+    </div>
+  </div>
+</header>
+
+<!-- INVESTMENT STRATEGY — ดีไซน์เดียวกับ About หน้าแรก (class about-* จาก style.css) -->
+<section class="section irp-about theme-light" id="irpStrategy" data-nav="Investment strategy" data-nav-desc="A holding company diversifying its investments in energy and real estate">
+  <div class="about-architecture" aria-hidden="true">
+    <img src="assets/img/energy/canopy-light.webp" alt="" loading="lazy">
+    <div class="about-architecture-wash"></div>
+  </div>
+  <div class="container container-xl">
+    <div class="about-masthead">
+      <div class="about-brandline reveal"><span class="about-brandmark" aria-hidden="true"></span><span>RPC / INVESTMENT STRATEGY</span></div>
+      <h2 class="about-display reveal">Investment<br><span>strategy</span></h2>
+      <p class="about-kicker" id="irpStrategyText"><span class="word">Holding Company</span> <span class="word">that diversifies investments</span><br><span class="word">into a variety of new businesses</span> <span class="word">creatively</span> <span class="word">and sustainably</span></p>
+      <div class="about-desc reveal">
+        <p>The Group has the energy business under the Caltex brand at its core, through Pure Thai Energy Company Limited (PTEC), extended by real estate development under the Sammakorn brand.</p>
+      </div>
+    </div>
+
+    <div class="about-board">
+      <aside class="about-board-rail reveal">
+        <span class="about-range">2025 performance</span>
+      </aside>
+      <div class="about-facts-layer">
+        <div class="about-facts stagger reveal" aria-label="2025 revenue breakdown">
+          <div class="about-fact stagger-item">
+            <div class="about-fact-head"><i class="icon" aria-hidden="true">local_gas_station</i><span>Energy share of revenue</span></div>
+            <strong>81.93<em>%</em></strong>
+          </div>
+          <div class="about-fact stagger-item">
+            <div class="about-fact-head"><i class="icon" aria-hidden="true">payments</i><span>Total revenue 2025 (THB million)</span></div>
+            <strong>8,371</strong>
+          </div>
+          <div class="about-fact stagger-item">
+            <div class="about-fact-head"><i class="icon" aria-hidden="true">trending_up</i><span>Caltex service stations, Dec 2025</span></div>
+            <strong>80</strong>
+          </div>
+          <div class="about-fact stagger-item">
+            <div class="about-fact-head"><i class="icon" aria-hidden="true">home_work</i><span>Real estate share of revenue</span></div>
+            <strong>17.70<em>%</em></strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- IR DATA — bento ข้อมูลนักลงทุน (ข้อมูลจาก assets/js/ir-data.js · กราฟ ECharts โดย assets/js/ir-charts.js) -->
+<section class="section irp-sec theme-tint" id="irpData">
+  <div class="container container-xl irp-sec-inner">
+
+    <!-- 1 · Financial highlights -->
+    <section class="irp-group" id="irpFinance" data-nav="Financial data" data-nav-desc="Assets, revenue, profit and latest operating results">
+      <header class="bento-head reveal">
+        <div>
+          <h2 class="section-title">Financial highlights</h2>
+        </div>
+        <div class="irp-head-end">
+          <a class="button button-secondary" href="financial-highlights.html">View all <i class="icon" aria-hidden="true">arrow_outward</i></a>
+        </div>
+      </header>
+      <div class="irp-bento irp-bento-fin stagger reveal">
+        <article class="irp-w irp-w-navy on-dark irp-arcs t-hero">
+          <span class="irp-w-label">Latest financial data · <span data-fin="period"></span></span>
+          <ul class="irp-kpi-list">
+            <li>
+              <span class="irp-kpi-label"><i class="icon irp-kpi-ico" aria-hidden="true">corporate_fare</i>Total assets<small>THB million</small></span>
+              <b class="irp-kpi-val irp-count" data-val="assets">—</b>
+            </li>
+            <li>
+              <span class="irp-kpi-label"><i class="icon irp-kpi-ico" aria-hidden="true">trending_up</i>Total revenue<small>THB million</small></span>
+              <b class="irp-kpi-val irp-count" data-val="revenue">—</b>
+            </li>
+            <li>
+              <span class="irp-kpi-label"><i class="icon irp-kpi-ico" aria-hidden="true">groups</i>Shareholders’ equity<small>THB million</small></span>
+              <b class="irp-kpi-val irp-count" data-val="equity">—</b>
+            </li>
+            <li>
+              <span class="irp-kpi-label"><i class="icon irp-kpi-ico" aria-hidden="true">calculate</i>Earnings per share<small>THB/share</small></span>
+              <b class="irp-kpi-val irp-count" data-val="eps">—</b>
+            </li>
+          </ul>
+        </article>
+        <article class="irp-w t-chart">
+          <header class="irp-w-head">
+            <h3>Total assets and total liabilities</h3>
+            <span class="irp-key"><i style="--k:var(--primary)"></i>Total liabilities<i style="--k:var(--brand)"></i>Total assets<i class="is-partial" style="--k:var(--muted-2)"></i>Q2/2026</span>
+          </header>
+          <div class="irp-chart" id="chAssets" role="img" aria-label="Bar chart comparing total assets and total liabilities by year"></div>
+        </article>
+        <article class="irp-w t-gross">
+          <header class="irp-w-head"><h3>Total revenue</h3><span class="irp-key"><i class="is-partial" style="--k:var(--primary)"></i>Q2/2026</span></header>
+          <div class="irp-chart" id="chGross" role="img" aria-label="Bar chart of total revenue by year"></div>
+        </article>
+        <article class="irp-w t-net">
+          <header class="irp-w-head"><h3>Net profit</h3><span class="irp-key"><i class="is-partial" style="--k:var(--primary)"></i>Q2/2026</span></header>
+          <div class="irp-chart" id="chNet" role="img" aria-label="Bar chart of net profit with net profit margin line by year"></div>
+        </article>
+      </div>
+    
+      <article class="irp-seg reveal" aria-label="Revenue by business, 2025">
+        <header class="irp-seg-head"><h3>Revenue by business, 2025</h3><span>Share of total revenue</span></header>
+        <div class="irp-seg-bar" role="img" aria-label="Energy 81.93%, real estate 17.70%, other 0.37%">
+          <span class="is-energy" style="--w:81.93%"><b>81.93%</b></span><span class="is-estate" style="--w:17.70%"><b>17.70%</b></span><span class="is-other" style="--w:0.37%"></span>
+        </div>
+        <ul class="irp-seg-key">
+          <li class="is-energy"><i></i><b>Energy</b> PTEC × Caltex · core company</li>
+          <li class="is-estate"><i></i><b>Affiliate · Real estate</b> SAMCO Sammakorn</li>
+          <li class="is-other"><i></i>Other 0.37%</li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- 2 · Shareholder information -->
+    <section class="irp-group" id="irpShareholders" data-nav="Shareholders" data-nav-desc="Shareholding proportion, major shareholders and dividends">
+      <header class="bento-head reveal">
+        <div>
+          <h2 class="section-title">Shareholder information</h2>
+        </div>
+        <div class="irp-head-end">
+          <a class="button button-secondary" href="#">Shareholder structure <i class="icon" aria-hidden="true">arrow_outward</i></a>
+        </div>
+      </header>
+      <div class="irp-bento irp-bento-sh stagger reveal">
+        <article class="irp-w t-donut">
+          <header class="irp-w-head"><h3>Shareholding proportion</h3></header>
+          <div class="irp-chart" id="chHolders" role="img" aria-label="Donut chart of major shareholders’ proportions"></div>
+        </article>
+        <article class="irp-w t-rank">
+          <header class="irp-w-head"><div class="irp-head-main"><h3>Major shareholders</h3>
+            <div class="irp-pager" data-holders-pager>
+              <span class="irp-pager-count" data-pager="count" aria-live="polite">1/1</span>
+              <button type="button" class="button button-secondary button-icon button-sm" data-pager="prev" aria-label="Previous page"><i class="icon" aria-hidden="true">arrow_back</i></button>
+              <button type="button" class="button button-secondary button-icon button-sm" data-pager="next" aria-label="Next page"><i class="icon" aria-hidden="true">arrow_forward</i></button>
+            </div></div>
+            <a class="button button-secondary button-sm" href="https://www.set.or.th/th/market/product/stock/quote/RPC/major-shareholders" target="_blank" rel="noopener">View all <i class="icon" aria-hidden="true">arrow_outward</i></a></header>
+          <ol class="irp-rank" data-holders></ol>
+        </article>
+        <a class="irp-w irp-w-navy on-dark irp-arcs t-policy" href="https://www.set.or.th/th/market/product/stock/quote/RPC/major-shareholders" target="_blank" rel="noopener">
+          <span class="irp-w-label">Free float (minority shareholders)</span>
+          <div class="irp-policy"><b class="irp-num-m">67.82%</b><p>6,681 of 7,391 shareholders</p></div>
+          <span class="hero-dock-arrow irp-go-ico"><i class="icon" aria-hidden="true">arrow_outward</i></span>
+        </a>
+        <article class="irp-w t-div">
+          <header class="irp-w-head"><h3>Dividend per share</h3><span class="irp-fine">THB/share</span></header>
+          <b class="irp-big irp-count" data-div="latest">—</b>
+          <p class="irp-fine">Latest year</p>
+          <div class="irp-chart" id="chDividend" role="img" aria-label="Bar chart of dividend per share by year"></div>
+        </article>
+      </div>
+    </section>
+
+    <div class="irp-pair">
+      <!-- 5 · Event calendar -->
+      <section class="irp-group" id="irpEvents" data-nav="Event calendar" data-nav-desc="Upcoming investor events">
+        <header class="bento-head reveal">
+          <div>
+            <h2 class="section-title">Event calendar</h2>
+          </div>
+        </header>
+        <div class="irp-bento irp-bento-cal stagger reveal">
+          <a class="irp-w irp-w-navy on-dark t-cal" href="#" aria-label="View the full investor event calendar">
+            <img class="irp-cal-img" src="assets/img/55678.webp" alt="" loading="lazy">
+            <ul class="irp-events" data-events></ul>
+            <span class="hero-dock-arrow irp-cal-go" aria-hidden="true"><i class="icon">arrow_outward</i></span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 3 · Investor documents -->
+      <section class="irp-group" id="irpDocs" data-nav="Investor documents" data-nav-desc="Annual reports, financial statements and published documents">
+        <header class="bento-head reveal">
+          <div>
+            <h2 class="section-title">Investor documents</h2>
+          </div>
+          <a class="button button-secondary" href="filing.html">All documents <i class="icon" aria-hidden="true">arrow_outward</i></a>
+        </header>
+        <div class="irp-bento irp-bento-docs stagger reveal">
+          <article class="irp-w irp-report-t t-report">
+          <img src="assets/img/56-1-onereport.webp?v=2" alt="" loading="lazy">
+          <div class="irp-rep-copy"><b>Form 56-1 One Report<br>2025</b></div>
+          <div class="irp-rep-btns">
+            <a class="button button-primary button-sm" href="assets/pdf/ONEREPORTRPCT.PDF" download>Download <i class="icon" aria-hidden="true">download</i></a>
+            <a class="button button-secondary button-sm on-dark" href="assets/pdf/ONEREPORTRPCT.PDF" target="_blank" rel="noopener">View document <i class="icon" aria-hidden="true">visibility</i></a>
+          </div>
+        </article>
+          <div class="irp-doc-list">
+          <a class="irp-w irp-doc t-fs" href="#"><span class="irp-doc-t"><b>Financial statements</b><small>File type: PDF</small></span><span class="irp-doc-acts" aria-hidden="true"><i class="icon irp-doc-ico">visibility</i><i class="icon irp-doc-ico">download</i></span></a>
+            <a class="irp-w irp-doc t-mdna" href="mda.html"><span class="irp-doc-t"><b>MD&amp;A</b><small>File type: PDF</small></span><span class="irp-doc-acts" aria-hidden="true"><i class="icon irp-doc-ico">visibility</i><i class="icon irp-doc-ico">download</i></span></a>
+            <a class="irp-w irp-doc t-web" href="#"><span class="irp-doc-t"><b>Presentations and multimedia</b><small>File type: PDF</small></span><span class="irp-doc-acts" aria-hidden="true"><i class="icon irp-doc-ico">visibility</i><i class="icon irp-doc-ico">download</i></span></a>
+            <a class="irp-w irp-doc t-cg" href="assets/pdf/ONEREPORTRPCT.PDF#page=63" target="_blank" rel="noopener"><span class="irp-doc-t"><b>Corporate governance</b><small>File type: PDF</small></span><span class="irp-doc-acts" aria-hidden="true"><i class="icon irp-doc-ico">visibility</i><i class="icon irp-doc-ico">download</i></span></a>
+            <a class="irp-w irp-doc t-policy-doc" href="https://rpc-th.listedcompany.com/misc/cg/20260227-rpc-good-corporate-governance-policy-th.pdf" target="_blank" rel="noopener"><span class="irp-doc-t"><b>Good corporate governance policy</b><small>File type: PDF</small></span><span class="irp-doc-acts" aria-hidden="true"><i class="icon irp-doc-ico">visibility</i><i class="icon irp-doc-ico">download</i></span></a>
+        </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- 4 · News and announcements -->
+    <section class="irp-group" id="irpNews" data-nav="News and announcements" data-nav-desc="News from the Stock Exchange and from the Company">
+      <header class="bento-head reveal">
+        <div>
+          <h2 class="section-title">News and announcements</h2>
+        </div>
+      </header>
+      <div class="irp-bento irp-bento-ne stagger reveal">
+        <article class="irp-w t-news">
+          <header class="irp-w-head"><h3>News from the Stock Exchange</h3>
+            <a class="button button-secondary button-sm" href="#">View all <i class="icon" aria-hidden="true">arrow_outward</i></a></header>
+          <ul class="news-list" data-news="set"></ul>
+        </article>
+        <article class="irp-w t-news">
+          <header class="irp-w-head"><h3>News from the Company</h3>
+            <a class="button button-secondary button-sm" href="#">View all <i class="icon" aria-hidden="true">arrow_outward</i></a></header>
+          <ul class="news-list" data-news="company"></ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- 6 · Shortcuts -->
+    <section class="irp-group" id="irpShortcuts" data-nav="Shortcuts" data-nav-desc="Tools and pages for investors">
+      <header class="bento-head reveal">
+        <div>
+          <h2 class="section-title">Information for investors</h2>
+        </div>
+      </header>
+      <nav class="irp-sc-grid stagger reveal" aria-label="Investor information shortcuts">
+        <a class="bento-tile irp-sc stagger-item" href="#">
+          <i class="icon irp-sc-ico" aria-hidden="true">calendar_month</i>
+          <span class="bento-title">Event calendar</span>
+          <span class="bento-meta">Join earnings calls and analyst events</span>
+          <span class="bento-go" aria-hidden="true"><i class="icon">arrow_outward</i></span>
+        </a>
+        <a class="bento-tile irp-sc stagger-item" href="#">
+          <i class="icon irp-sc-ico" aria-hidden="true">history</i>
+          <span class="bento-title">Historical share price</span>
+          <span class="bento-meta">Discover investment opportunities with historical share price data</span>
+          <span class="bento-go" aria-hidden="true"><i class="icon">arrow_outward</i></span>
+        </a>
+        <a class="bento-tile irp-sc stagger-item" href="#">
+          <i class="icon irp-sc-ico" aria-hidden="true">calculate</i>
+          <span class="bento-title">Investment calculator</span>
+          <span class="bento-meta">Helps you make decisions that suit your risk tolerance</span>
+          <span class="bento-go" aria-hidden="true"><i class="icon">arrow_outward</i></span>
+        </a>
+        <a class="bento-tile irp-sc stagger-item" href="#">
+          <i class="icon irp-sc-ico" aria-hidden="true">candlestick_chart</i>
+          <span class="bento-title">Stock health</span>
+          <span class="bento-meta">Information to help you analyze and invest with confidence</span>
+          <span class="bento-go" aria-hidden="true"><i class="icon">arrow_outward</i></span>
+        </a>
+        <a class="bento-tile irp-sc stagger-item" href="assets/pdf/ONEREPORTRPCT.PDF#page=63" target="_blank" rel="noopener">
+          <i class="icon irp-sc-ico" aria-hidden="true">verified_user</i>
+          <span class="bento-title">Corporate governance</span>
+          <span class="bento-meta">Building confidence and sustainability for the organization and its stakeholders</span>
+          <span class="bento-go" aria-hidden="true"><i class="icon">arrow_outward</i></span>
+        </a>
+        <a class="bento-tile irp-sc stagger-item" href="dividend-policy-payment.html">
+          <i class="icon irp-sc-ico" aria-hidden="true">savings</i>
+          <span class="bento-title">Dividend payment history</span>
+          <span class="bento-meta">The Company’s dividend policy and payment history</span>
+          <span class="bento-go" aria-hidden="true"><i class="icon">arrow_outward</i></span>
+        </a>
+        <a class="bento-tile bento-esg irp-sc-esg stagger-item" href="index-en.html#esg">
+          <img src="assets/img/50882.webp" alt="" loading="lazy">
+          <span class="bento-label">Social &amp; environment</span>
+          <span class="bento-title">ESG</span>
+          <span class="bento-meta">Creating sustainable, valuable growth for stakeholders over the long term</span>
+          <span class="bento-go" aria-hidden="true"><i class="icon">arrow_outward</i></span>
+        </a>
+        <a class="bento-tile bento-esg irp-sc-esg stagger-item" href="assets/pdf/ONEREPORTRPCT.PDF#page=26" target="_blank" rel="noopener">
+          <img src="assets/img/esg/relief-caltex.webp" alt="" loading="lazy">
+          <span class="bento-label">Social &amp; environment</span>
+          <span class="bento-title">CSR</span>
+          <span class="bento-meta">Doing business with responsibility to society and the environment</span>
+          <span class="bento-go" aria-hidden="true"><i class="icon">arrow_outward</i></span>
+        </a>
+      </nav>
+    </section>
+
+    <!-- ที่มาและข้อสงวนของข้อมูล -->
+    
+  </div>
+</section>
+
+
+
+<!-- FOOTER -->
+<script>rpcgInclude('footer-en')</script>
+
+<script src="assets/vendor/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/js/menu.js?v=10"></script>
+<script src="assets/js/ir-data.js?v=9"></script>
+<script src="assets/js/main.js?v=32"></script>
+<script src="assets/vendor/echarts.min.js"></script>
+<script src="assets/js/ir.js?v=4"></script>
+<script src="assets/js/charts.js?v=3"></script>
+<script src="assets/js/ir-charts.js?v=39"></script>
+</body>
+</html>

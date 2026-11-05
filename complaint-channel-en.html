@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Complaint Channel — RPC PCL</title>
+<meta name="description" content="Whistleblowing and complaint channels of RPC Public Company Limited">
+<link rel="alternate" hreflang="th" href="complaint-channel.html">
+<link rel="alternate" hreflang="en" href="complaint-channel-en.html">
+
+<link rel="stylesheet" href="assets/font/fonts.css?v=3">
+<link href="assets/vendor/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css?v=10">
+<link rel="stylesheet" href="assets/css/components.css?v=20">
+<link rel="stylesheet" href="assets/css/style.css?v=156">
+<link rel="stylesheet" href="assets/css/pages.css?v=258">
+<script src="assets/js/include.js"></script>
+<link rel="icon" href="favicon.ico" sizes="any">
+</head>
+<body class="has-sec-nav">
+
+<!-- Navbar -->
+<script>rpcgInclude('header-en','cg')</script>
+
+<!-- PAGE HERO (แม่แบบเดียวกับ about-history.html) -->
+<header class="page-hero theme-dark" id="top">
+  <div class="page-hero-media" aria-hidden="true"><img fetchpriority="high" src="assets/img/energy/canopy-deep.webp" alt=""></div>
+  <div class="container container-xl page-hero-inner">
+    <nav class="page-crumb" aria-label="Breadcrumb"><a href="index-en.html">Home</a><i class="icon" aria-hidden="true">chevron_right</i><span>Corporate Governance</span><i class="icon" aria-hidden="true">chevron_right</i><span aria-current="page">Complaint Channel</span></nav>
+    <span class="section-tag">Complaint Channel</span>
+    <h1 class="page-hero-title"><span class="line"><span class="line-in">Complaint Channel</span></span></h1>
+  </div>
+</header>
+
+<main id="main">
+<section class="section theme-light" id="form">
+  <div class="container container-xl">
+    <div class="ea-grid row g-bento">
+      <div class="col-12 col-lg-5"><div class="ea-panel ab-brand-bg theme-primary reveal h-100">
+        <span class="ab-wm" aria-hidden="true"></span>
+        <div><span class="section-tag">Whistleblowing</span><h2 class="section-title">Report a concern</h2><p class="section-desc">Reports go directly to the independent directors. You can report on:</p></div>
+        <ul class="ea-list">
+          <li><i class="icon icon-fill" aria-hidden="true">check_circle</i><span>Personal data (PDPA)</span></li>
+          <li><i class="icon icon-fill" aria-hidden="true">check_circle</i><span>Business ethics</span></li>
+          <li><i class="icon icon-fill" aria-hidden="true">check_circle</i><span>Human rights / discrimination</span></li>
+          <li><i class="icon icon-fill" aria-hidden="true">check_circle</i><span>Harassment</span></li>
+          <li><i class="icon icon-fill" aria-hidden="true">check_circle</i><span>Fraud & corruption</span></li>
+          <li><i class="icon icon-fill" aria-hidden="true">check_circle</i><span>Employee misconduct</span></li>
+          <li><i class="icon icon-fill" aria-hidden="true">check_circle</i><span>Lack of transparency to shareholders</span></li>
+          <li><i class="icon icon-fill" aria-hidden="true">check_circle</i><span>Other complaints</span></li>
+        </ul>
+        <div class="cc-shield"><i class="icon" aria-hidden="true">lock</i><span>Your identity and information are kept confidential. Complainants, whistleblowers and informants are protected.<br>By post: 86/2 Sammakorn Place, Ramkhamhaeng Road, Saphan Sung, Bangkok 10240</span></div>
+        <div class="ea-contact on-dark">
+          <a class="button button-secondary button-sm" href="mailto:whistleblower@rpcthai.com">whistleblower@rpcthai.com <i class="icon" aria-hidden="true">mail</i></a>
+          <a class="button button-secondary button-sm" href="tel:023723600">02-372-3600 <i class="icon" aria-hidden="true">call</i></a>
+        </div>
+      </div></div>
+      <div class="col-12 col-lg-7"><div class="rpcg-card fm-card reveal h-100">
+      <form data-form novalidate>
+        <fieldset class="fm-set">
+          <legend class="fm-legend"><span class="fm-step">1</span>Complaint details</legend>
+          <div class="field-grid row g-field">
+            <div class="field is-full col-12"><label class="field-label" for="ccType">Type of complaint <span class="field-req" aria-hidden="true">*</span></label><div class="field-select"><select class="field-input" id="ccType" required data-err="Please choose a type"><option value="">Choose a type</option><option>Personal data (PDPA)</option><option>Business ethics</option><option>Human rights / discrimination</option><option>Harassment</option><option>Fraud & corruption</option><option>Employee misconduct</option><option>Lack of transparency to shareholders</option><option>Other complaints</option></select></div><p class="field-error" id="ccType-err"></p></div>
+            <div class="field is-full col-12"><label class="field-label" for="ccDetail">Details <span class="field-req" aria-hidden="true">*</span></label><textarea class="field-input" id="ccDetail" maxlength="2000" minlength="20" required data-counter="ccCount" placeholder="Describe what happened, who was involved, when and where"></textarea><div class="field-meta"><p class="field-error" id="ccDetail-err"></p><span class="field-count" id="ccCount" aria-live="polite">0 / 2,000</span></div></div>
+            <div class="field is-full col-12"><span class="field-label" id="ccFileLabel">Attachments <small>(optional)</small></span>
+              <div class="file-drop"><input type="file" multiple data-files data-max="3" data-size="2" accept=".jpg,.jpeg,.png,.gif,.doc,.docx,.xls,.xlsx,.pdf" aria-labelledby="ccFileLabel" aria-describedby="ccFileHint"><span class="file-drop-ico" aria-hidden="true"><i class="icon" aria-hidden="true">upload_file</i></span><span class="file-drop-text"><b>Drag files here or <u>browse</u></b><span id="ccFileHint">.jpg .png .gif .doc .docx .xls .xlsx .pdf · up to 3 files, 2MB each</span></span></div>
+              <ul class="file-list" aria-live="polite"></ul><p class="field-error"></p></div>
+          </div>
+        </fieldset>
+        <fieldset class="fm-set">
+          <legend class="fm-legend"><span class="fm-step">2</span>How we can reach you</legend>
+          <div class="field-grid row g-field">
+            <div class="field is-full col-12"><label class="field-label" for="ccName">Full name <span class="field-req" aria-hidden="true">*</span></label><input class="field-input" id="ccName" autocomplete="name" required><p class="field-error" id="ccName-err"></p></div>
+            <div class="field col-12 col-sm-6"><label class="field-label" for="ccTel">Phone <span class="field-req" aria-hidden="true">*</span></label><input class="field-input" id="ccTel" type="tel" autocomplete="tel" inputmode="tel" pattern="[0-9+\-\s]{9,15}" required data-err-type="Enter a 9–15 digit phone number"><p class="field-error" id="ccTel-err"></p></div>
+            <div class="field col-12 col-sm-6"><label class="field-label" for="ccEmail">Email <span class="field-req" aria-hidden="true">*</span></label><input class="field-input" id="ccEmail" type="email" autocomplete="email" inputmode="email" placeholder="name@example.com" required><p class="field-error" id="ccEmail-err"></p></div>
+            <div class="field is-full col-12"><label class="field-label" for="ccOther">Other contact <small>(optional)</small></label><input class="field-input" id="ccOther" placeholder="e.g. LINE ID or best time to call"></div>
+          </div>
+        </fieldset>
+        <div class="fm-foot">
+          <div class="field"><label class="check"><input type="checkbox" required><span class="check-box" aria-hidden="true"></span><span>I have read the <a href="privacy-policy-en.html">Privacy Policy</a> and consent to RPC using my data to handle this complaint</span></label><p class="field-error" id="ccConsent-err"></p></div>
+          <button type="submit" class="button button-primary">Submit complaint <i class="icon" aria-hidden="true">send</i></button>
+        </div>
+      </form>
+      <div class="fm-done" tabindex="-1" role="status">
+        <span class="fm-done-ic"><i class="icon" aria-hidden="true">verified_user</i></span>
+        <h3>Complaint received</h3>
+        <p>Thank you. We will investigate confidentially and respond via the contact details you provided.</p>
+        <span class="fm-ref">Reference <b data-ref="CC">CC-0000-0000</b></span>
+        <div class="page-cta"><button type="button" class="button button-secondary" data-again>Submit another</button></div>
+      </div>
+    </div></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- Footer -->
+<script>rpcgInclude('footer-en')</script>
+
+<script src="assets/vendor/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/js/menu.js?v=10"></script>
+<script src="assets/js/main.js?v=32"></script>
+<script src="assets/js/pages.js?v=90"></script>
+</body>
+</html>

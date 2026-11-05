@@ -2176,3 +2176,4 @@ body.ck-open .back-top{ opacity:0; visibility:hidden; }
 .biz-affil-copy span{ font-size:var(--fs-sm); color:var(--muted-2); }
 .biz-affil-go{ flex:none; display:inline-flex; align-items:center; gap:8px; font-family:var(--ff-display); font-weight:var(--fw-semibold); color:var(--ink); border-bottom:1px solid currentColor; padding:4px 0; }
 @media (max-width:575.98px){ .biz-affil{ flex-wrap:wrap; } .biz-affil-go{ margin-left:calc(clamp(96px,12vw,168px) + 16px); } }
+@media (max-width:575.98px){ .hero-sim-more{ display:none; } }
