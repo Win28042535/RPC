@@ -1099,3 +1099,9 @@ body.rd-plain{ padding-right:0; }
 .bz-affil-foot{ display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap; margin-top:clamp(20px,2.4vw,32px); padding-top:clamp(16px,2vw,24px); border-top:1px solid var(--line-dark); }
 .bz-affil-foot .bz-stat{ padding:0; }
 @media (max-width:991.98px){ .bz-path.is-side{ min-height:200px; } }
+
+/* about pages: energy note under the vision, energy milestones marked on the timeline */
+.vm-vision-note{ display:inline-flex; align-items:center; gap:12px; margin-top:clamp(20px,2.4vw,32px); padding:12px 20px; border-radius:var(--r-pill, 999px); background:var(--surface-muted); color:var(--ink); font-size:var(--fs-sm); line-height:var(--lh-ui); }
+.vm-vision-note .icon{ color:var(--primary); }
+.vm-vision-note b{ color:var(--primary); }
+.tl-ev--energy .tl-when{ color:var(--brand); }
