@@ -1105,3 +1105,11 @@ body.rd-plain{ padding-right:0; }
 .vm-vision-note .icon{ color:var(--primary); }
 .vm-vision-note b{ color:var(--primary); }
 .tl-ev--energy .tl-when{ color:var(--brand); }
+
+/* contact: energy line, plant tag, affiliate contacts */
+.ct-lead{ margin-top:10px; color:var(--muted-2); font-size:var(--fs-p); }
+.ct-tag{ display:inline-flex; align-self:flex-start; margin-top:10px; padding:4px 12px; border-radius:999px; background:color-mix(in srgb,var(--brand) 14%,transparent); color:var(--green-700, var(--brand)); font-size:var(--fs-xs); font-weight:var(--fw-semibold); }
+.ct-tag.is-muted{ background:var(--surface-muted); color:var(--muted-2); }
+.ct-affil-head{ margin-top:clamp(48px,6vw,96px); }
+.ct-affil{ margin-top:clamp(16px,2vw,28px); }
+.ct-affil-card .ct-top{ flex-wrap:wrap; gap:8px 16px; }
