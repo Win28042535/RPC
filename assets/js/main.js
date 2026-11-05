@@ -468,7 +468,7 @@ rpcgReady(() => {
     gsap.matchMedia().add('(min-width: 1200px)', () => {
       const hero = document.querySelector('.hero');
       if (!hero) return;
-      const heroCoverTrigger = () => ({ trigger: '#business', start: 'top bottom', end: 'top top', scrub: true });
+      const heroCoverTrigger = () => ({ trigger: '#about', start: 'top bottom', end: 'top top', scrub: true });
       gsap.to(hero, { yPercent: -30, ease: 'none', scrollTrigger: heroCoverTrigger() });
       gsap.fromTo(hero, { filter: 'blur(0px)' }, { filter: 'blur(14px)', ease: 'power3.in', scrollTrigger: heroCoverTrigger() });
     });

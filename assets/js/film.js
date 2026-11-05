@@ -17,12 +17,6 @@
     { src: 'film/samco-gate.webp', start: 5.5, end: 7.3, o: '60% 50%', from: { s: 1.02, x: 0, y: 0 }, to: { s: 1.12, x: 0, y: 0 } },
     { src: 'film/unify-aerial.webp', start: 7.1, end: 9.4, o: '35% 60%', from: { s: 1.2, x: 0, y: 0 }, to: { s: 1, x: 0, y: 0 } },
   ];
-  const STAGES = [
-    { no: '01', key: 'ESTABLISH', start: 0, end: 2, text: 'RPC Holding Company', note: 'ต้องใช้ฟุตเทจจริง: ภาพมุมสูงของโครงสร้างพื้นฐานด้านพลังงาน (ตอนนี้ใช้ภาพสถานีบริการแทน)' },
-    { no: '02', key: 'REVEAL', start: 2, end: 4, text: 'Driven by Energy', note: 'ต้องใช้ฟุตเทจจริง: ระบบผลิตพลังงาน เครื่องจักร และโครงสร้างอุตสาหกรรม' },
-    { no: '03', key: 'EXPAND', start: 4, end: 7, text: 'Expanding Beyond Energy', note: 'ภาพอาคารและพื้นที่ธุรกิจ โดยยังคงเห็นพลังงานในเฟรม' },
-    { no: '04', key: 'UNIFY', start: 7, end: 10, text: 'Connecting Businesses.<br>Creating Value.', note: 'ภาพมุมกว้างที่เห็นพลังงานและธุรกิจในเครืออยู่ด้วยกัน' },
-  ];
   const INSET = { start: 4.1, end: 7.1 };   /* กรอบสถานีบริการค้างไว้ช่วง Expand: พลังงานยังอยู่ในเรื่อง */
   const LOCKUP = 9.2;
 
@@ -78,55 +72,4 @@
     }
   }
 
-  /* ---- full-screen player ---- */
-  const modal = document.getElementById('filmModal');
-  if (!modal) return;
-  const film = build(modal.querySelector('[data-film="player"]'));
-  const cap = modal.querySelector('[data-film-caption]');
-  const note = modal.querySelector('[data-film-note]');
-  const time = modal.querySelector('[data-film-time]');
-  const bar = modal.querySelector('[data-film-stages]');
-  bar.innerHTML = STAGES.map(s => `<li style="--w:${s.end - s.start}"><i></i><b>${s.no}</b><span>${s.key}</span></li>`).join('');
-  const segs = [...bar.children];
-  let start = 0, raf = 0, lastStage = -1, opener = null;
-
-  const frame = now => {
-    const t = Math.min(DURATION, (now - start) / 1000);
-    render(film, t);
-    const i = STAGES.findIndex(s => t >= s.start && t < s.end);
-    const k = i < 0 ? STAGES.length - 1 : i;
-    if (k !== lastStage) {
-      cap.classList.remove('is-out');
-      lastStage = k;
-      cap.classList.remove('is-in'); void cap.offsetWidth;
-      cap.innerHTML = STAGES[k].text; cap.classList.add('is-in');
-      note.textContent = STAGES[k].note;
-    }
-    segs.forEach((li, j) => {
-      const s = STAGES[j];
-      li.style.setProperty('--p', Math.max(0, Math.min(1, (t - s.start) / (s.end - s.start))).toFixed(3));
-      li.classList.toggle('is-on', j === k);
-    });
-    /* 9–10s: brand lockup carries the frame alone */
-    cap.classList.toggle('is-out', t >= LOCKUP);
-    if (t >= LOCKUP) note.textContent = 'ปิดด้วยโลโก้ RPC และ Brand Lockup';
-    time.textContent = t.toFixed(1) + ' / 10.0s';
-    if (t < DURATION) raf = requestAnimationFrame(frame);
-  };
-  const play = () => { cancelAnimationFrame(raf); lastStage = -1; start = performance.now(); raf = requestAnimationFrame(frame); };
-  const open = e => {
-    opener = e && e.currentTarget;
-    modal.hidden = false; document.body.style.overflow = 'hidden';
-    modal.querySelector('[data-film-close]').focus();
-    play();
-  };
-  const close = () => {
-    cancelAnimationFrame(raf); modal.hidden = true; document.body.style.overflow = '';
-    if (opener) opener.focus();
-  };
-  document.querySelectorAll('[data-film-open]').forEach(b => b.addEventListener('click', open));
-  modal.querySelector('[data-film-close]').addEventListener('click', close);
-  modal.querySelector('[data-film-replay]').addEventListener('click', play);
-  modal.addEventListener('click', e => { if (e.target === modal) close(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) close(); });
 })();
