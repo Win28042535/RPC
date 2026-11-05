@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RPC Energy-first v2</title>
+<link rel="stylesheet" href="assets/font/fonts.css">
+<style>
+:root{--primary:#073d93;--deep:#081f5c;--ink:#12141c;--mute:#5f6256;--green:#2fa84f;--line:#e3e5ea;--soft:#f5f6f8;--bg:#fff;--on-primary:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#eef0f4;--mute:#a7abb3;--line:#2a2f3a;--soft:#171b23;--bg:#0f1218;--primary:#7aa7ff;--deep:#cfdcff;--on-primary:#0f1218}}
+:root[data-theme="dark"]{--ink:#eef0f4;--mute:#a7abb3;--line:#2a2f3a;--soft:#171b23;--bg:#0f1218;--primary:#7aa7ff;--deep:#cfdcff;--on-primary:#0f1218}
+*{box-sizing:border-box;margin:0}
+body{font-family:'FC Minimal',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+.wrap{max-width:1280px;margin:0 auto;padding:40px 16px 80px}
+.eb{display:flex;align-items:center;gap:8px;color:var(--green);font-weight:500;font-size:15px}
+.eb::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green)}
+h1{font-size:clamp(28px,4vw,44px);color:var(--primary);line-height:1.2;margin-top:6px}
+.lead{color:var(--mute);margin-top:8px;max-width:780px}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.btns a{display:inline-flex;padding:10px 20px;border-radius:999px;text-decoration:none;font-weight:500;border:1px solid var(--primary);color:var(--primary)}
+.btns a.main{background:var(--primary);color:var(--on-primary)}
+.box{margin-top:32px;border:1px solid var(--line);border-radius:16px;padding:20px 24px;background:var(--soft)}
+.box h2{font-size:20px;color:var(--deep)}
+.box ol{margin-top:10px;padding-left:22px;display:grid;gap:6px}
+.box b{color:var(--deep)}
+.flow{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:12px}
+.flow ol{margin:0}
+.flow h3{font-size:15px;color:var(--mute);font-weight:500}
+.flow .hi{color:var(--primary);font-weight:700}
+section{margin-top:48px}
+section h2{font-size:24px;color:var(--deep)}
+section p.why{color:var(--mute);margin-top:4px;max-width:900px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.pair.m{grid-template-columns:repeat(2,minmax(0,300px))}
+figure{min-width:0}
+figure img{width:100%;display:block;border-radius:12px;border:1px solid var(--line)}
+figcaption{font-size:14px;color:var(--mute);margin-top:6px}
+figcaption b{color:var(--ink)}
+@media (max-width:760px){.pair,.flow{grid-template-columns:1fr}.pair.m{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eb">Mockup preview · v2 ปรับโครงสร้าง</div>
+  <h1>RPC v2: เล่าเรื่องด้วยพลังงานตั้งแต่จอแรก</h1>
+  <p class="lead">ต่อจาก v1 (ปรับน้อย) รอบนี้ปรับลำดับ section, component และ interaction ใช้สี ฟอนต์ ปุ่ม และ motion ของเดโม่เดิมทั้งหมด วิดีโอ hero เปลี่ยนเป็นภาพเคลื่อนไหวจำลองชั่วคราว ภาพทั้งหมดเป็นภาพที่มีอยู่ในเดโม่</p>
+  <div class="btns"><a class="main" href="index.html">เปิดหน้า v2 →</a><a href="http://localhost:5171/">เปิด v1 (ปรับน้อย)</a><a href="https://design.onlineasset.co.th/demo/ir/RPC/index.html">เปิดเดโม่เดิม</a></div>
+
+  <div class="box">
+    <h2>ลำดับ section</h2>
+    <div class="flow">
+      <div><h3>เดโม่เดิม</h3><ol><li>Hero (การ์ด 2 ธุรกิจเท่ากัน)</li><li>เกี่ยวกับ</li><li>ธุรกิจของเรา (สไลด์ PTEC / SAMCO)</li><li>ผลิตภัณฑ์ 7 รายการ (อสังหา 4)</li><li>สำหรับนักลงทุน</li><li>โอกาส 3 การ์ด</li><li>ESG</li><li>ข่าว · ติดต่อ</li></ol></div>
+      <div><h3>v2</h3><ol><li class="hi">Hero พลังงาน + แถบตัวเลข</li><li class="hi">ธุรกิจพลังงาน PTEC</li><li class="hi">ผลิตภัณฑ์พลังงาน 4 รายการ</li><li>สำหรับนักลงทุน (ย้ายขึ้น)</li><li>เกี่ยวกับ RPC (ย่อ) + SAMCO</li><li>ESG (เริ่มจากโซลาร์รูฟท็อป)</li><li>โอกาส 2 การ์ด</li><li>ข่าว · ติดต่อ</li></ol></div>
+    </div>
+  </div>
+
+  <div class="box">
+    <h2>สรุปการเปลี่ยนแปลง (สำหรับทีมเว็บ)</h2>
+    <ol>
+      <li><b>Hero:</b> ภาพจำลองแทนวิดีโอ (ภาพสถานีคาลเท็กซ์ · พลังงานสะอาด · การลงทุน เปลี่ยนวน 18 วินาที + เส้นพลังงานวิ่ง) มีป้าย "ภาพจำลอง · รอวิดีโอจริง" และหยุดนิ่งเมื่อผู้ใช้ตั้งลดการเคลื่อนไหว · คำขวัญ "ขับเคลื่อนพลังงาน เพื่อการเติบโตอย่างยั่งยืน" · การ์ด 2 ใบ เปลี่ยนเป็นการ์ดพลังงานที่มีตัวเลข 81.9% · 80 สถานี · EURO 5 + ลิงก์เล็ก SAMCO</li>
+      <li><b>ธุรกิจพลังงาน:</b> อยู่ต่อจาก Hero และทำหน้าที่ปิดทับ Hero แทนส่วนเกี่ยวกับ แผง PTEC แผงเดียว ไม่มีสไลด์และไม่หมุนอัตโนมัติ</li>
+      <li><b>ผลิตภัณฑ์และบริการพลังงาน:</b> สถานีบริการ → Techron® → Non-Oil → โซลาร์รูฟท็อป 12 สถานี บนแถบ Moving Forward 01 / 04 ท้ายส่วนเป็นปุ่มเว็บไซต์ PTEC</li>
+      <li><b>เกี่ยวกับ RPC:</b> ย้ายลงมาหลังนักลงทุน ย่อเหลือย่อหน้าเดียว ตัวเลข 81.9% / 80 / 2538 และ SAMCO เป็นช่องธุรกิจในเครือ (17.7% ของรายได้) ลิงก์ไปเว็บ SAMCO</li>
+      <li><b>ESG:</b> เพิ่มการ์ดโซลาร์รูฟท็อปเป็นใบแรก แล้วตามด้วยกิจกรรมผ่านสถานีคาลเท็กซ์และเพียวไทย</li>
+      <li><b>โอกาส:</b> เหลือ 2 การ์ด คือขยายธุรกิจพลังงาน และลงทุนธุรกิจใหม่ (ตัดการ์ดที่อยู่อาศัย)</li>
+      <li><b>ติดต่อเรา:</b> SAMCO เหลือบรรทัดเดียว (ชื่อ + เว็บไซต์)</li>
+    </ol>
+  </div>
+
+  <section>
+    <h2>1 · Hero</h2>
+    <p class="why">เปิดมาเห็นภาพพลังงานและตัวเลขของธุรกิจพลังงานทันที SAMCO ยังเข้าถึงได้จากลิงก์เล็กด้านขวา</p>
+    <div class="pair"><figure><img src="_compare/d-1hero-before.jpg" alt="" loading="lazy"><figcaption><b>เดิม</b></figcaption></figure><figure><img src="_compare/v2-d-1hero.jpg" alt="" loading="lazy"><figcaption><b>v2</b> · ภาพจำลองแทนวิดีโอ</figcaption></figure></div>
+    <div class="pair m"><figure><img src="_compare/m-1hero-before.jpg" alt="" loading="lazy"><figcaption><b>เดิม</b> · มือถือ</figcaption></figure><figure><img src="_compare/v2-m-1hero.jpg" alt="" loading="lazy"><figcaption><b>v2</b> · มือถือ</figcaption></figure></div>
+  </section>
+
+  <section>
+    <h2>2 · ธุรกิจพลังงาน</h2>
+    <p class="why">ส่วนที่สองของหน้า เดิมเป็นสไลด์สลับ PTEC / SAMCO ตอนนี้เป็น PTEC แผงเดียว</p>
+    <div class="pair"><figure><img src="_compare/d-4business-before.jpg" alt="" loading="lazy"><figcaption><b>เดิม</b></figcaption></figure><figure><img src="_compare/v2-d-2business.jpg" alt="" loading="lazy"><figcaption><b>v2</b></figcaption></figure></div>
+  </section>
+
+  <section>
+    <h2>3 · ผลิตภัณฑ์และบริการพลังงาน</h2>
+    <p class="why">แถบ Moving Forward เล่าเส้นทางจากสถานีบริการไปถึงพลังงานสะอาด ทุกการ์ดเป็นพลังงาน</p>
+    <div class="pair"><figure><img src="_compare/d-6highlight-end-before.jpg" alt="" loading="lazy"><figcaption><b>เดิม</b> · 07 / 07 (อสังหา 4 ใบ)</figcaption></figure><figure><img src="_compare/v2-d-4hl-end.jpg" alt="" loading="lazy"><figcaption><b>v2</b> · 04 / 04 โซลาร์รูฟท็อป</figcaption></figure></div>
+  </section>
+
+  <section>
+    <h2>4 · เกี่ยวกับ RPC</h2>
+    <p class="why">ย่อเนื้อหา ตัวเลขพลังงานนำ SAMCO อยู่ในช่องธุรกิจในเครือ</p>
+    <div class="pair"><figure><img src="_compare/d-3about-facts-before.jpg" alt="" loading="lazy"><figcaption><b>เดิม</b></figcaption></figure><figure><img src="_compare/v2-d-7about-facts.jpg" alt="" loading="lazy"><figcaption><b>v2</b></figcaption></figure></div>
+  </section>
+
+  <section>
+    <h2>5 · ESG และโอกาส</h2>
+    <p class="why">ESG เริ่มที่โซลาร์รูฟท็อป โอกาสเหลือ 2 การ์ดที่เป็นพลังงานและการลงทุน</p>
+    <div class="pair"><figure><img src="_compare/v2-d-8esg.jpg" alt="" loading="lazy"><figcaption><b>v2</b> · ESG</figcaption></figure><figure><img src="_compare/v2-d-9opp.jpg" alt="" loading="lazy"><figcaption><b>v2</b> · โอกาส</figcaption></figure></div>
+    <div class="pair"><figure><img src="_compare/d-7opportunity-before.jpg" alt="" loading="lazy"><figcaption><b>เดิม</b> · โอกาส 3 การ์ด</figcaption></figure></div>
+  </section>
+</div>
+</body>
+</html>

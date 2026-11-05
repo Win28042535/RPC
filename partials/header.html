@@ -1,0 +1,180 @@
+<!-- ==========================================================================
+     partials/header.html — navbar (ใช้ร่วมทุกหน้า)
+     • เกี่ยวกับเรา / การกำกับดูแลกิจการ / ข่าว = dropdown ปกติ (Bootstrap)
+     • นักลงทุนสัมพันธ์ = mega-menu (.mm-pane ด้านล่าง, พฤติกรรมที่ assets/js/menu.js)
+     แก้เมนูที่ไฟล์นี้ แล้วรัน  python3 tools/build.py
+     หน้าที่เปิดอยู่ไฮไลต์ตาม active=KEY ใน marker (เทียบกับ data-key)
+     ========================================================================== -->
+<nav class="navbar navbar-expand-lg rpcg-nav">
+  <div class="container container-xl">
+    <a class="rpcg-logo" href="index.html">
+      <img src="assets/img/rpcg-logo.webp" alt="RPC" width="74" height="48">
+    </a>
+    <button type="button" class="lang-switch lang-switch-m ms-auto me-2 d-lg-none" data-lang-toggle aria-label="Switch to English" lang="en">EN</button>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain" aria-label="เปิดเมนู">
+      <span class="burger" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navMain">
+      <ul class="navbar-nav align-items-lg-center gap-lg-1">
+        <li class="nav-item"><a class="nav-link" href="index.html" data-key="home">หน้าหลัก</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-key="about">เกี่ยวกับเรา <i class="icon ir-trigger-ic" aria-hidden="true">expand_more</i></a>
+          <ul class="dropdown-menu rpcg-dropdown">
+            <li><a class="dropdown-item" href="chairman-statement.html">สารจากประธานกรรมการ</a></li>
+            <li><a class="dropdown-item" href="company-information.html">ข้อมูลบริษัท</a></li>
+            <li><a class="dropdown-item" href="vision-and-mission.html">วิสัยทัศน์และพันธกิจ</a></li>
+            <li><a class="dropdown-item" href="about-history.html">ประวัติองค์กร</a></li>
+            <li><a class="dropdown-item" href="organization-chart.html">โครงสร้างองค์กร</a></li>
+            <li><a class="dropdown-item" href="shareholding.html">โครงสร้างการถือหุ้นของกลุ่มบริษัทฯ</a></li>
+            <li><a class="dropdown-item" href="board-of-directors.html">คณะกรรมการบริษัท และผู้บริหาร</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="business.html" data-key="business">ธุรกิจของเรา</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link d-none d-lg-block" href="index-ir.html" data-key="ir" data-menu="ir" aria-haspopup="dialog" aria-expanded="false" aria-controls="siteMenu">นักลงทุนสัมพันธ์ <i class="icon ir-trigger-ic" aria-hidden="true">expand_more</i></a>
+          <a class="nav-link dropdown-toggle d-lg-none" href="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" data-key="ir">นักลงทุนสัมพันธ์ <i class="icon ir-trigger-ic" aria-hidden="true">expand_more</i></a>
+          <div class="dropdown-menu rpcg-dropdown ir-nested d-lg-none">
+            <a class="dropdown-item" href="index-ir.html">หน้าหลักนักลงทุนสัมพันธ์</a>
+            <details class="ir-group">
+              <summary>ข้อมูลทางการเงิน <i class="icon" aria-hidden="true">expand_more</i></summary>
+              <a class="dropdown-item" href="#">งบการเงิน</a>
+              <a class="dropdown-item" href="financial-highlights.html">ข้อมูลสำคัญทางการเงิน</a>
+              <a class="dropdown-item" href="mda.html">คำอธิบายและการวิเคราะห์</a>
+              <a class="dropdown-item" href="#">สุขภาพหุ้น</a>
+            </details>
+            <details class="ir-group">
+              <summary>เอกสารเผยแพร่ <i class="icon" aria-hidden="true">expand_more</i></summary>
+              <a class="dropdown-item" href="one-report.html">แบบ 56-1 One Report</a>
+              <a class="dropdown-item" href="filing.html">หนังสือชี้ชวน</a>
+              <a class="dropdown-item" href="#">ESG Structured Data Report</a>
+              <a class="dropdown-item" href="#">ข้อมูลนำเสนอแบบมัลติมีเดีย</a>
+            </details>
+            <details class="ir-group">
+              <summary>ข้อมูลผู้ถือหุ้น <i class="icon" aria-hidden="true">expand_more</i></summary>
+              <a class="dropdown-item" href="#">การประชุมผู้ถือหุ้น</a>
+              <a class="dropdown-item" href="#">โครงสร้างการถือหุ้น</a>
+              <a class="dropdown-item" href="rights-offering.html">การจัดสรรหุ้นเพิ่มทุน RO</a>
+              <a class="dropdown-item" href="#">โครงสร้างผู้ถือหุ้น</a>
+              <a class="dropdown-item" href="dividend-policy-payment.html">นโยบายและประวัติการจ่ายเงินปันผล</a>
+              <a class="dropdown-item" href="#">ปฏิทินกิจกรรมนักลงทุนสัมพันธ์</a>
+              <a class="dropdown-item" href="#">สรุปข้อสนเทศ</a>
+            </details>
+            <details class="ir-group">
+              <summary>ข้อมูลราคาหลักทรัพย์ <i class="icon" aria-hidden="true">expand_more</i></summary>
+              <a class="dropdown-item" href="#">ราคาหลักทรัพย์ล่าสุด</a>
+              <a class="dropdown-item" href="#">ราคาหลักทรัพย์ย้อนหลัง</a>
+              <a class="dropdown-item" href="#">เครื่องคำนวณการลงทุน</a>
+            </details>
+            <details class="ir-group">
+              <summary>สอบถามข้อมูลนักลงทุนสัมพันธ์ <i class="icon" aria-hidden="true">expand_more</i></summary>
+              <a class="dropdown-item" href="ir-contact.html">ติดต่อนักลงทุนสัมพันธ์</a>
+              <a class="dropdown-item" href="e-mail-alert.html">รับข่าวสารทางอีเมล</a>
+              <a class="dropdown-item" href="faqs.html">คำถามที่ถูกถามบ่อย</a>
+            </details>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-key="cg">การกำกับดูแลกิจการ <i class="icon ir-trigger-ic" aria-hidden="true">expand_more</i></a>
+          <ul class="dropdown-menu rpcg-dropdown">
+            <li><a class="dropdown-item" href="documents-company-policy.html">เอกสารสำคัญ และ นโยบายบริษัท</a></li>
+            <li><a class="dropdown-item" href="cookie-policy.html">นโยบายคุกกี้</a></li>
+            <li><a class="dropdown-item" href="privacy-policy.html">นโยบายคุ้มครองส่วนบุคคล</a></li>
+            <li><a class="dropdown-item" href="complaint-channel.html">ช่องทางการร้องเรียน</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="index.html#esg" data-key="sustain">การพัฒนาอย่างยั่งยืน</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-key="news">ข่าว <i class="icon ir-trigger-ic" aria-hidden="true">expand_more</i></a>
+          <ul class="dropdown-menu rpcg-dropdown">
+            <li><a class="dropdown-item" href="https://rpc-th.listedcompany.com" target="_blank" rel="noopener">ประกาศจากตลาดหลักทรัพย์</a></li>
+            <li><a class="dropdown-item" href="#">ข่าวสารล่าสุด</a></li>
+            <li><a class="dropdown-item" href="#">ห้องข่าวประชาสัมพันธ์</a></li>
+            <li><a class="dropdown-item" href="#">ข่าวจากหนังสือพิมพ์</a></li>
+          </ul>
+        </li>
+        <li class="nav-item lang-item d-none d-lg-flex">
+          <button type="button" class="lang-switch" data-lang-toggle aria-label="Switch to English" lang="en">EN</button>
+        </li>
+        <li class="nav-item ms-lg-3"><a class="button button-primary" href="contact.html">ติดต่อเรา <i class="icon" aria-hidden="true">arrow_outward</i></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Mega-menu (เฉพาะนักลงทุนสัมพันธ์) -->
+<div class="ir-oc" id="siteMenu" role="dialog" aria-modal="true" aria-label="เมนูนักลงทุนสัมพันธ์" aria-hidden="true">
+  <div class="ir-oc-panel">
+    <button type="button" class="ir-oc-close" id="siteMenuClose" aria-label="ปิดเมนู"><i class="icon" aria-hidden="true">close</i></button>
+    <div class="mm-pane" data-mm="ir" hidden>
+      <div class="ir-oc-col mm-intro">
+        <h3 class="mm-title">นักลงทุนสัมพันธ์</h3>
+        <p class="mm-desc">ข้อมูลการเงิน เอกสารเผยแพร่ ผู้ถือหุ้น และราคาหลักทรัพย์ ครบในที่เดียว</p>
+        <ul class="mm-quick">
+          <li><a href="one-report.html"><i class="icon" aria-hidden="true">description</i>แบบ 56-1 One Report</a></li>
+          <li><a href="ir-contact.html"><i class="icon" aria-hidden="true">mail</i>ติดต่อนักลงทุนสัมพันธ์</a></li>
+        </ul>
+      </div>
+      <div class="ir-oc-col ir-oc-col-ir">
+        <div class="ir-oc-ir-master">
+          <div class="tabs tabs-vertical" role="tablist" aria-orientation="vertical" aria-label="หมวดข้อมูลนักลงทุน">
+            <a class="tab mm-tab-home" href="index-ir.html" role="presentation" style="--i:0"><span class="mm-tab-label">หน้าหลักนักลงทุนสัมพันธ์</span><i class="icon" aria-hidden="true">arrow_outward</i></a>
+            <button type="button" class="tab is-active" role="tab" aria-selected="true" tabindex="0" aria-controls="mmPanel-ir-0" id="mmTab-ir-0" data-mm-tab="0" style="--i:1"><span class="mm-tab-label">ข้อมูลทางการเงิน</span><i class="icon" aria-hidden="true">chevron_right</i></button>
+            <button type="button" class="tab" role="tab" aria-selected="false" tabindex="-1" aria-controls="mmPanel-ir-1" id="mmTab-ir-1" data-mm-tab="1" style="--i:2"><span class="mm-tab-label">เอกสารเผยแพร่</span><i class="icon" aria-hidden="true">chevron_right</i></button>
+            <button type="button" class="tab" role="tab" aria-selected="false" tabindex="-1" aria-controls="mmPanel-ir-2" id="mmTab-ir-2" data-mm-tab="2" style="--i:3"><span class="mm-tab-label">ข้อมูลผู้ถือหุ้น</span><i class="icon" aria-hidden="true">chevron_right</i></button>
+            <button type="button" class="tab" role="tab" aria-selected="false" tabindex="-1" aria-controls="mmPanel-ir-3" id="mmTab-ir-3" data-mm-tab="3" style="--i:4"><span class="mm-tab-label">ข้อมูลราคาหลักทรัพย์</span><i class="icon" aria-hidden="true">chevron_right</i></button>
+            <button type="button" class="tab" role="tab" aria-selected="false" tabindex="-1" aria-controls="mmPanel-ir-4" id="mmTab-ir-4" data-mm-tab="4" style="--i:5"><span class="mm-tab-label">สอบถามข้อมูลนักลงทุนสัมพันธ์</span><i class="icon" aria-hidden="true">chevron_right</i></button>
+          </div>
+          <div class="ir-oc-ir-panels">
+            <div class="tab-panel ir-oc-ir-panel is-active" role="tabpanel" id="mmPanel-ir-0" aria-labelledby="mmTab-ir-0" data-mm-panel="0" style="--i:1">
+              <div class="mm-panel-head"><strong>ข้อมูลทางการเงิน</strong></div>
+              <div class="mm-panel-links">
+                <a href="#">งบการเงิน</a>
+                <a href="financial-highlights.html">ข้อมูลสำคัญทางการเงิน</a>
+                <a href="mda.html">คำอธิบายและการวิเคราะห์</a>
+                <a href="#">สุขภาพหุ้น</a>
+              </div>
+            </div>
+            <div class="tab-panel ir-oc-ir-panel" role="tabpanel" id="mmPanel-ir-1" aria-labelledby="mmTab-ir-1" data-mm-panel="1" style="--i:2">
+              <div class="mm-panel-head"><strong>เอกสารเผยแพร่</strong></div>
+              <div class="mm-panel-links">
+                <a href="one-report.html">แบบ 56-1 One Report</a>
+                <a href="filing.html">หนังสือชี้ชวน</a>
+                <a href="#">ESG Structured Data Report</a>
+                <a href="#">ข้อมูลนำเสนอแบบมัลติมีเดีย</a>
+              </div>
+            </div>
+            <div class="tab-panel ir-oc-ir-panel" role="tabpanel" id="mmPanel-ir-2" aria-labelledby="mmTab-ir-2" data-mm-panel="2" style="--i:3">
+              <div class="mm-panel-head"><strong>ข้อมูลผู้ถือหุ้น</strong></div>
+              <div class="mm-panel-links is-two">
+                <a href="#">การประชุมผู้ถือหุ้น</a>
+                <a href="#">โครงสร้างการถือหุ้น</a>
+                <a href="rights-offering.html">การจัดสรรหุ้นเพิ่มทุน RO</a>
+                <a href="#">โครงสร้างผู้ถือหุ้น</a>
+                <a href="dividend-policy-payment.html">นโยบายและประวัติการจ่ายเงินปันผล</a>
+                <a href="#">ปฏิทินกิจกรรมนักลงทุนสัมพันธ์</a>
+                <a href="#">สรุปข้อสนเทศ</a>
+              </div>
+            </div>
+            <div class="tab-panel ir-oc-ir-panel" role="tabpanel" id="mmPanel-ir-3" aria-labelledby="mmTab-ir-3" data-mm-panel="3" style="--i:4">
+              <div class="mm-panel-head"><strong>ข้อมูลราคาหลักทรัพย์</strong></div>
+              <div class="mm-panel-links">
+                <a href="#">ราคาหลักทรัพย์ล่าสุด</a>
+                <a href="#">ราคาหลักทรัพย์ย้อนหลัง</a>
+                <a href="#">เครื่องคำนวณการลงทุน</a>
+              </div>
+            </div>
+            <div class="tab-panel ir-oc-ir-panel" role="tabpanel" id="mmPanel-ir-4" aria-labelledby="mmTab-ir-4" data-mm-panel="4" style="--i:5">
+              <div class="mm-panel-head"><strong>สอบถามข้อมูลนักลงทุนสัมพันธ์</strong></div>
+              <div class="mm-panel-links">
+                <a href="ir-contact.html">ติดต่อนักลงทุนสัมพันธ์</a>
+                <a href="e-mail-alert.html">รับข่าวสารทางอีเมล</a>
+                <a href="faqs.html">คำถามที่ถูกถามบ่อย</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ir-oc-veil" id="siteMenuVeil" aria-hidden="true"></div>

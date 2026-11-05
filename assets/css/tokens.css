@@ -1,0 +1,265 @@
+/* ==========================================================================
+   RPC — Design tokens  (แหล่งอ้างอิงเดียวของระบบดีไซน์)
+   --------------------------------------------------------------------------
+   โครงสร้าง 3 ชั้น — ให้แก้ที่ชั้นบนสุดที่เกี่ยวข้องเท่านั้น
+     1. Primitive  ค่าดิบ (สี, ขนาด)                 ห้ามใช้ตรง ๆ ใน component
+     2. Semantic   ความหมาย (primary, text, h2 ...)   ใช้ใน style.css ได้
+     3. Component  ค่าเฉพาะชิ้น (ปุ่ม, input, การ์ด)    ใช้ในตัว component
+   กฎ: style.css ห้ามมี hex / px ของ font-size / border-radius ใหม่
+        ต้องอ้าง token จากไฟล์นี้ — คู่มือดูที่ design-system.html
+   ========================================================================== */
+
+:root{
+
+  /* ========================================================================
+     1. PRIMITIVE
+     ======================================================================== */
+
+  /* Color */
+  --blue-700:   #073d93;
+  --blue-600:   #0a4bb3;
+  --blue-500:   #0055a4;
+  --blue-900:   #081f5c;
+  --navy-900:   #0f1424;
+  --navy-800:   #161d34;
+  --gray-900:   #12141c;
+  --gray-600:   #6b6e60;
+  --gray-400:   #9093a6;
+  --white:      #ffffff;
+  --gray-50:    #f7f7f7;
+  --green-500:  #2fa84f;
+  --amber-400:  #e2a54d;
+  --amber-600:  #c9862f;
+  --red-600:    #d7281e;
+
+  /* Font family */
+  --font-th:    'FC Minimal', sans-serif;
+
+  /* Font weight */
+  --weight-500: 500;
+  --weight-600: 600;
+  --weight-700: 700;
+
+  /* Radius */
+  --radius-8:    8px;
+  --radius-16:   16px;
+  --radius-full: 999px;
+
+  /* Motion */
+  --ease: cubic-bezier(.65,0,.35,1);      /* ease-in-out: hover, สลับสถานะ */
+  --ease-out: cubic-bezier(.16,1,.3,1);   /* expo-out: reveal / สไลด์เข้า (เร็วแล้วค่อยๆ หยุด) */
+
+
+  /* ========================================================================
+     2. SEMANTIC
+     ======================================================================== */
+
+  /* ---- Color ---- */
+  --primary:        var(--blue-700);   /* ปุ่มหลัก, ไอคอน, หัวข้อน้ำเงิน, พื้น section */
+  --primary-hover:  var(--blue-600);
+  --primary-deep:   var(--blue-900);   /* พื้นน้ำเงินเข้ม (IR) */
+  --danger:         var(--red-600);    /* ตัวเลขลด, เน้นสีแดง */
+  --navy:           var(--blue-500);
+  --navy-2:         var(--navy-900);
+  --navy-3:         var(--navy-800);
+  --ink:            var(--gray-900);   /* ข้อความหลัก */
+  --muted-2:        var(--gray-600);   /* ข้อความรอง */
+  --muted:          var(--gray-400);   /* ข้อความรองบนพื้นเข้ม */
+  --surface:        var(--white);      /* พื้นหน้า, พื้นการ์ด */
+  --surface-muted:  var(--gray-50);    /* พื้นรอง (#f7f7f7) */
+  --text-inverse:   var(--white);      /* ตัวอักษร / ไอคอนบนพื้นเข้มหรือพื้นสี */
+  --brand:          var(--green-500);
+  --amber:          var(--amber-400);
+  --amber-2:        var(--amber-600);
+  --line:           rgba(255,255,255,.10);   /* เส้นบนพื้นเข้ม */
+  --line-dark:      rgba(18,20,28,.08);      /* เส้นบนพื้นสว่าง */
+  --line-dark-strong: rgba(18,20,28,.2);     /* เส้นขอบเด่น / พื้นโปร่งเข้มบนพื้นสว่าง */
+
+  /* สีขาวโปร่งบนพื้นเข้ม — ใช้แทน rgba(255,255,255,x) ทุกที่ */
+  --text-inverse-muted:  rgba(255,255,255,.72);   /* ข้อความรอง */
+  --text-inverse-subtle: rgba(255,255,255,.6);    /* label, เส้นขอบปุ่ม */
+  --border-inverse:      rgba(255,255,255,.28);   /* เส้นขอบ */
+  --overlay-inverse:     rgba(255,255,255,.12);   /* พื้นโปร่ง (glass) */
+
+  /* ---- Shadow (3 แบบ + glow) ---- */
+  --shadow-sm:      0 30px 60px -30px rgba(18,20,28,.18);   /* การ์ดบนพื้นสว่างตอน hover */
+  --shadow-lg:      0 40px 80px -30px rgba(4,8,20,.55);     /* ภาพเด่น, dropdown, การ์ดบนพื้นเข้ม */
+  --shadow-cover:   0 -50px 90px -45px rgba(6,12,24,.4);    /* section ที่เลื่อนทับ section ก่อนหน้า */
+  --shadow-glow:    0 0 7px color-mix(in srgb,var(--brand) 72%,transparent), 0 0 16px color-mix(in srgb,var(--brand) 38%,transparent);  /* เส้นเรืองแสง (timeline) */
+
+  /* ---- Font family ---- */
+  --ff-display:     var(--font-th);
+  --ff-body:        var(--font-th);
+  --ff-icon:        'Material Symbols Outlined';   /* สลับสไตล์ไอคอนที่นี่ที่เดียว: 'Material Symbols Rounded' | 'Material Symbols Outlined' */
+
+  /* ---- Font weight ---- */
+  --fw-regular:     var(--weight-500);  /* ย่อหน้า + หัวข้อ h1–h3 */
+  --fw-semibold:    var(--weight-600);  /* label, ปุ่ม */
+  --fw-bold:        var(--weight-700);  /* หัวการ์ด h4, ตัวเลข */
+
+  /* ---- Type scale — มือถือ (< 768px) เป็นค่าตั้งต้น ----------------------
+     ระดับ      มือถือ   แท็บเล็ต   เดสก์ท็อป
+                <768    768–1199    ≥1200
+     h1        40px      60px       86px       hero title
+     page-title 36px     52px       68px       h1 ของหน้าย่อย (.page-hero)
+     h2        30px      40px       54px       หัวข้อ section
+     h3        24px      28px       36px       หัวข้อรอง / statement
+     h4        20px      (ค่าเดียวทุกจอ)        หัวการ์ด / ไอคอน
+     p         18px      (ค่าเดียวทุกจอ)        ย่อหน้า
+     sm        16px      (ค่าเดียวทุกจอ)        ข้อความรอง / ลิงก์ / ปุ่ม
+     xs        14px      (ค่าเดียวทุกจอ)        label / eyebrow / caption — ต่ำสุดของเว็บ ห้ามเล็กกว่า 14px
+     stat      32px      40px       48px       ตัวเลขเด่น
+     display   56px      80px       112px      ตัวเลขขนาดใหญ่พิเศษ (ราคาหุ้น, วันที่)
+     mega      80px      104px      144px      wordmark RPC (graphic)
+     ---------------------------------------------------------------------- */
+  --fs-mega:        80px;
+  --fs-h1:          40px;
+  --fs-page-title:  36px;   /* h1 ของหน้าย่อย (.page-hero) */
+  --fs-h2:          30px;
+  --fs-h3:          24px;
+  --fs-h4:          20px;
+  --fs-p:           18px;
+  --fs-sm:          16px;
+  --fs-xs:          14px;
+  --fs-stat:        32px;
+  --fs-display:     56px;
+  --fs-hero-num:    136px;   /* ตัวเลขเด่นในช่อง bento (เช่น "3" พันธกิจ) */
+
+  /* ---- Line height ----------------------------------------------------
+     ข้อความไทยหลายบรรทัดต้องไม่ต่ำกว่า 1.3 (วรรณยุกต์ซ้อนสระบน) */
+  --lh-display:     1;      /* ตัวเลข / คำเดียวบรรทัดเดียว */
+  --lh-heading:     1.3;    /* หัวข้อทุกระดับ */
+  --lh-ui:          1.5;    /* label, caption, ข้อความ UI */
+  --lh-p:           1.85;   /* ย่อหน้า */
+
+  /* ---- Letter spacing ---- */
+  --ls-display:     -.01em;
+  --ls-eyebrow:     .26em;
+
+  /* ---- Radius ---------------------------------------------------------
+     sm  = input, กล่องไอคอน, thumbnail    lg = การ์ด, panel, section
+     pill = ปุ่ม, chip                      circle = ปุ่มไอคอนวงกลม */
+  --r-sm:           var(--radius-8);
+  --r-lg:           var(--radius-16);
+  --r-pill:         var(--radius-full);
+  --r-circle:       50%;
+
+
+  /* ========================================================================
+     3. COMPONENT
+     ======================================================================== */
+
+  /* ---- Layout ---- */
+  --gutter:            clamp(16px,4.5vw,84px);   /* ระยะขอบซ้าย-ขวาของหน้า IR */
+  --grid-gap:          clamp(6px,.9vw,14px);
+
+  /* ---- Button: 3 แบบ  button-primary / button-secondary / button-link ----
+     ค่าด้านล่างคือโหมดพื้นสว่าง — โหมดพื้นเข้มดูที่ .on-dark ใน components.css */
+  --btn-radius:        var(--r-pill);
+  --btn-radius-icon:   var(--r-circle);
+  --btn-pad-y:         .95rem;
+  --btn-pad-x:         1.9rem;
+  --btn-pad-y-sm:      .5rem;
+  --btn-pad-x-sm:      1.15rem;
+  --btn-icon-size:     44px;
+  --btn-icon-size-sm:  30px;
+  --btn-font-size:     var(--fs-sm);
+  --btn-font-size-sm:  var(--fs-xs);
+  --btn-font-weight:   var(--fw-semibold);
+  --btn-line-height:   var(--lh-ui);
+  --btn-gap:           .6rem;
+
+  --btn-primary-shadow:    0 14px 32px -10px rgba(7,61,147,.5);
+
+  /* ---- Tab ---- */
+  --tab-pad-y:         .75rem;
+  --tab-pad-x:         1.25rem;
+  --tab-font-size:     var(--fs-sm);
+  --tab-font-weight:   var(--fw-semibold);
+
+  /* ---- Table ---- */
+  --table-font-size:   var(--fs-sm);
+  --table-head-size:   var(--fs-xs);
+  --table-pad-y:       1.125rem;       /* 18px — แถวโปร่งแบบ editorial */
+  --table-pad-x:       1rem;
+  --table-radius:      var(--r-sm);
+  --table-group-size:  var(--fs-stat);  /* หัวกลุ่ม (ปี / หมวด) ในตาราง */
+
+  /* ---- Icon (Material Symbols) ---- */
+  --icon-size:         1.25em;           /* ตามขนาดตัวอักษรที่ไอคอนอยู่ข้าง ๆ */
+  --icon-weight:       300;              /* เส้นบาง (ฟอนต์ subset รองรับ 300–700) */
+  --icon-fill:         0;                /* 0 = เส้น, 1 = ทึบ */
+
+  /* ---- Input / Card ---- */
+  --input-radius:      var(--r-sm);
+  --input-font-size:   var(--fs-p);
+  --card-radius:       var(--r-lg);
+  --card-pad:          clamp(22px,2.4vw,36px);
+  --card-bg:           var(--surface);
+  --card-border:       var(--line-dark);
+  --icon-box-radius:   var(--r-sm);
+
+  /* ---- Bento / ESG ---- */
+  --bento-gap:         clamp(10px,1.2vw,18px);
+  --bento-row:         clamp(200px,17vw,260px);
+  --bento-go-size:     44px;
+  --esg-pillar-h:      clamp(520px,44vw,640px);
+}
+
+/* ==========================================================================
+   ค่าสีของ ปุ่ม / tab / table ที่เปลี่ยนตามพื้น — โหมดพื้นสว่าง (ค่าตั้งต้น)
+   ใช้กับ .theme-light / .theme-tint / .rpcg-card ด้วย เพื่อให้การ์ดสว่างที่วางบน section เข้มได้สีถูก
+   โหมดพื้นเข้มอยู่ที่ .theme-dark / .theme-primary / .on-dark ใน components.css
+   ========================================================================== */
+:root, .theme-light, .theme-tint, .rpcg-card{
+  --btn-primary-bg:        var(--primary);
+  --btn-primary-bg-hover:  var(--primary-hover);
+  --btn-primary-fg:        var(--text-inverse);
+  --btn-secondary-border:  rgba(18,20,28,.25);
+  --btn-secondary-fg:      var(--ink);
+  --btn-secondary-hover-bg:var(--ink);
+  --btn-secondary-hover-fg:var(--text-inverse);
+  --btn-link-fg:           var(--primary);
+  --btn-link-hover-fg:     var(--primary-hover);
+  --tab-fg:            var(--muted-2);
+  --tab-fg-hover:      var(--ink);
+  --tab-fg-active:     var(--primary);
+  --tab-border:        var(--line-dark);
+  --tab-indicator:     var(--primary);
+  --tab-pill-bg:       rgba(18,20,28,.06);
+  --table-head-fg:     var(--muted-2);
+  --table-head-border: var(--ink);
+  --table-row-border:  var(--line-dark);
+  --table-row-hover:   color-mix(in srgb,var(--primary) 4%,var(--surface));
+  --table-accent:      var(--primary);          /* เส้นซ้ายตอน hover, ลูกศร */
+  --table-col-bg:      var(--primary);          /* คอลัมน์เน้น .col-highlight */
+  --table-col-fg:      var(--text-inverse);
+}
+
+/* ==========================================================================
+   Responsive type — เปลี่ยนค่า token ตามหน้าจอ (ทำที่นี่ที่เดียว)
+   ========================================================================== */
+@media (min-width:768px){
+  :root{
+    --fs-mega:  104px;
+    --fs-h1:    60px;
+    --fs-page-title: 52px;
+    --fs-h2:    40px;
+    --fs-h3:    28px;
+    --fs-stat:  40px;
+    --fs-display: 80px;
+    --fs-hero-num: 200px;
+  }
+}
+@media (min-width:1200px){
+  :root{
+    --fs-mega:  144px;
+    --fs-h1:    86px;
+    --fs-page-title: 68px;
+    --fs-h2:    54px;
+    --fs-h3:    36px;
+    --fs-stat:  48px;
+    --fs-display: 112px;
+    --fs-hero-num: 270px;
+  }
+}

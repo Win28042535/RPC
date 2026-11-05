@@ -1,26 +1,34 @@
-# RPCG homepage — Direction A / B
+# RPC homepage — energy-first mockup (v2)
 
-Design exploration for the RPCG homepage, based on the "ยุทธศาสตร์การยกระดับดิจิทัลแพลตฟอร์ม RPCG" deck.
+Mockup preview of the RPC homepage, built on the latest demo at `design.onlineasset.co.th/demo/ir/RPC/` and reworked so the energy business (PTEC × Caltex) leads the story. Design tokens, components and motion follow the original demo.
 
-| Folder / file | What it is |
+| File | What it is |
 |---|---|
-| `rpcg-homepage-wireframe.html` | Wireframe, Direction A "เชื่อมโยงธุรกิจ สร้างคุณค่า" |
-| `rpcg-homepage-wireframe-B.html` | Wireframe, Direction B "ก้าวไปข้างหน้า" |
-| `rpcg-demo-A/` | Demo page restructured to follow Wireframe A |
-| `rpcg-demo-B/` | Demo page restructured to follow Wireframe B |
-| `rpcg-demo-switcher/` | Panel to switch between A, B and A\|B at desktop / tablet / mobile widths |
-| `serve-demo.js` | Static dev server for the switcher |
+| `index.html` | The v2 homepage mockup |
+| `compare.html` | Before / after screenshots and the change list for the web team |
+| `_compare/` | Screenshots used by `compare.html` |
+| `serve.js` | Static dev server (port 5172) |
 
 ## Run
 
 ```bash
-node serve-demo.js
+node serve.js
 ```
 
-Open http://localhost:5170 (also `rpcg-demo-A/serve.js` on 5173 and `rpcg-demo-B/serve.js` on 5174).
+Open http://localhost:5172 and http://localhost:5172/compare.html
+
+## What changed from the demo
+
+- Section order: Hero → energy business (PTEC) → energy products → investors → about RPC → ESG → opportunity → news / contact.
+- Hero: a simulated motion placeholder replaces the video (to be swapped for the real video); one energy card with 81.9% / 80 stations / EURO 5, SAMCO as a small affiliate link.
+- Energy business: single PTEC panel, no slider.
+- Products: four energy items on the Moving Forward rail (01 / 04), real-estate items removed.
+- About: shortened; SAMCO shown as one affiliate tile.
+- ESG starts with solar rooftop; opportunity reduced to two cards.
+- Company name RPCG / อาร์พีซีจี replaced with RPC / อาร์พีซี throughout.
 
 ## Notes
 
-- **Fonts are not included.** The demos use the licensed font *FC Minimal*; place the `.woff2` files in `rpcg-demo-A/assets/font/` and `rpcg-demo-B/assets/font/` (see `fonts.css` for the expected file names). Without them the pages fall back to a system sans-serif.
-- **Simulated data.** Net profit, total assets, dividend, the 2564–2567 revenue trend and the ESG indicators are made-up placeholders for design purposes and are labelled as such on the pages. Total revenue 2568 (฿8,370.69 million) and the 81.9% / 17.7% revenue split come from the original demo.
-- The demo pages are working copies of the draft at `design.onlineasset.co.th/demo/ir/rpcg-draft/`; the original is unchanged.
+- **Fonts are not included.** FC Minimal and the Material Symbols subset are licensed / build assets and are kept out of this public repo; place the `.woff2` files in `assets/font/` (see `fonts.css`). Without them the page falls back to a system font and icons show as text.
+- Figures (81.9%, 17.7%, 80 stations, 12 solar-rooftop stations, revenue bars) come from the original demo.
+- The solar-rooftop card uses an existing demo image (city with wind turbines) as a stand-in.

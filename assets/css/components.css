@@ -1,0 +1,423 @@
+/* ==========================================================================
+   RPC — Components (ปุ่ม / tab / table / section theme)
+   --------------------------------------------------------------------------
+   ทุกค่ามาจาก tokens.css — ห้ามใส่สี / px / font-size ตรง ๆ ที่นี่
+   โหลดหลัง tokens.css และก่อน style.css
+   วิธีใช้ + ตัวอย่างโค้ด: design-system.html และ DESIGN-SYSTEM.md
+   ========================================================================== */
+
+/* ---------- Section theme ------------------------------------------------
+   ใส่ 1 class ที่ <section> เพื่อกำหนดพื้น / สีตัวอักษร / โหมดปุ่ม ให้ลูกทั้งหมด
+     theme-light    พื้นขาว            (ค่าตั้งต้นของเว็บ)
+     theme-tint     พื้นครีม
+     theme-dark     พื้นเข้ม + ตัวอักษรขาว
+     theme-primary  พื้นน้ำเงินแบรนด์ + ตัวอักษรขาว                      */
+.theme-light  { --bg:var(--surface);   --fg:var(--ink); --fg-muted:var(--muted-2); --border:var(--line-dark); background:var(--bg); color:var(--fg); }
+.theme-tint   { --bg:var(--surface-muted); --fg:var(--ink); --fg-muted:var(--muted-2); --border:var(--line-dark); background:var(--bg); color:var(--fg); }
+.theme-dark   { --bg:var(--navy-2);  --fg:var(--text-inverse); --fg-muted:var(--text-inverse-muted); --border:var(--line); background:var(--bg); color:var(--fg); }
+.theme-primary{ --bg:var(--primary); --fg:var(--text-inverse); --fg-muted:var(--text-inverse-muted); --border:var(--line); background:var(--bg); color:var(--fg); }
+
+/* โหมดพื้นเข้ม — ใช้ได้ทั้งที่ section (theme-dark / theme-primary) หรือใส่ .on-dark ที่ตัวปุ่ม / กลุ่มปุ่มเอง */
+.theme-dark, .theme-primary, .on-dark{
+  --btn-secondary-border:   var(--text-inverse-subtle);
+  --btn-secondary-fg:       var(--text-inverse);
+  --btn-secondary-hover-bg: var(--surface);
+  --btn-secondary-hover-fg: var(--primary);
+  --btn-link-fg:            var(--text-inverse);
+  --btn-link-hover-fg:      var(--brand);
+  --tab-fg:                 var(--text-inverse-subtle);
+  --tab-fg-hover:           var(--text-inverse);
+  --tab-fg-active:          var(--text-inverse);
+  --tab-border:             var(--line);
+  --tab-indicator:          var(--brand);
+  --tab-pill-bg:            var(--overlay-inverse);
+  --table-head-fg:          var(--text-inverse-subtle);
+  --table-head-border:      var(--text-inverse);
+  --table-row-border:       var(--line);
+  --table-row-hover:        var(--overlay-inverse);
+  --table-accent:           var(--brand);
+  --table-col-bg:           var(--overlay-inverse);
+  --table-col-fg:           var(--text-inverse);
+}
+.theme-primary{
+  --btn-primary-bg:        var(--surface);
+  --btn-primary-bg-hover:  var(--surface-muted);
+  --btn-primary-fg:        var(--primary);
+}
+
+/* ---------- Card ---------------------------------------------------------
+   <div class="rpcg-card [is-interactive]">
+     <div class="rpcg-card-icon"><i class="icon" aria-hidden="true">apartment</i></div>
+     <h4>หัวการ์ด</h4><p>รายละเอียด</p>
+   </div>
+   การ์ดทั่วไปใช้ .rpcg-card เสมอ (พื้น / ขอบ / มุม / padding จาก token)  is-interactive = ลอยขึ้นตอน hover
+   การ์ดภาพมีข้อความทับ → โครงแบบ .proj-card (style.css)                                          */
+/* ฐานการ์ดร่วม: .rpcg-card (ทั่วไป) · .bento-tile (หน้าแรก) · .irp-w (หน้า IR) ใช้พื้น / ขอบ / มุม / hover ชุดเดียวกัน */
+.rpcg-card, .bento-tile, .irp-w{
+  background:var(--card-bg); color:var(--ink); border:1px solid var(--card-border); border-radius:var(--card-radius);
+  transition:transform .5s var(--ease), border-color .4s var(--ease);
+}
+.rpcg-card{ padding:var(--card-pad); height:100%; }
+.rpcg-card.is-interactive:hover, .bento-tile:hover, .irp-w:hover{ transform:translateY(-6px); }
+.rpcg-card h4{ margin-top:20px; }
+.rpcg-card p{ margin-top:10px; color:var(--muted-2); }
+.rpcg-card a:not(.button){ color:var(--ink); font-weight:var(--fw-semibold); display:inline-block; margin-top:8px; border-bottom:1px solid var(--ink); }
+.rpcg-card a:not(.button){ transition:color .3s var(--ease), border-color .3s var(--ease); }
+.rpcg-card a:not(.button):hover, .rpcg-card a:not(.button):focus-visible{ color:var(--primary); border-bottom-color:var(--primary); }
+.rpcg-card-icon{
+  width:52px; height:52px; display:flex; align-items:center; justify-content:center; flex:none;
+  border-radius:var(--icon-box-radius); background:var(--surface-muted); color:var(--brand); font-size:var(--fs-h4);
+}
+
+/* ---------- Chip -----------------------------------------------------------
+   <span class="chip">ณ 9M/2567</span>   <span class="chip chip-sm">งบการเงิน</span>   <span class="chip is-up">+3.2%</span>
+   ใช้เป็น badge ช่วงเวลา / หมวด / สถานะ (ขึ้น-ลง) — พื้นมืดใส่ .on-dark หรืออยู่ใน .theme-dark / .theme-primary (สีสลับให้เอง) */
+.chip{
+  --chip-bg:var(--line-dark); --chip-fg:var(--ink);
+  flex:none; display:inline-flex; align-items:center; gap:3px; width:fit-content; padding:.25rem .8rem; border-radius:var(--r-pill);
+  font-size:var(--fs-xs); font-weight:var(--fw-semibold); font-variant-numeric:tabular-nums; white-space:nowrap;
+  background:var(--chip-bg); color:var(--chip-fg);
+}
+.chip:empty{ display:none; }
+.chip-sm{ padding:.1rem .65rem; --chip-fg:var(--primary); }
+.chip.is-up, .chip.is-down{ --chip-bg:color-mix(in srgb,var(--brand) 14%,transparent); --chip-fg:var(--brand); }
+.chip.is-down{ --chip-bg:color-mix(in srgb,var(--danger) 12%,transparent); --chip-fg:var(--danger); }
+.chip.is-up::before, .chip.is-down::before{ font-family:var(--ff-icon); font-feature-settings:'liga'; font-size:1.15em; line-height:1; }
+.chip.is-up::before{ content:'arrow_upward'; } .chip.is-down::before{ content:'arrow_downward'; }
+:is(.theme-dark,.theme-primary,.on-dark) .chip{ --chip-bg:var(--overlay-inverse); --chip-fg:var(--text-inverse); }
+:is(.theme-dark,.theme-primary,.on-dark) .chip.is-up{ --chip-bg:var(--brand); --chip-fg:var(--ink); }
+:is(.theme-dark,.theme-primary,.on-dark) .chip.is-down{ --chip-bg:var(--danger); --chip-fg:var(--text-inverse); }
+
+/* ---------- Icon ---------------------------------------------------------
+   <i class="icon" aria-hidden="true">arrow_outward</i>      เส้น (ค่าตั้งต้น)
+   <i class="icon icon-fill" aria-hidden="true">home</i>       ทึบ
+   ชื่อไอคอนดูที่ fonts.google.com/icons — ต้องเป็นไอคอนที่อยู่ใน subset ของ
+   assets/font/material-symbols-rounded.woff2 (เพิ่มไอคอนใหม่ตามขั้นตอนใน DESIGN-SYSTEM.md)
+   โลโก้แบรนด์ (LinkedIn / Instagram / X) ใช้ <svg class="icon-svg">                    */
+.icon{
+  font-family:var(--ff-icon); font-weight:var(--icon-weight); font-style:normal; font-size:var(--icon-size);
+  font-variation-settings:'FILL' var(--icon-fill), 'GRAD' 0, 'opsz' 24;
+  line-height:1; letter-spacing:normal; text-transform:none; white-space:nowrap; word-wrap:normal; direction:ltr;
+  display:inline-block; width:1em; height:1em; overflow:hidden; flex:none; vertical-align:middle;
+  font-feature-settings:'liga'; -webkit-font-feature-settings:'liga'; -webkit-font-smoothing:antialiased; user-select:none;
+}
+.icon-fill{ --icon-fill:1; }
+.icon-svg{ width:1.1em; height:1.1em; fill:currentColor; flex:none; vertical-align:middle; }
+
+/* ---------- Button -------------------------------------------------------
+   <a class="button button-primary">…</a>
+   <a class="button button-secondary">…</a>
+   <a class="button button-link">…</a>
+   ขนาดเล็ก: + button-sm     ปุ่มไอคอนวงกลม: button button-secondary button-icon  */
+.button{
+  display:inline-flex; align-items:center; justify-content:center; gap:var(--btn-gap);
+  padding:var(--btn-pad-y) var(--btn-pad-x); border:1px solid transparent; border-radius:var(--btn-radius);
+  font-family:var(--ff-display); font-size:var(--btn-font-size); font-weight:var(--btn-font-weight); line-height:var(--btn-line-height);
+  background:none; color:inherit; cursor:pointer; position:relative; overflow:hidden; white-space:nowrap;
+  transition:transform .45s var(--ease), box-shadow .45s var(--ease), background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease);
+}
+.button:active{ transform:scale(.96); }
+.button:focus-visible{ outline:2px solid var(--primary); outline-offset:3px; }
+.button .icon{ transition:transform .4s var(--ease); }
+.button:not(.button-icon):hover .icon, a:hover > .irp-arrow{ transform:translateX(4px); }
+
+.button-primary{ background:var(--btn-primary-bg); color:var(--btn-primary-fg); }
+.button-primary:hover{ background:var(--btn-primary-bg-hover); color:var(--btn-primary-fg); box-shadow:var(--btn-primary-shadow); }
+
+.button-secondary{ border-color:var(--btn-secondary-border); color:var(--btn-secondary-fg); }
+.button-secondary:hover{ background:var(--btn-secondary-hover-bg); border-color:var(--btn-secondary-hover-bg); color:var(--btn-secondary-hover-fg); }
+
+.button-link{ padding:0; border:0; border-radius:0; gap:.5rem; overflow:visible; color:var(--btn-link-fg); }
+.button-link:hover{ color:var(--btn-link-hover-fg); }
+.button-link:active{ transform:none; }
+
+.button-sm{ padding:var(--btn-pad-y-sm) var(--btn-pad-x-sm); font-size:var(--btn-font-size-sm); }
+.button-link.button-sm{ padding:0; }
+.button-icon{
+  width:var(--btn-icon-size); height:var(--btn-icon-size); padding:0; flex:none;
+  border-radius:var(--btn-radius-icon);
+}
+.button-icon.button-sm{ width:var(--btn-icon-size-sm); height:var(--btn-icon-size-sm); }
+
+/* ---------- Tab ----------------------------------------------------------
+   <div class="tabs" role="tablist">                  แนวนอน มีเส้นใต้ (ค่าตั้งต้น)
+     <button class="tab is-active" role="tab" aria-selected="true">…</button>
+   <div class="tabs tabs-vertical" role="tablist">    รายการแนวตั้งด้านซ้าย (master-detail)
+   <div class="tabs tabs-pill" role="tablist">        chip โค้งมน (ตัวกรอง)
+   เนื้อหา: <div class="tab-panel is-active" role="tabpanel">                */
+.tabs{ display:flex; gap:2px; border-bottom:1px solid var(--tab-border); overflow-x:auto; scrollbar-width:none; }
+.tabs::-webkit-scrollbar{ display:none; }
+.tab{
+  display:flex; align-items:center; justify-content:space-between; gap:10px; flex:none;
+  padding:var(--tab-pad-y) var(--tab-pad-x); margin-bottom:-1px; border:0; border-bottom:2px solid transparent; background:none;
+  font-family:var(--ff-display); font-size:var(--tab-font-size); font-weight:var(--tab-font-weight); line-height:var(--lh-ui);
+  color:var(--tab-fg); text-align:left; cursor:pointer; white-space:nowrap;
+  transition:color .3s var(--ease), background .3s var(--ease), border-color .3s var(--ease);
+}
+.tab:hover{ color:var(--tab-fg-hover); }
+.tab:focus-visible{ outline:2px solid var(--primary); outline-offset:-2px; }
+.tab.is-active{ color:var(--tab-fg-active); border-bottom-color:var(--tab-indicator); }
+.tab i{ font-size:var(--fs-xs); opacity:.5; transition:transform .3s var(--ease), opacity .3s var(--ease); }
+.tab.is-active i{ opacity:1; transform:translateX(2px); }
+
+.tabs-vertical{ flex-direction:column; gap:2px; border-bottom:0; border-right:1px solid var(--tab-border); overflow:visible; }
+.tabs-vertical .tab{
+  width:100%; margin:0; border-bottom:0; border-left:2px solid transparent; border-radius:0 var(--r-sm) var(--r-sm) 0; white-space:normal;
+}
+.tabs-vertical .tab.is-active{ border-left-color:var(--tab-indicator); background:var(--tab-pill-bg); }
+
+.tabs-pill{ gap:8px; border-bottom:0; flex-wrap:wrap; overflow:visible; }
+.tabs-pill .tab{ margin:0; border:0; border-radius:var(--r-pill); background:var(--tab-pill-bg); padding:var(--btn-pad-y-sm) var(--btn-pad-x-sm); }
+.tabs-pill .tab.is-active{ background:var(--tab-indicator); color:var(--text-inverse); }
+
+.tab-panel{ display:none; }
+.tab-panel.is-active{ display:block; animation:tabPanelIn .35s var(--ease); }
+@keyframes tabPanelIn{ from{ opacity:0; transform:translateX(6px); } to{ opacity:1; transform:none; } }
+@media (prefers-reduced-motion:reduce){ .tab-panel.is-active{ animation:none; } }
+
+/* ---------- Table — ระบบเดียวทั้งเว็บ ----------------------------------------
+   <div class="data-table-wrap">               กรอบการ์ดเสมอ (ในการ์ดอื่น .rpcg-card กรอบหายเอง)
+     <table class="data-table [data-table-sticky] [data-table-stack] [data-table-striped]" [data-crosshair]>
+   ฐาน: หัวตาราง label เล็ก + เส้น ink · แถวโปร่ง เส้นบาง · hover = พื้นจาง + เส้น accent ด้านซ้าย
+   ตัวเลขชิดขวา .num · ขึ้น/ลง .is-up / .is-down
+   ส่วนเสริม (ใช้เมื่อจำเป็น):
+     tr.row-group > td > .row-group-in (<b>หัวกลุ่ม</b><span class="chip">n</span>)   หัวกลุ่มตัวใหญ่ + เส้นวาดเข้า  (.is-label = หัวเล็กมีจุดเขียว)
+     tr.row-latest                       แถวล่าสุด (พื้นจาง + เส้นซ้าย)
+     tr.row-more + table.is-all          ซ่อนแถวจนกดปุ่ม [data-more]
+     .col-highlight                      คอลัมน์เน้น (พื้นแบรนด์ทั้งคอลัมน์ ใส่ทุกเซลล์ของคอลัมน์นั้น)
+     td.row-index                        เลขลำดับ (hover เปลี่ยนเป็นสี accent)
+     .th-stack (<small>งบปี</small><b>2568</b>)                         หัวคอลัมน์ 2 ชั้น
+     [data-crosshair]                    hover ไฮไลต์ทั้งคอลัมน์ (pages.js)
+     data-table-sticky                   คอลัมน์แรกติดซ้ายเมื่อเลื่อนแนวนอน
+     data-table-stack + td.cell-main / .cell-meta / .cell-actions   มือถือเรียงเป็นการ์ด
+   เอกสารในเซลล์: .doc-cell > .doc-ico + .doc-title(<b>,<span>) · ปุ่ม .doc-actions (button-icon)        */
+.data-table-wrap{ overflow-x:auto; overflow-y:hidden; padding:clamp(10px,1.4vw,20px); border:1px solid var(--card-border); border-radius:var(--card-radius); background:var(--card-bg); }
+.rpcg-card .data-table-wrap{ padding:0; border:0; border-radius:0; background:none; }
+.data-table{ width:100%; min-width:520px; border-collapse:separate; border-spacing:0; font-size:var(--table-font-size); line-height:var(--lh-ui); color:inherit; }
+.data-table th, .data-table td{ padding:var(--table-pad-y) var(--table-pad-x); vertical-align:middle; }
+.data-table thead th{
+  padding-top:0; padding-bottom:14px; text-align:left; vertical-align:bottom; border-bottom:1px solid var(--table-head-border);
+  font-size:var(--table-head-size); font-weight:var(--fw-semibold); letter-spacing:.04em; color:var(--table-head-fg);
+}
+.data-table tbody th{ text-align:left; font-weight:var(--fw-regular); color:inherit; }
+.data-table tbody td, .data-table tbody th{ border-bottom:1px solid var(--table-row-border); transition:background .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease); }
+.data-table tbody tr:last-child > *{ border-bottom:0; }
+.data-table tbody tr > :first-child{ border-left:2px solid transparent; }
+.data-table tr > :first-child{ border-right:1px solid var(--table-row-border); }
+.data-table .row-group > :first-child{ border-right:0; }
+.data-table tbody tr:not(.row-group):hover > *{ background:var(--table-row-hover); }
+.data-table tbody tr:not(.row-group):hover > :first-child{ border-left-color:var(--table-accent); }
+.data-table tbody tr:not(.row-group):hover > th{ color:var(--table-accent); font-weight:var(--fw-semibold); }
+.data-table .num{ text-align:right; font-variant-numeric:tabular-nums; }
+.data-table th:last-child.num, .data-table thead th.is-end{ text-align:right; }
+.data-table-striped tbody tr:not(.row-group):nth-child(even) > *{ background:color-mix(in srgb,var(--table-row-hover) 50%,transparent); }
+.data-table .is-up{ color:var(--brand); }
+.data-table .is-down{ color:var(--danger); }
+.data-table tr[hidden]{ display:none; }
+.data-table tr.row-more{ display:none; }
+.data-table.is-all tr.row-more{ display:table-row; }
+.data-table .is-col{ background:var(--table-row-hover); }
+/* หัวกลุ่ม */
+.data-table .row-group > *{ padding-top:clamp(28px,3vw,44px); padding-bottom:0; border-bottom:0; }
+.data-table tbody .row-group:first-child > *{ padding-top:20px; }
+.row-group-in{ position:relative; display:flex; align-items:flex-end; gap:14px; padding-bottom:14px; }
+.row-group-in::after{ content:''; position:absolute; left:0; right:0; bottom:0; height:1px; background:var(--line-dark-strong); transform-origin:left; transform:scaleX(0); transition:transform 1.2s var(--ease-out); }
+.in .row-group-in::after, .row-group-in.is-static::after{ transform:none; }
+.row-group-in b{ font-family:var(--ff-display); font-size:var(--table-group-size); font-weight:var(--fw-regular); line-height:var(--lh-display); letter-spacing:-.02em; color:var(--primary); font-variant-numeric:tabular-nums; }
+.row-group-in .chip{ margin-bottom:4px; }
+.row-group.is-label .row-group-in{ align-items:center; gap:12px; }
+.row-group.is-label .row-group-in b{ font-family:var(--ff-body); font-size:var(--fs-sm); font-weight:var(--fw-semibold); letter-spacing:0; line-height:var(--lh-ui); }
+.row-group.is-label .row-group-in::before{ content:''; width:8px; height:8px; border-radius:var(--r-circle); background:var(--brand); }
+/* แถวล่าสุด */
+.data-table .row-latest > *{ background:var(--table-row-hover); }
+.data-table .row-latest > :first-child{ border-left-color:var(--table-accent); font-weight:var(--fw-semibold); }
+/* คอลัมน์เน้น */
+.data-table .col-highlight, .data-table tbody tr:not(.row-group):hover > .col-highlight{ background:var(--table-col-bg); color:var(--table-col-fg); border-bottom-color:var(--line); }
+.data-table thead .col-highlight{ border-radius:var(--r-sm) var(--r-sm) 0 0; border-bottom-color:var(--border-inverse); }
+.data-table tbody tr:last-child > .col-highlight{ border-radius:0 0 var(--r-sm) var(--r-sm); }
+.data-table td.col-highlight{ font-weight:var(--fw-bold); }
+.data-table td.col-highlight.is-down{ color:color-mix(in srgb,var(--danger) 30%,var(--table-col-fg)); }
+.data-table tbody tr:not(.row-group):hover > .col-highlight{ filter:brightness(1.12); }
+/* หัวคอลัมน์ 2 ชั้น */
+.th-stack{ display:inline-flex; flex-direction:column; align-items:flex-end; gap:2px; letter-spacing:0; }
+.th-stack small{ font-size:var(--fs-xs); font-weight:var(--fw-semibold); }
+.th-stack b{ font-family:var(--ff-display); font-size:var(--fs-h4); font-weight:var(--fw-regular); color:var(--ink); font-variant-numeric:tabular-nums; }
+.col-highlight .th-stack small{ color:var(--text-inverse-subtle); }
+.col-highlight .th-stack b{ color:var(--table-col-fg); font-weight:var(--fw-bold); }
+/* เลขลำดับ (hover = สี accent) */
+.data-table .row-index{ width:56px; font-size:var(--fs-xs); font-weight:var(--fw-semibold); color:var(--muted-2); font-variant-numeric:tabular-nums; transition:color .3s var(--ease); }
+tr:hover .row-index{ color:var(--table-accent); }
+.data-table .cell-meta{ white-space:nowrap; color:var(--muted-2); font-variant-numeric:tabular-nums; }
+.data-table .cell-actions{ text-align:right; }
+/* คอลัมน์แรกติดซ้าย */
+.data-table-sticky tbody th:first-child, .data-table-sticky thead th:first-child, .data-table-sticky td:first-child{ position:sticky; left:0; z-index:1; background:var(--card-bg); box-sizing:border-box; min-width:220px; }
+.data-table-sticky tbody tr:not(.row-group):hover > :first-child{ background:var(--table-row-hover); }
+.data-table-hint{ display:none; align-items:center; gap:6px; margin-top:12px; font-size:var(--fs-xs); font-weight:var(--fw-semibold); color:var(--muted-2); }
+/* เอกสารในเซลล์ */
+.doc-cell{ display:flex; align-items:center; gap:16px; min-width:0; }
+.doc-ico{ position:relative; flex:none; width:44px; height:52px; display:grid; place-items:end center; padding-bottom:7px; border-radius:var(--icon-box-radius); background:var(--surface-muted); color:var(--primary); font-size:var(--fs-xs); font-weight:var(--fw-bold); letter-spacing:.04em;
+  transition:background .4s var(--ease), color .4s var(--ease); }
+.doc-ico::before{ content:'description'; position:absolute; top:7px; left:50%; transform:translateX(-50%); font-family:var(--ff-icon); font-feature-settings:'liga'; font-weight:var(--icon-weight); font-size:var(--fs-h4); line-height:1; letter-spacing:normal; }
+.doc-ico small{ font-size:var(--fs-xs); line-height:1; }
+tr:hover .doc-ico{ background:var(--primary); color:var(--text-inverse); }
+.doc-title{ display:flex; flex-direction:column; gap:2px; min-width:0; }
+.doc-title b{ font-size:var(--fs-p); font-weight:var(--fw-semibold); line-height:var(--lh-heading); color:var(--ink); transition:color .3s var(--ease), transform .5s var(--ease-out); }
+.doc-title span{ font-size:var(--fs-xs); color:var(--muted-2); transition:transform .5s var(--ease-out) .03s; }
+tr:hover .doc-title b{ color:var(--primary); transform:translateX(6px); }
+tr:hover .doc-title span{ transform:translateX(6px); }
+.doc-actions{ display:flex; align-items:center; justify-content:flex-end; gap:8px; white-space:nowrap; }
+/* ปุ่มเอกสาร: ชี้ที่แถว/การ์ด (.doc-card) = ขอบ+ไอคอนสี accent · ชี้ที่ปุ่ม = พื้น accent ไอคอนขาว (ทุกที่เหมือนกัน) */
+:is(tr,.doc-card):hover .doc-actions .button-icon{ border-color:var(--table-accent); color:var(--table-accent); }
+.doc-actions .button-icon:hover, .doc-actions .button-icon:focus-visible,
+:is(tr,.doc-card):hover .doc-actions .button-icon:hover{ background:var(--table-accent); border-color:var(--table-accent); color:var(--text-inverse); }
+/* มือถือ */
+@media (max-width:991.98px){ .data-table-sticky ~ .data-table-hint, .data-table-wrap + .data-table-hint{ display:inline-flex; } }
+@media (max-width:767.98px){
+  .data-table-sticky tbody th:first-child, .data-table-sticky thead th:first-child, .data-table-sticky td:first-child{ min-width:160px; }
+  .data-table-stack, .data-table-stack tbody{ display:block; min-width:0; }
+  .data-table-stack thead{ display:none; }
+  .data-table-stack tr{ display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; column-gap:12px; row-gap:6px; padding:18px 4px; border-top:1px solid var(--table-row-border); }
+  .data-table-stack tr:first-child, .data-table-stack .row-group + tr{ border-top:0; } /* เส้นคั่นระหว่างแถวเท่านั้น — ไม่มีเส้นใต้แถวสุดท้าย */
+  .data-table-stack tr[hidden]{ display:none; }
+  .data-table-stack tbody tr > *{ padding:0; border:0; }
+  .data-table.data-table-stack tbody tr:not(.row-group):hover > *, .data-table.data-table-stack .row-latest > *{ background:transparent; }
+  .data-table-stack .row-index{ display:none; }
+  .data-table-stack .cell-main{ grid-column:1; grid-row:1; }
+  .data-table-stack .cell-meta{ grid-column:1; grid-row:2; padding-left:60px; font-size:var(--fs-xs); }
+  .data-table-stack .cell-actions{ grid-column:2; grid-row:1 / span 2; }
+  .data-table-stack .row-group{ padding:28px 0 0; border-top:0; }
+  .data-table-stack tbody .row-group:first-child{ padding-top:0; }
+  .data-table-stack .row-group > td{ grid-column:1 / -1; }
+}
+@media (prefers-reduced-motion:reduce){
+  .row-group-in::after{ transition:none; transform:none; }
+  .doc-title b, .doc-title span{ transition:none; }
+}
+
+/* ---------- Form field -----------------------------------------------------
+   <div class="field">
+     <label class="field-label" for="em">อีเมล <span class="field-req" aria-hidden="true">*</span></label>
+     <input class="field-input" id="em" type="email" required aria-describedby="em-err">
+     <p class="field-hint">ข้อความช่วยเหลือ</p>
+     <p class="field-error" id="em-err"></p>             ← JS ใส่ข้อความ + .field.is-invalid
+   </div>
+   select → ห่อด้วย <div class="field-select"> · ไอคอนนำหน้า → <div class="field-icon"><i class="icon">search</i><input class="field-input"></div>
+   checkbox / radio → <label class="check [is-radio]"><input type="checkbox"><span class="check-box"></span><span>ข้อความ</span></label>
+   แนบไฟล์ → .file-drop (ดูหน้า complaint-channel.html) · จัดเป็น 2 คอลัมน์ด้วย .field-grid (+ .is-full)            */
+.field{ display:flex; flex-direction:column; gap:8px; min-width:0; }
+.field-label{ font-size:var(--fs-sm); font-weight:var(--fw-semibold); line-height:var(--lh-ui); color:var(--ink); }
+.field-label small{ font-size:var(--fs-xs); font-weight:var(--fw-regular); color:var(--muted-2); }
+.field-req{ color:var(--danger); }
+.field-input{
+  width:100%; min-height:52px; padding:12px 16px; border:1px solid var(--line-dark-strong); border-radius:var(--input-radius);
+  background:var(--surface); color:var(--ink); font-family:var(--ff-body); font-size:var(--input-font-size); font-weight:var(--fw-regular); line-height:var(--lh-ui);
+  outline:3px solid transparent; outline-offset:0; appearance:none; -webkit-appearance:none;
+  transition:border-color .3s var(--ease), outline-color .3s var(--ease), background .3s var(--ease);
+}
+.field-input::placeholder{ color:var(--muted-2); opacity:1; }
+.field-input:hover{ border-color:var(--muted-2); }
+.field-input:focus{ border-color:var(--primary); outline-color:color-mix(in srgb,var(--primary) 16%,transparent); }
+textarea.field-input{ min-height:160px; resize:vertical; line-height:var(--lh-p); }
+.field-hint, .field-error{ margin:0; font-size:var(--fs-xs); line-height:var(--lh-ui); color:var(--muted-2); }
+.field-error{ display:none; align-items:center; gap:6px; color:var(--danger); font-weight:var(--fw-semibold); }
+.field-error::before{ content:'error'; font-family:var(--ff-icon); font-feature-settings:'liga'; font-size:1.25em; font-weight:var(--icon-weight); line-height:1; }
+.field.is-invalid .field-error{ display:flex; }
+.field.is-invalid .field-input, .field.is-invalid .file-drop{ border-color:var(--danger); }
+.field.is-invalid .field-input:focus{ outline-color:color-mix(in srgb,var(--danger) 16%,transparent); }
+.field-meta{ display:flex; justify-content:space-between; gap:12px; }
+.field-count{ flex:none; margin-left:auto; font-size:var(--fs-xs); color:var(--muted-2); font-variant-numeric:tabular-nums; }
+.field-count.is-max{ color:var(--danger); }
+.field-select{ position:relative; }
+.field-select .field-input{ padding-right:48px; cursor:pointer; }
+.field-select::after{ content:'expand_more'; position:absolute; right:16px; top:50%; transform:translateY(-50%); pointer-events:none;
+  font-family:var(--ff-icon); font-feature-settings:'liga'; font-size:var(--fs-h4); font-weight:var(--icon-weight); line-height:1; color:var(--muted-2); }
+.field-icon{ position:relative; }
+.field-icon > .icon{ position:absolute; left:16px; top:50%; transform:translateY(-50%); font-size:var(--fs-h4); color:var(--muted-2); pointer-events:none; }
+.field-icon .field-input{ padding-left:50px; }
+/* .field-grid = Bootstrap .row g-field · ช่อง .field ใส่ col-12 col-sm-6 (.is-full ใช้ col-12) */
+
+/* checkbox / radio */
+/* บรรทัดแรกสูง 24px (16px × 1.5) = ความสูงกล่อง → กล่องตรงกึ่งกลางบรรทัดแรกพอดี ทั้งข้อความบรรทัดเดียวและหลายบรรทัด */
+.check{ position:relative; display:flex; align-items:flex-start; gap:12px; cursor:pointer; font-size:var(--fs-sm); line-height:var(--lh-ui); color:var(--ink); }
+.check input{ position:absolute; opacity:0; width:24px; height:24px; margin:0; cursor:pointer; }
+.check-box{ flex:none; width:24px; height:24px; margin-top:0; display:grid; place-items:center; border:1px solid var(--line-dark-strong); border-radius:var(--r-sm); background:var(--surface); color:var(--text-inverse);
+  transition:background .25s var(--ease), border-color .25s var(--ease); }
+.check-box::after{ content:'check'; font-family:var(--ff-icon); font-feature-settings:'liga'; font-size:var(--fs-sm); font-weight:var(--fw-bold); line-height:1; transform:scale(0); transition:transform .3s var(--ease-out); }
+.check.is-radio .check-box{ border-radius:var(--r-circle); }
+.check.is-radio .check-box::after{ content:''; width:10px; height:10px; border-radius:var(--r-circle); background:var(--text-inverse); }
+.check:hover .check-box{ border-color:var(--primary); }
+.check input:checked + .check-box{ background:var(--primary); border-color:var(--primary); }
+.check input:checked + .check-box::after{ transform:scale(1); }
+.check input:focus-visible + .check-box{ outline:2px solid var(--primary); outline-offset:3px; }
+/* ลิงก์ในข้อความ checkbox = ลิงก์ในบรรทัด (กันกฎลิงก์ของ .rpcg-card ที่เป็น inline-block + margin) */
+.check a, .rpcg-card .check a:not(.button){ display:inline; margin:0; color:var(--primary); font-weight:var(--fw-semibold); border-bottom:1px solid currentColor; }
+.field.is-invalid .check-box{ border-color:var(--danger); }
+/* ตัวเลือกแบบชิป (เลือกหลายข้อ) */
+.check.is-chip{ align-items:center; gap:10px; padding:10px 16px 10px 12px; border:1px solid var(--line-dark-strong); border-radius:var(--r-pill); line-height:var(--lh-ui); transition:border-color .25s var(--ease), background .25s var(--ease); }
+.check.is-chip .check-box{ margin-top:0; width:22px; height:22px; }
+.check.is-chip:has(input:checked){ border-color:var(--primary); background:color-mix(in srgb,var(--primary) 6%,transparent); }
+
+/* แนบไฟล์ */
+.file-drop{ position:relative; display:flex; align-items:center; gap:16px; padding:20px; border:1px dashed var(--line-dark-strong); border-radius:var(--input-radius); background:var(--surface-muted);
+  transition:border-color .3s var(--ease), background .3s var(--ease); }
+.file-drop:hover, .file-drop.is-over{ border-color:var(--primary); background:color-mix(in srgb,var(--primary) 5%,var(--surface)); }
+.file-drop input{ position:absolute; inset:0; width:100%; height:100%; opacity:0; cursor:pointer; }
+.file-drop input:focus-visible ~ .file-drop-ico{ outline:2px solid var(--primary); outline-offset:3px; }
+.file-drop-ico{ flex:none; width:52px; height:52px; display:grid; place-items:center; border-radius:var(--icon-box-radius); background:var(--surface); color:var(--primary); font-size:var(--fs-h4); }
+.file-drop-text{ display:flex; flex-direction:column; gap:2px; font-size:var(--fs-sm); line-height:var(--lh-ui); }
+.file-drop-text b{ font-weight:var(--fw-semibold); color:var(--ink); }
+.file-drop-text b u{ text-decoration:none; color:var(--primary); border-bottom:1px solid currentColor; }
+.file-drop-text span{ font-size:var(--fs-xs); color:var(--muted-2); }
+.file-list{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:8px; }
+.file-list li{ display:inline-flex; align-items:center; gap:8px; max-width:100%; padding:6px 8px 6px 14px; border-radius:var(--r-pill); background:var(--surface-muted); font-size:var(--fs-xs); font-weight:var(--fw-semibold); }
+.file-list li span{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.file-list button{ flex:none; width:28px; height:28px; display:grid; place-items:center; padding:0; border:0; border-radius:var(--r-circle); background:none; color:var(--muted-2); cursor:pointer; font-size:var(--fs-sm); }
+.file-list button:hover{ background:var(--line-dark-strong); color:var(--ink); }
+
+/* ปุ่มระหว่างส่งข้อมูล */
+.button.is-loading{ pointer-events:none; opacity:.8; }
+.button.is-loading .icon{ animation:btnSpin .9s linear infinite; }
+@keyframes btnSpin{ to{ transform:rotate(360deg); } }
+@media (prefers-reduced-motion:reduce){ .button.is-loading .icon{ animation:none; } }
+
+/* ---------- Dropdown เลือกหลายข้อ (.field-multi) ----------------------------
+   <details class="field-multi" data-multi data-all="ทุกหัวข้อ" data-unit="หัวข้อ">
+     <summary class="field-input"><span data-multi-label>ทุกหัวข้อ</span></summary>
+     <div class="field-multi-panel" role="group"> <label class="check">…</label> … </div>
+   </details>
+   หน้าตาเหมือน .field-select · JS (pages.js) สรุปข้อความที่เลือก ปิดเมื่อคลิกนอก / Esc                */
+.field-multi{ position:relative; }
+.field-multi > summary{ display:flex; align-items:center; padding-right:48px; cursor:pointer; list-style:none; user-select:none; }
+.field-multi > summary::-webkit-details-marker{ display:none; }
+.field-multi > summary span{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.field-multi > summary::after{ content:'expand_more'; position:absolute; right:16px; top:26px; transform:translateY(-50%); pointer-events:none; transition:transform .3s var(--ease);
+  font-family:var(--ff-icon); font-feature-settings:'liga'; font-size:var(--fs-h4); font-weight:var(--icon-weight); line-height:1; color:var(--muted-2); }
+.field-multi[open] > summary{ border-color:var(--primary); outline-color:color-mix(in srgb,var(--primary) 16%,transparent); }
+.field-multi[open] > summary::after{ transform:translateY(-50%) rotate(180deg); }
+.field-multi-panel{ position:absolute; z-index:20; left:0; right:0; top:calc(100% + 8px); display:flex; flex-direction:column; gap:4px; padding:8px;
+  border:1px solid var(--card-border); border-radius:var(--input-radius); background:var(--surface); box-shadow:var(--shadow-lg); animation:multiIn .35s var(--ease-out); }
+@keyframes multiIn{ from{ opacity:0; transform:translateY(-6px); } }
+.field-multi-panel .check{ align-items:center; min-height:44px; padding:6px 10px; border-radius:var(--r-sm); line-height:var(--lh-ui); transition:background .25s var(--ease); }
+.field-multi-panel .check .check-box{ margin-top:0; }
+.field-multi-panel .check:hover{ background:var(--surface-muted); }
+.field-multi-all{ border-bottom:1px solid var(--line-dark); border-radius:var(--r-sm) var(--r-sm) 0 0; font-weight:var(--fw-semibold); }
+.field.is-invalid .field-multi > summary{ border-color:var(--danger); }
+@media (prefers-reduced-motion:reduce){ .field-multi-panel{ animation:none; } }
+
+/* ==========================================================================
+   Layout grid = Bootstrap (.row + .col-*) — ระยะห่าง (gutter) ตาม token ของระบบ
+   ใช้คู่กับ .row: <div class="row g-bento"><div class="col-12 col-lg-6">…</div></div>
+   ห้ามใส่ .row กับ .col-* บนการ์ดที่มี padding ของตัวเอง (.rpcg-card ฯลฯ) — ห่อด้วย div คอลัมน์ แล้วใส่ h-100 ที่การ์ดเพื่อให้สูงเท่ากัน
+   ========================================================================== */
+.g-bento{ --bs-gutter-x:var(--bento-gap); --bs-gutter-y:var(--bento-gap); }          /* การ์ดเรียงกัน */
+.g-split{ --bs-gutter-x:clamp(32px,6vw,112px); --bs-gutter-y:clamp(32px,6vw,112px); } /* หัวข้อ/สารบัญ ซ้าย + เนื้อหา ขวา */
+.g-split-md{ --bs-gutter-x:clamp(32px,6vw,96px); --bs-gutter-y:clamp(32px,6vw,96px); }
+.g-split-sm{ --bs-gutter-x:clamp(32px,5vw,88px); --bs-gutter-y:clamp(32px,5vw,88px); }
+/* gutter กว้างกว่า padding ของ .container → ตัดส่วนที่ล้นด้วย clip (ไม่สร้าง scroll container จึงไม่ทำให้ position:sticky ข้างในเสีย) */
+:has(> .row:is(.g-split,.g-split-md,.g-split-sm)){ overflow-x:clip; }
+/* การ์ดที่ถูกซ่อนด้วยตัวกรอง (hidden) → ซ่อนคอลัมน์ที่ห่อด้วย ไม่ให้เหลือช่องว่าง */
+.row > [class*="col"]:has(> [hidden]){ display:none; }
+.g-or{ --bs-gutter-x:var(--bento-gap); --bs-gutter-y:clamp(28px,3vw,48px); }           /* ปก One Report */
+.g-field{ --bs-gutter-x:20px; --bs-gutter-y:22px; }                                     /* ช่องฟอร์ม */
+.g-ft{ --bs-gutter-x:clamp(10px,1.2vw,20px); --bs-gutter-y:clamp(10px,1.2vw,20px); }   /* การ์ด footer */
+.g-ft-links{ --bs-gutter-x:clamp(20px,3vw,56px); --bs-gutter-y:clamp(20px,3vw,56px); }
