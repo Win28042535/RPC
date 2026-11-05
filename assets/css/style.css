@@ -1490,7 +1490,8 @@ body > section, body > footer{ position:relative; z-index:1; }
    ขีดแนวนอนแทนแต่ละ section, ขีดที่ active ยาวกว่า, hover/โฟกัสแสดงการ์ดชื่อ section
    ========================================================================== */
 .sec-nav, .sec-nav-tip{ display:none; }
-@media (min-width:992px){
+/* capsule from 1200px: at 992–1199px it sat on top of section content */
+@media (min-width:1200px){
   body.has-sec-nav{ padding-right:0; }
   .has-sec-nav .rpcg-nav{ right:0; }
   .has-sec-nav .back-top, .has-sec-nav .rpcg-toast{ right:26px; }
@@ -2134,7 +2135,7 @@ body.ck-open .back-top{ opacity:0; visibility:hidden; }
 .hero-stats-list{ flex:1; min-width:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(12px,2vw,36px); }
 .hero-stats-list > span{ display:flex; flex-direction:column; gap:6px; min-width:0; }
 .hero-stats-list b{ font-family:var(--ff-display); font-size:calc(var(--fs-h3) * .9); font-weight:var(--fw-semibold); line-height:1; letter-spacing:-.02em; white-space:nowrap; }
-.hero-stats-list b small{ font-size:.55em; margin-left:2px; }
+.hero-stats-list b small{ font-size:max(.55em,11px); margin-left:2px; }
 .hero-stats-list em{ font-style:normal; font-size:var(--fs-xs); line-height:var(--lh-ui); color:var(--text-inverse-muted); }
 .hero-affil .hero-dock-copy{ gap:8px; }
 .hero-affil .hero-dock-copy small{ order:-1; color:var(--muted-2); }
