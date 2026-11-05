@@ -1,0 +1,642 @@
+/* ==========================================================================
+   RPC — Investor Relations page (index-ir.html)
+   Loaded after style.css; every class here is prefixed irp-
+   ใช้ token จาก tokens.css เท่านั้น (สี / ฟอนต์ / radius) — ปุ่ม / tab / table ใช้ component จาก components.css
+   ========================================================================== */
+.irp-page{ background:var(--surface); }
+
+.irp-arrow{ transition:transform .45s var(--ease); }
+
+/* ---------- Hero (สูง 500px) ----------------------------------------------- */
+.irp-hero{ position:relative; isolation:isolate; overflow:hidden; display:flex; flex-direction:column; justify-content:flex-end; min-height:500px; background:var(--primary-deep); color:var(--text-inverse); }
+#investor.irp-hero{ position:sticky; top:0; z-index:0; }
+@media (min-width:992px){ #investor.irp-hero{ height:500px; } }
+/* จอ ≤991px: hero ไม่ตรึง (ไม่มีส่วนกลยุทธ์เลื่อนมาทับ) */
+@media (max-width:991.98px){ #investor.irp-hero{ position:relative; } #irpStrategy{ margin-top:0; } }
+.irp-hero-media{ position:absolute; inset:0; z-index:-2; }
+.irp-hero-media img{ width:100%; height:100%; object-fit:cover; transform:scale(1.06); animation:irpKen 18s var(--ease) forwards; }
+.irp-hero-media::after{ content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(60% 90% at 82% 46%, color-mix(in srgb,var(--brand) 22%,#00000000), #00000038 70%),
+    linear-gradient(90deg,color-mix(in srgb,#020e2f 94%,transparent) 0%,color-mix(in srgb,#00284d 62%,transparent) 60%,color-mix(in srgb,var(--primary-deep) 82%,transparent) 100%),
+    linear-gradient(0deg,var(--primary-deep) 0%,transparent 40%); }
+.irp-hero-inner{ flex:1; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:end; gap:clamp(24px,5vw,96px); padding-top:96px; padding-bottom:clamp(48px,5vw,72px); }
+.irp-hero-title{ margin:14px 0 clamp(18px,2vw,26px); font-size:var(--fs-h2); font-weight:var(--fw-regular); line-height:var(--lh-heading); letter-spacing:var(--ls-display); }
+.irp-hero-copy{ align-self:center; }
+
+/* ราคาหุ้น SET : RPC — ตัวเลขเป็นตัวเอก ไม่มีกรอบการ์ด */
+.irp-quote{ position:relative; display:flex; flex-direction:column; gap:clamp(6px,.9vw,12px); padding-left:clamp(24px,3.4vw,56px); border-left:1px solid var(--border-inverse); color:var(--text-inverse); }
+/* เบลอรูปพื้นหลังเฉพาะบริเวณกล่องราคา — ขอบจางเข้ากับรูป ให้ตัวเลขอ่านง่าย */
+.irp-quote::before{ content:''; position:absolute; z-index:-1; inset:calc(-1 * clamp(24px,3vw,56px)) calc(-1 * clamp(24px,3vw,56px)) calc(-1 * clamp(24px,3vw,56px)) 0; pointer-events:none;
+  -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px); background:color-mix(in srgb,var(--primary-deep) 22%,transparent);
+  -webkit-mask-image:radial-gradient(ellipse 72% 72% at 50% 50%,#000 55%,transparent 100%); mask-image:radial-gradient(ellipse 72% 72% at 50% 50%,#000 55%,transparent 100%); }
+.irp-quote:hover{ color:var(--text-inverse); }
+.irp-quote-sym{ display:inline-flex; align-items:center; gap:8px; font-size:var(--fs-sm); font-weight:var(--fw-semibold); letter-spacing:var(--ls-eyebrow); text-transform:uppercase; color:var(--text-inverse-muted); }
+.irp-quote-sym .icon{ transition:transform .4s var(--ease); }
+.irp-quote:hover .irp-quote-sym .icon{ transform:rotate(45deg); }
+.irp-quote-main{ display:flex; align-items:center; flex-wrap:wrap; gap:6px clamp(12px,1.4vw,20px); }
+.irp-quote-main b{ font-family:var(--ff-display); font-size:calc(var(--fs-mega) * .85); font-weight:var(--fw-regular); line-height:var(--lh-display); letter-spacing:-.04em; font-variant-numeric:tabular-nums; }
+.irp-quote-delta{ display:inline-flex; align-items:center; font-size:var(--fs-h4); font-weight:var(--fw-semibold); font-variant-numeric:tabular-nums; color:var(--q,var(--text-inverse-muted)); }
+.irp-quote-delta:empty{ display:none; }
+/* ลูกศรสามเหลี่ยมหน้าราคา — แบบเดียวกับการ์ดหุ้นหน้าแรก (.bento-arrow): ขึ้น = เขียว · ลง = แดง · เท่าเดิม = เทา */
+.irp-quote-main.is-up, .irp-quote-main.is-down, .irp-quote-main.is-flat{ gap:6px clamp(10px,1.2vw,16px); }
+.irp-quote-main.is-up::before, .irp-quote-main.is-down::before, .irp-quote-main.is-flat::before{ content:''; flex:none; width:.62em; height:.5em; font-size:var(--fs-h3); background:var(--q,var(--text-inverse-muted)); clip-path:polygon(0 0,100% 0,50% 100%); }
+.irp-quote-main.is-up::before{ transform:rotate(180deg); }
+.irp-quote-main.is-flat::before{ transform:rotate(-90deg); }
+.irp-quote-main.is-up{ --q:var(--brand); } .irp-quote-main.is-down{ --q:var(--danger); }
+.irp-quote-stats{ display:grid; grid-template-columns:repeat(4,minmax(0,auto)); gap:0; margin:clamp(2px,.4vw,6px) 0 0; border-top:1px solid var(--line); }
+.irp-quote-stats > div{ padding:12px 12px 0 0; }
+.irp-quote-stats > div + div{ padding-left:clamp(12px,1.6vw,24px); border-left:1px solid var(--line); }
+.irp-quote-stats dt{ font-size:var(--fs-xs); font-weight:var(--fw-semibold); letter-spacing:.04em; color:var(--text-inverse-subtle); }
+.irp-quote-stats dd{ margin:2px 0 0; font-size:var(--fs-h4); font-weight:var(--fw-semibold); font-variant-numeric:tabular-nums; }
+.irp-quote-time{ font-size:var(--fs-xs); color:var(--text-inverse-subtle); }
+
+
+/* entrance */
+.irp-hero-copy > *, .irp-quote > *{ opacity:0; transform:translateY(18px); animation:irpIn .9s var(--ease) forwards; }
+.irp-hero-copy > :nth-child(2){ animation-delay:.1s; } .irp-hero-copy > :nth-child(3){ animation-delay:.2s; }
+.irp-quote > :nth-child(1){ animation-delay:.15s; } .irp-quote > :nth-child(2){ animation-delay:.25s; } .irp-quote > :nth-child(3){ animation-delay:.35s; } .irp-quote > :nth-child(4){ animation-delay:.45s; }
+@media (prefers-reduced-motion:reduce){
+  .irp-hero-media img{ animation:none; transform:none; }
+  .irp-hero-copy > *, .irp-quote > *{ opacity:1; transform:none; animation:none; }
+}
+@media (max-width:991.98px){
+  .irp-hero{ min-height:0; }
+  .irp-hero-inner{ grid-template-columns:1fr; padding-top:88px; padding-bottom:36px; gap:24px; }
+  .irp-quote{ padding-left:0; padding-top:20px; border-left:0; border-top:1px solid var(--border-inverse); }
+  .irp-quote-main b{ font-size:calc(var(--fs-mega) * .9); }
+}
+
+/* ---------- Intro blocks (strategy / future) ------------------------------ */
+.irp-intro{ background:var(--surface); }
+.irp-intro-future{ padding-top:clamp(48px,7.4vw,130px); padding-bottom:clamp(56px,8vw,140px); }
+.irp-intro-grid{ display:grid; grid-template-columns:42fr 58fr; gap:clamp(24px,4vw,80px); align-items:start; }
+.irp-intro .section-title b, .irp-band-copy .section-title b{ font-weight:var(--fw-bold); }
+/* หัว section ข้อมูลนักลงทุน ใช้ขนาด h3 (ยังเป็นแท็ก h2 เพื่อไม่ข้ามลำดับหัวข้อ) */
+.bento-head{ margin-bottom:clamp(16px,2vw,28px); }
+.bento-head .section-title{ font-size:var(--fs-h3); }
+.bento-head .section-desc{ margin-top:12px; max-width:40em; }
+.irp-head-end{ display:flex; flex-direction:column; align-items:flex-end; gap:16px; max-width:30em; }
+.irp-head-end .section-desc{ margin-top:0; }
+.irp-band-copy .section-title{ margin:0; color:var(--text-inverse); }
+.irp-band-copy .section-title b{ color:var(--brand); }
+.irp-eyebrow{ display:block; font-size:var(--fs-xs); letter-spacing:.06em; color:var(--muted); margin-bottom:clamp(12px,1.4vw,22px); }
+.irp-h2{ font-family:var(--ff-display); font-weight:var(--fw-regular); color:var(--primary); font-size:var(--fs-h2); line-height:var(--lh-heading); letter-spacing:0; }
+.irp-h2 b{ font-weight:var(--fw-bold); color:var(--brand); }
+.irp-lead{ font-size:var(--fs-h3); line-height:var(--lh-heading); color:var(--primary); font-weight:var(--fw-regular); margin-bottom:clamp(18px,2.2vw,34px); max-width:32em; }
+.irp-small{ font-size:var(--fs-p); line-height:var(--lh-ui); color:var(--ink); margin-bottom:.7em; max-width:56em; }
+.irp-intro-body .button{ margin-top:clamp(12px,1.6vw,24px); }
+
+/* ทางลัดข้อมูลนักลงทุน — ใช้ bento-tile / bento-esg / bento-head จากหน้าแรก (style.css) */
+.irp-sc-grid{ display:grid; gap:var(--bento-gap); grid-template-columns:1fr; }
+.irp-sc-ico{ margin-top:auto; margin-bottom:12px; font-size:var(--fs-h3); color:var(--primary); }
+.irp-sc .bento-title{ font-size:var(--fs-h4); }
+/* ปุ่มลูกศรวงกลมแบบเดียวกับการ์ด dock สีอ่อนหน้าแรก (.hero-dock-card--light): เส้นขอบบาง สีน้ำเงิน hover เติมน้ำเงิน */
+.irp-sc .bento-go{ background:none; border:1px solid currentColor; color:var(--primary); }
+.irp-sc:hover .bento-go{ background:var(--primary); border-color:var(--primary); color:var(--text-inverse); }
+.irp-sc:hover .bento-go, .irp-sc-esg:hover .bento-go{ transform:none; } /* ยกเลิกการหมุนของ .bento-tile */
+/* การ์ด ESG / CSR (พื้นเข้ม): ปุ่มลูกศรวงกลมเส้นขอบสีขาว hover เติมขาว — ชุดเดียวกับ dock สีน้ำเงินหน้าแรก */
+.irp-sc-esg .bento-go{ background:none; backdrop-filter:none; border:1px solid currentColor; color:var(--text-inverse); }
+.irp-sc-esg:hover .bento-go{ background:var(--text-inverse); border-color:var(--text-inverse); color:var(--primary-hover); }
+/* ขอบโปร่งใสของ .bento-tile เผยพื้น navy ด้านหลังเป็นเส้นดำรอบรูป → ตัดขอบออก */
+.irp-sc-esg{ border:0; }
+/* overlay การ์ด ESG / CSR ใช้ชุดเดียวกับการ์ด ESG หน้าแรก (.bento-esg::before ใน style.css) — ทั้งใบเป็นน้ำเงินเข้มโปร่ง ไม่เบลอ */
+.irp-sc-esg .bento-title{ font-size:var(--fs-h3); line-height:var(--lh-heading); }
+/* .bento-esg ใน style.css ตั้ง grid-area:esg (ของกริดหน้าแรก) — ในกริดนี้ต้องวางอัตโนมัติ ไม่งั้นเกิดคอลัมน์ว่างแคบๆ ที่จอเล็ก */
+.irp-sc-esg{ grid-area:auto; }
+.irp-sc-grid > .bento-tile{ min-height:clamp(150px,34vw,200px); }
+.irp-sc-grid > .irp-sc-esg{ min-height:clamp(200px,48vw,240px); }
+@media (min-width:576px){ .irp-sc-grid{ grid-template-columns:repeat(2,1fr); } }
+@media (min-width:768px) and (max-width:991.98px){ .irp-sc-grid > .bento-tile{ min-height:190px; } .irp-sc-grid > .irp-sc-esg{ min-height:230px; } }
+@media (min-width:992px){
+  .irp-sc-grid{ grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(2,minmax(var(--bento-row),auto)); }
+  .irp-sc-grid > .bento-tile, .irp-sc-grid > .irp-sc-esg{ min-height:var(--bento-row); }
+  .irp-sc-esg:nth-last-child(2){ grid-column:4; grid-row:1; }
+  .irp-sc-esg:last-child{ grid-column:4; grid-row:2; }
+}
+
+/* ---------- Tiles --------------------------------------------------------- */
+.irp-tile{
+  position:relative; display:flex; flex-direction:column; justify-content:space-between; overflow:hidden;
+  padding:clamp(14px,1.5vw,26px); color:var(--text-inverse); transition:transform .45s var(--ease), filter .35s var(--ease);
+}
+.irp-tile:hover{ color:var(--text-inverse); transform:translateY(-4px); }
+.irp-tile-navy{ background:var(--primary); }
+.irp-tile-title{ position:relative; z-index:2; font-size:var(--fs-h4); font-weight:var(--fw-bold); line-height:var(--lh-heading); }
+.irp-tile-arrow{ position:relative; z-index:2; align-self:flex-end; font-size:var(--fs-h3); }
+
+.irp-feature-card{
+  position:absolute; z-index:5; left:var(--gutter); top:calc(-1 * clamp(14px,4.3vw,72px));
+  width:clamp(150px,22vw,400px); aspect-ratio:123/160;
+}
+.irp-arcs::before{
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background:repeating-linear-gradient(135deg, var(--border-inverse) 0 1px, transparent 1px 14px);
+  -webkit-mask-image:radial-gradient(110% 70% at 100% 100%, #000 0%, transparent 72%); mask-image:radial-gradient(110% 70% at 100% 100%, #000 0%, transparent 72%);
+}
+
+/* ---------- Hub ------------------------------------------------------------ */
+.irp-hub{
+  position:relative; z-index:3; padding:clamp(140px,22vw,360px) var(--gutter) clamp(28px,4.2vw,72px);
+  background:linear-gradient(180deg,var(--primary) 0,var(--primary-deep) 100%);
+}
+.irp-hub-img{
+  position:absolute; inset:-6% 0; will-change:transform;
+  background:#02266dd4 url('../img/energy/pumps-deep.webp') center 30%/cover no-repeat; background-blend-mode:multiply;
+}
+.irp-cal-slide{ grid-area:1/1; display:flex; flex-direction:column; opacity:0; visibility:hidden; transition:opacity .45s var(--ease), visibility 0s .45s; }
+.irp-cal-slide.is-active{ opacity:1; visibility:visible; transition:opacity .45s var(--ease), visibility 0s; }
+
+/* ---------- Sustainability landscape ------------------------------------- */
+.irp-land{ position:relative; padding:34vw var(--gutter) 0; background:var(--navy-2); }
+.irp-land-media{ position:absolute; inset:0; overflow:hidden; }
+.irp-land-bg{ position:absolute; left:0; top:-7%; width:100%; height:114%; object-fit:cover; will-change:transform; }
+.irp-land-panels{ position:relative; z-index:2; display:grid; grid-template-columns:1fr 1fr; gap:var(--grid-gap); }
+.irp-panel{
+  position:relative; overflow:hidden; min-height:clamp(150px,17vw,300px); padding:clamp(16px,1.9vw,34px);
+  color:var(--text-inverse); background:color-mix(in srgb,var(--navy-2) 58%,transparent); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+}
+.irp-panel-social{ background:var(--overlay-inverse); }
+.irp-panel h3{ font-family:var(--ff-display); font-size:var(--fs-h4); font-weight:var(--fw-bold); margin-bottom:.6em; }
+.irp-panel p{ font-size:var(--fs-sm); line-height:var(--lh-ui); opacity:.85; max-width:30em; }
+.irp-panel-cut{ position:absolute; right:0; bottom:0; top:0; width:28%; background:var(--primary-hover); clip-path:polygon(100% 0,100% 100%,0 100%,78% 0); opacity:.92; }
+
+/* กลยุทธ์การลงทุน — ใช้ class about-* ของหน้าแรก แต่ #about เป็น id-selector จึงประกาศส่วนของ section ที่นี่ */
+.irp-about{
+  position:relative; overflow:hidden; isolation:isolate; background:var(--surface-muted);
+  padding-top:clamp(72px,9vw,142px);
+}
+.irp-about .container{ position:relative; z-index:2; }
+/* รูปพื้นหลังเฟดเข้าพื้นทุกด้าน (ซ้าย·บน·ล่าง) */
+.irp-about .about-architecture img{
+  width:min(56vw,960px); height:82%; right:0;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 38%),linear-gradient(180deg,transparent 0%,#000 22%,#000 62%,transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(90deg,transparent 0%,#000 38%),linear-gradient(180deg,transparent 0%,#000 22%,#000 62%,transparent 100%);
+  mask-composite:intersect;
+}
+
+/* ---------- Responsive ----------------------------------------------------- */
+@media (max-width:991.98px){
+  .irp-hero{ grid-template-columns:1fr; grid-template-rows:auto 1fr; min-height:0; }
+  .irp-hero-copy{ padding-top:0; padding-bottom:0; }
+  .irp-hero-media{ min-height:340px; }
+  .irp-intro-grid{ grid-template-columns:1fr; }
+  .irp-hub{ padding-top:clamp(120px,30vw,220px); }
+  .irp-feature-card{ width:clamp(150px,38vw,240px); }
+  .irp-land{ padding-top:56vw; }
+}
+@media (max-width:575.98px){
+  .irp-hero{ min-height:0; }
+}
+@media (max-width:767.98px){
+  .irp-land-panels{ grid-template-columns:1fr; }
+  }
+@media (prefers-reduced-motion:reduce){
+  .irp-cal-slide{ transition:none; }
+}
+
+/* ---------- Card radius --------------------------------------------------- */
+.irp-tile, .irp-panel{ border-radius:var(--r-lg); }
+
+/* Intro slides over the pinned hero (same cover effect as the home page About) */
+#irpStrategy{
+  border-radius:var(--r-lg) var(--r-lg) 0 0; margin-top:calc(-1 * var(--r-lg)); position:relative; z-index:2;
+  box-shadow:var(--shadow-cover);
+}
+
+/* ---------- Band: การ์ดติดต่อ IR + หัวข้อโซนข้อมูล ----------------------------------------- */
+.irp-band{ position:relative; z-index:3; min-height:clamp(240px,27vw,440px); background:var(--primary-deep); border-radius:var(--r-lg); }
+.irp-band-bg{ position:absolute; inset:0; overflow:hidden; border-radius:inherit; }
+.irp-band-bg .irp-hub-img{ inset:-8% 0; }
+.irp-band-copy{ position:absolute; right:var(--gutter); bottom:clamp(20px,3vw,48px); z-index:2; display:flex; flex-direction:column; align-items:flex-start; gap:clamp(8px,1vw,14px); max-width:min(58vw,760px); }
+.irp-band-copy .irp-h2{ margin:0; color:var(--text-inverse); font-size:var(--fs-h2); }
+.irp-band-copy .irp-h2 b{ color:var(--brand); }
+.irp-jump .tab{ text-decoration:none; }
+.irp-band .tabs-pill .tab{ color:var(--text-inverse); background:var(--overlay-inverse); }
+[id^="irp"]{ scroll-margin-top:84px; }
+@media (max-width:991.98px){
+  .irp-band{ min-height:0; padding-top:calc(min(300px, 100vw - 2 * var(--gutter)) * 1.25 - clamp(14px,4.3vw,72px) + clamp(20px,5vw,32px)); } /* สูงการ์ด (4:5) − ส่วนที่ล้นขอบบน + ระยะห่าง */
+  .irp-band-copy{ position:relative; right:auto; bottom:auto; max-width:none; padding:0 var(--gutter) clamp(24px,5vw,40px); }
+}
+
+/* ---------- IR data zone: bento mosaic ------------------------------------------------ */
+.irp-sec{ position:relative; z-index:3; scroll-margin-top:72px; }
+.irp-sec-inner{ display:grid; gap:clamp(36px,4.6vw,72px); }
+.irp-group{ min-width:0; scroll-margin-top:84px; }
+.irp-group-head-old{ display:flex; align-items:center; gap:clamp(12px,1.4vw,20px); margin-bottom:clamp(14px,1.8vw,24px); }
+.irp-group-title{ flex:1; min-width:0; }
+.irp-group-title h3{ font-family:var(--ff-display); font-size:var(--fs-h3); font-weight:var(--fw-regular); line-height:var(--lh-heading); letter-spacing:-.01em; color:var(--primary); }
+.irp-group-title p{ margin:2px 0 0; font-size:var(--fs-sm); color:var(--muted-2); line-height:var(--lh-ui); }
+.irp-group-head .irp-ico-lg{ width:clamp(44px,3.6vw,56px); height:clamp(44px,3.6vw,56px); background:var(--primary); color:var(--text-inverse); font-size:var(--fs-h4); }
+
+.irp-bento{ --card-pad:clamp(18px,1.8vw,28px); --R:clamp(160px,11.5vw,184px); display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); gap:clamp(8px,.9vw,14px); }
+.irp-bento-fin{ --R:clamp(110px,8vw,128px); grid-template-rows:repeat(5,var(--R)); }
+.irp-bento-fin .t-hero{ grid-area:1/1/4/6; } .irp-bento-fin .t-chart{ grid-area:1/6/4/13; }
+.irp-bento-fin .t-gross{ grid-area:4/1/6/7; } .irp-bento-fin .t-net{ grid-area:4/7/6/13; }
+.irp-bento-fin .t-rev{ grid-area:6/1/7/5; } .irp-bento-fin .t-eq{ grid-area:6/5/7/9; } .irp-bento-fin .t-eps{ grid-area:6/9/7/13; }
+.irp-bento-sh{ grid-template-rows:repeat(3,var(--R)); }
+.irp-bento-sh .t-donut{ grid-area:1/1/4/5; } .irp-bento-sh .t-rank{ grid-area:1/5/3/10; } .irp-bento-sh .t-policy{ grid-area:3/5/4/10; } .irp-bento-sh .t-div{ grid-area:1/10/4/13; }
+.irp-bento-ne .t-news{ grid-column:span 6; min-height:clamp(300px,24vw,380px); }
+.irp-bento-cal .t-cal{ grid-column:1/-1; }
+.irp-bento-docs{ grid-template-rows:repeat(3,calc(var(--R) * .62)); }
+.irp-bento-docs .t-report{ grid-area:1/1/4/6; } .irp-bento-docs .t-fs{ grid-area:1/6/2/10; } .irp-bento-docs .t-mdna{ grid-area:1/10/2/13; } .irp-bento-docs .t-web{ grid-area:2/6/3/10; } .irp-bento-docs .t-cg{ grid-area:2/10/3/13; } .irp-bento-docs .t-policy-doc{ grid-area:3/6/4/13; }
+
+/* tile base */
+.irp-w{ position:relative; display:flex; flex-direction:column; min-width:0; overflow:hidden; isolation:isolate; padding:var(--card-pad); }
+.irp-w:hover{ color:var(--ink); }
+.irp-w::after{ content:''; position:absolute; inset:0; z-index:0; pointer-events:none; opacity:0; transition:opacity .5s var(--ease);
+  background:radial-gradient(360px circle at var(--mx,50%) var(--my,50%), color-mix(in srgb,var(--primary) 7%,transparent), transparent 70%); }
+.irp-w:hover::after{ opacity:1; }
+.irp-w > *{ position:relative; z-index:1; }
+.irp-w-head{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:clamp(6px,.8vw,12px); }
+.irp-w-head h3{ font-family:var(--ff-display); font-size:var(--fs-h4); font-weight:var(--fw-bold); color:var(--ink); line-height:var(--lh-heading); }
+.irp-w-label{ font-size:var(--fs-sm); font-weight:var(--fw-semibold); color:var(--muted-2); line-height:var(--lh-ui); }
+.irp-fine{ margin:0; font-size:var(--fs-xs); font-weight:var(--fw-semibold); color:var(--muted-2); line-height:var(--lh-ui); }
+.irp-big{ display:block; font-size:var(--fs-stat); font-weight:var(--fw-regular); line-height:var(--lh-display); letter-spacing:-.03em; font-variant-numeric:tabular-nums; }
+.irp-num-m{ display:block; font-size:calc(var(--fs-stat) * 1.5); font-weight:var(--fw-regular); line-height:var(--lh-display); letter-spacing:-.02em; font-variant-numeric:tabular-nums; }
+.irp-chart{ flex:1 1 0; min-height:150px; width:100%; }
+
+/* colour blocks */
+.irp-w-navy{ background:radial-gradient(70% 60% at 100% 0%, color-mix(in srgb,var(--brand) 14%,transparent), transparent 70%), linear-gradient(160deg,var(--primary-hover) 0%,var(--primary) 45%,var(--primary-deep) 100%); color:var(--text-inverse); border-color:var(--border-inverse); }
+.irp-w-navy:hover{ color:var(--text-inverse); }
+.irp-w-navy .irp-w-head h3{ color:var(--text-inverse); }
+.irp-w-navy .irp-w-label, .irp-w-navy .irp-fine{ color:var(--text-inverse-muted); }
+.irp-w-navy.irp-arcs::before{ z-index:0; }
+.irp-w-navy::after{ background:radial-gradient(360px circle at var(--mx,50%) var(--my,50%), color-mix(in srgb,var(--brand) 16%,transparent), transparent 70%); }
+.irp-w-blue{ background:linear-gradient(135deg,var(--primary-hover),var(--primary)); color:var(--text-inverse); border-color:transparent; }
+.irp-w-blue:hover{ color:var(--text-inverse); }
+.irp-w-blue .irp-w-label{ color:var(--text-inverse-muted); }
+
+/* chips */
+.irp-key{ display:flex; align-items:center; flex-wrap:wrap; gap:6px 0; font-size:var(--fs-sm); font-weight:var(--fw-semibold); }
+.irp-key i{ display:inline-block; width:10px; height:10px; margin-right:6px; border-radius:var(--r-pill); background:var(--k); vertical-align:baseline; }
+.irp-key i:not(:first-child){ margin-left:20px; }
+.irp-key i.is-partial{ background:repeating-linear-gradient(135deg,var(--k) 0 3px,color-mix(in srgb,var(--k) 35%,transparent) 3px 6px); }
+
+/* hero (การเงิน) */
+.t-hero{ justify-content:space-between; gap:clamp(8px,1vw,14px); }
+.irp-hero-num{ display:flex; flex-direction:column; align-items:flex-start; gap:6px; }
+.irp-ins-list{ display:grid; gap:6px; margin:0; padding:0; list-style:none; }
+.irp-ins-list li{ display:flex; align-items:center; gap:8px; font-size:var(--fs-sm); font-weight:var(--fw-semibold); line-height:var(--lh-ui); color:var(--text-inverse-muted); }
+.irp-ins-list .icon{ flex:none; font-size:1.1em; color:var(--brand); } .irp-ins-list .is-down .icon{ color:var(--danger); }
+.irp-kpi-list{ display:grid; gap:0; margin:auto 0 0; padding:0; list-style:none; }
+.irp-kpi-list li{ display:grid; grid-template-columns:1fr auto; align-items:center; column-gap:12px; padding:clamp(8px,.9vw,12px) 0; border-top:1px solid var(--overlay-inverse); }
+.irp-kpi-list li:first-child{ border-top:0; }
+.irp-kpi-label{ display:flex; align-items:baseline; gap:6px; font-size:var(--fs-sm); font-weight:var(--fw-semibold); color:var(--text-inverse-muted); line-height:var(--lh-ui); }
+.irp-kpi-ico{ align-self:center; flex:none; margin-right:4px; font-size:var(--fs-h3); color:var(--text-inverse); opacity:.9; }
+.irp-kpi-label small{ font-size:var(--fs-xs); font-weight:var(--fw-regular); opacity:.8; }
+.irp-kpi-val{ grid-row:1/3; grid-column:2; font-size:calc(var(--fs-stat) * .7); font-weight:var(--fw-regular); letter-spacing:-.02em; font-variant-numeric:tabular-nums; line-height:var(--lh-display); }
+.irp-kpi-list [data-chip]{ grid-column:1; }
+.irp-spark{ width:100%; height:clamp(70px,7vw,100px); }
+
+/* small KPI tiles */
+.t-rev, .t-eq, .t-eps{ display:grid; grid-template-columns:1fr auto; grid-template-rows:auto 1fr; align-items:start; }
+.t-rev > .irp-w-label, .t-eq > .irp-w-label, .t-eps > .irp-w-label{ grid-area:1/1; }
+.t-rev > [data-chip], .t-eq > [data-chip], .t-eps > [data-chip]{ grid-area:1/2; justify-self:end; }
+.t-rev > .irp-num-m, .t-eq > .irp-num-m, .t-eps > .irp-num-m{ grid-area:2/1/3/3; align-self:end; }
+.t-gross .irp-num-m, .t-net .irp-num-m{ margin-top:4px; color:var(--primary); }
+.t-gross .irp-w-head, .t-net .irp-w-head{ margin-bottom:0; }
+
+/* policy */
+.t-policy{ display:grid; grid-template-columns:1fr auto; grid-template-rows:auto 1fr; align-items:start; }
+.t-policy > .irp-w-label{ grid-area:1/1; }
+.irp-policy{ grid-area:2/1; align-self:end; display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 12px; }
+.t-policy .irp-num-m{ font-size:var(--fs-stat); }
+.irp-policy p{ margin:0; line-height:1.4; font-size:var(--fs-sm); color:var(--text-inverse-muted); }
+/* ปุ่มลูกศรวงกลม — ชุดเดียวกับการ์ด dock หน้าแรก (.hero-dock-arrow ใน style.css) */
+.irp-go-ico{ grid-area:1/2; align-self:start; justify-self:end; margin-left:0; }
+.irp-cal-go{ position:absolute; top:var(--card-pad); right:var(--card-pad); z-index:2; margin:0; }
+.t-cal:hover .irp-cal-go{ background:var(--text-inverse); border-color:var(--text-inverse); color:var(--primary-hover); }
+.t-cal:focus-visible{ outline:2px solid var(--text-inverse); outline-offset:-4px; }
+.t-policy:hover .irp-go-ico{ background:var(--text-inverse); border-color:var(--text-inverse); color:var(--primary-hover); }
+
+/* dividend */
+.t-div .irp-big{ color:var(--primary); margin-top:6px; }
+
+/* ranked shareholders */
+.irp-rank{ display:grid; gap:0; margin:auto 0; padding:0; list-style:none; }
+.irp-rank li{ display:grid; grid-template-columns:auto minmax(0,1fr) 5.5em; align-items:center; gap:clamp(10px,1.2vw,18px); padding:clamp(8px,.9vw,12px) 0; border-bottom:1px solid var(--line-dark); }
+.irp-rank li:last-child{ border-bottom:0; }
+.irp-rank li{ --c:var(--muted); } .irp-rank li[data-r="1"]{ --c:var(--primary); } .irp-rank li[data-r="2"]{ --c:var(--primary-hover); } .irp-rank li[data-r="3"]{ --c:color-mix(in srgb,var(--primary) 70%,var(--surface)); }
+.irp-rank.is-swap li{ animation:irpRankIn .55s var(--ease-out) both; } .irp-rank.is-swap li:nth-child(2){ animation-delay:.07s; } .irp-rank.is-swap li:nth-child(3){ animation-delay:.14s; }
+@keyframes irpRankIn{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:none; } }
+.irp-rank.in .irp-rank-bar u{ width:var(--w); }
+/* ตัวเลื่อนหน้า (เช่น 1/4) */
+.irp-head-main{ display:flex; flex-direction:column; align-items:flex-start; gap:8px; min-width:0; }
+.irp-pager{ display:flex; align-items:center; gap:8px; }
+.irp-pager[hidden]{ display:none; }
+.irp-pager-count{ margin-right:6px; font-size:var(--fs-xs); font-weight:var(--fw-semibold); letter-spacing:.08em; color:var(--muted-2); font-variant-numeric:tabular-nums; }
+.irp-pager .button:disabled{ opacity:.35; pointer-events:none; }
+.irp-rank-no{ font-size:var(--fs-h3); line-height:var(--lh-display); color:var(--c,var(--primary)); min-width:1ch; }
+.irp-rank-body{ display:grid; gap:2px; min-width:0; }
+.irp-rank-body b{ font-size:var(--fs-sm); font-weight:var(--fw-semibold); line-height:var(--lh-ui); }
+.irp-rank-body small{ font-size:var(--fs-xs); color:var(--muted-2); font-variant-numeric:tabular-nums; }
+.irp-rank-bar{ display:block; height:5px; margin-top:6px; border-radius:var(--r-pill); background:var(--line-dark); overflow:hidden; }
+.irp-rank-bar u{ display:block; height:100%; width:0; border-radius:inherit; background:var(--c,var(--primary)); transition:width 1.2s var(--ease) .3s; }
+.in .irp-rank-bar u{ width:var(--w); }
+.irp-rank-pct{ text-align:right; font-size:var(--fs-xs); font-weight:var(--fw-semibold); color:var(--muted-2); }
+.irp-rank-pct b{ font-size:var(--fs-h4); font-weight:var(--fw-bold); color:var(--ink); font-variant-numeric:tabular-nums; }
+
+/* news */
+.t-news{ gap:0; }
+.t-news .news-list{ flex:1; }
+.t-news .news-item:last-child{ border-bottom:0; }
+.t-news .news-item{ grid-template-columns:auto minmax(0,1fr); align-items:start; gap:clamp(12px,1.4vw,18px); }
+.t-news .news-item h4{ font-size:var(--fs-h4); font-weight:var(--fw-bold); line-height:var(--lh-heading); }
+.t-news .news-meta{ display:flex; align-items:center; flex-wrap:wrap; gap:6px 12px; margin-top:10px; }
+.t-news .news-meta .chip{ margin:0; }
+.t-news .news-date{ flex-direction:row; align-items:baseline; gap:.4em; }
+.t-news .news-date b, .t-news .news-date span{ font-family:inherit; font-size:var(--fs-sm); font-weight:var(--fw-semibold); letter-spacing:.04em; line-height:var(--lh-ui); color:var(--muted-2); }
+.irp-events li > div{ display:flex; flex-direction:column; align-items:flex-start; gap:4px; min-width:0; }
+.irp-events strong{ font-weight:var(--fw-semibold); line-height:var(--lh-ui); }
+
+/* calendar (แบนเนอร์แนวนอนเดียว) */
+.t-cal{ flex-direction:row; align-items:center; gap:clamp(12px,2vw,32px); min-height:calc(var(--R) * .85); }
+/* รูปในการ์ดปฏิทิน: สีจริงไม่มี overlay ด้านบน ไล่เฟดเข้าพื้นน้ำเงินด้านล่างให้ข้อความอ่านง่าย */
+.t-cal .irp-cal-img{ position:absolute; inset:0; z-index:-1; width:100%; height:100%; object-fit:cover;
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 38%,transparent 92%); mask-image:linear-gradient(180deg,#000 0%,#000 38%,transparent 92%); }
+.t-cal .irp-events{ flex:1; margin:0; padding:0; list-style:none; }
+/* เบลอรูปเฉพาะส่วนล่างที่มีข้อความ (ไล่ระดับด้วย mask) */
+.t-cal::before{ content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
+  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+  -webkit-mask-image:linear-gradient(180deg,transparent 0%,transparent 28%,rgba(0,0,0,.35) 48%,#000 72%); mask-image:linear-gradient(180deg,transparent 0%,transparent 28%,rgba(0,0,0,.35) 48%,#000 72%); }
+.t-cal .irp-events{ position:relative; z-index:1; }
+.irp-events li{ display:flex; align-items:center; gap:clamp(16px,3vw,48px); }
+.irp-events li > div{ display:flex; flex-direction:column; align-items:flex-start; gap:6px; min-width:0; }
+.irp-bigdate{ display:flex; flex-direction:column; align-items:center; text-align:center; flex:none; line-height:var(--lh-display); }
+.irp-bigdate b{ font-size:var(--fs-display); font-weight:var(--fw-regular); letter-spacing:-.03em; }
+.irp-bigdate span{ margin-top:6px; font-size:var(--fs-sm); font-weight:var(--fw-semibold); color:var(--text-inverse-muted); }
+.irp-events strong{ font-size:var(--fs-h3); font-weight:var(--fw-regular); line-height:var(--lh-heading); }
+.irp-events small{ display:flex; align-items:center; gap:8px; font-size:var(--fs-sm); color:var(--text-inverse-muted); }
+.t-cal > .chip{ margin-left:auto; font-size:var(--fs-sm); padding:.4rem 1.1rem; }
+
+/* documents + calendar อยู่แถวเดียวกัน */
+.irp-pair{ --irp-card-w:clamp(230px,21vw,300px); display:grid; grid-template-columns:minmax(0,1fr) minmax(0,2fr); gap:clamp(24px,3vw,48px); align-items:stretch; }
+.irp-pair > .irp-group{ display:flex; flex-direction:column; }
+.irp-pair .irp-bento{ flex:1; }
+.irp-pair .irp-bento-docs{ display:grid; grid-template-columns:var(--irp-card-w) minmax(0,1fr); grid-template-rows:auto; column-gap:clamp(16px,2vw,32px); align-items:stretch; }
+.irp-pair .irp-bento-docs .t-report{ grid-area:auto; align-self:start; width:100%; aspect-ratio:3/4; padding:clamp(18px,1.8vw,28px); }
+.irp-doc-list{ display:flex; flex-direction:column; justify-content:space-between; min-width:0; }
+.irp-doc-list .irp-doc{ flex:1; }
+.irp-pair .irp-bento-cal{ grid-template-columns:1fr; grid-template-rows:1fr; }
+/* การ์ดปฏิทินเต็มความกว้างคอลัมน์ และสูงเท่าการ์ด 56-1 ที่อยู่ข้างกัน */
+.irp-pair .irp-bento-cal .t-cal{ width:100%; min-height:0; align-self:stretch; }
+.irp-pair .t-cal{ flex-direction:column; align-items:flex-start; justify-content:flex-end; }
+.irp-pair .t-cal .irp-events{ flex:none; width:100%; }
+.irp-pair .t-cal > .chip{ margin-left:0; }
+.irp-pair .irp-bigdate b{ font-size:var(--fs-stat); }
+.irp-pair .irp-events strong{ font-size:var(--fs-p); }
+.irp-pair .irp-report-t{ justify-content:flex-end; }
+.irp-pair .irp-report-t{ gap:14px; }
+.irp-rep-btns{ display:flex; flex-wrap:wrap; gap:8px; }
+.irp-pair .irp-report-t .irp-w-label{ display:none; }
+.irp-pair .irp-rep-copy b{ font-size:var(--fs-h4); }
+.irp-pair .irp-doc{ background:transparent; border:0; border-top:1px solid var(--line-dark); border-radius:0; padding:10px 0; box-shadow:none; }
+.irp-pair .irp-doc:first-child{ border-top:0; }
+.irp-pair .irp-doc::before, .irp-pair .irp-doc::after{ display:none; }
+.irp-pair .irp-doc:hover{ color:inherit; }
+.irp-pair .irp-doc:hover .irp-doc-acts .irp-doc-ico{ color:var(--primary); }
+.irp-pair .irp-doc .irp-ico{ width:clamp(52px,4.6vw,72px); height:clamp(52px,4.6vw,72px); font-size:var(--fs-h3); background:var(--primary); color:var(--text-inverse); }
+.irp-pair .irp-doc:hover .irp-ico{ background:var(--primary-deep); color:var(--text-inverse); }
+.irp-pair .irp-doc-t{ flex:1; display:flex; flex-direction:column; gap:2px; min-width:0; }
+.irp-pair .irp-doc-t b{ flex:none; font-size:var(--fs-p); color:var(--ink); }
+.irp-pair .irp-doc:hover .irp-doc-t b{ color:var(--primary); }
+.irp-pair .irp-doc-t small{ font-size:var(--fs-sm); color:var(--muted-2); line-height:var(--lh-ui); }
+@media (max-width:1199.98px){ .irp-pair{ grid-template-columns:1fr; } }
+/* ปฏิทินกิจกรรม + เอกสารนักลงทุน (จอ ≤1199px) */
+@media (max-width:1199.98px){
+  /* กฎรวม .irp-bento > * (span 6) ทำให้การ์ด 56-1 กินเต็มแถวสูงเป็น 3:4 — คืนเป็นสองคอลัมน์การ์ด + รายการ */
+  .irp-pair .irp-bento-docs{ grid-template-columns:clamp(220px,34vw,300px) minmax(0,1fr); }
+  .irp-pair .irp-bento-docs > *{ grid-column:auto !important; grid-area:auto !important; }
+  .irp-pair .irp-bento-docs > .t-report{ min-height:0; }
+  .irp-pair .irp-bento-cal .t-cal{ min-height:clamp(150px,20vw,200px); justify-content:center; }
+}
+@media (max-width:767.98px){
+  /* การ์ด 56-1 เต็มความกว้าง สัดส่วนกว้าง ไม่สูงเต็มจอ; รายการเอกสารอยู่ใต้การ์ด */
+  .irp-pair .irp-bento-docs{ grid-template-columns:minmax(0,1fr); row-gap:clamp(12px,3vw,20px); }
+  .irp-pair .irp-bento-docs .t-report{ aspect-ratio:3/4; min-height:0; width:100%; max-width:420px; justify-self:center; }
+  .irp-pair .irp-bento-cal .t-cal{ min-height:clamp(180px,48vw,240px); padding:clamp(18px,5vw,26px); justify-content:flex-end; }
+  .irp-pair .t-cal .irp-events li{ flex-direction:row; align-items:center; gap:16px; }
+  .irp-pair .irp-cal-go{ top:clamp(14px,4vw,22px); right:clamp(14px,4vw,22px); }
+}
+
+/* documents */
+.irp-report-t{ justify-content:space-between; color:var(--text-inverse); border-color:transparent; }
+.irp-report-t:hover{ color:var(--text-inverse); }
+.irp-report-t img{ position:absolute; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; object-position:70% 50%; transition:transform 1s var(--ease); }
+.irp-report-t:hover img{ transform:scale(1.05); }
+.irp-report-t::before{ content:''; position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg,transparent 0%,transparent 20%,color-mix(in srgb,var(--primary-deep) 62%,transparent) 50%,color-mix(in srgb,var(--primary-deep) 90%,transparent) 75%,color-mix(in srgb,var(--primary-deep) 97%,transparent) 100%); }
+.irp-report-t .irp-w-label{ color:var(--text-inverse-muted); }
+/* ลายเส้นทแยงมุมจางไปทางมุมซ้ายบน (ลายเดียวกับ One Report หน้าแรก) — เฉพาะพื้น hover ของการ์ดเอกสาร */
+.irp-doc::after{
+  content:''; position:absolute; inset:0; z-index:0; pointer-events:none; opacity:1; background-position:0 0;
+  background:repeating-linear-gradient(135deg, var(--border-inverse) 0 1px, transparent 1px 14px);
+  -webkit-mask-image:radial-gradient(110% 70% at 100% 100%, #000 0%, transparent 72%); mask-image:radial-gradient(110% 70% at 100% 100%, #000 0%, transparent 72%);
+  transition:background-position .8s var(--ease), opacity .5s var(--ease);
+}
+.irp-doc::after{ opacity:0; }
+.irp-doc:hover::after{ opacity:1; background-position:14px 0; }
+.irp-report-t > *:not(img){ position:relative; z-index:1; }
+.irp-rep-copy{ display:flex; flex-direction:column; gap:2px; }
+.irp-rep-copy b{ font-size:var(--fs-h3); font-weight:var(--fw-regular); line-height:var(--lh-heading); }
+.irp-rep-copy span{ font-size:var(--fs-sm); color:var(--text-inverse-muted); }
+.irp-dl{ position:absolute !important; right:clamp(18px,1.8vw,28px); bottom:clamp(18px,1.8vw,28px); }
+.irp-doc{ flex-direction:row; align-items:center; gap:clamp(12px,1.4vw,18px); }
+.irp-doc::before{ content:''; position:absolute; inset:0; z-index:0; background:var(--primary); transform:translateY(101%); transition:transform .6s var(--ease); }
+.irp-doc:hover{ color:var(--text-inverse); } .irp-doc:hover::before{ transform:none; }
+.irp-doc b{ flex:1; font-size:var(--fs-h4); font-weight:var(--fw-bold); line-height:var(--lh-ui); color:var(--primary); transition:color .4s var(--ease); }
+.irp-doc:hover b{ color:var(--text-inverse); }
+.irp-ico{ flex:none; display:grid; place-items:center; width:44px; height:44px; border-radius:var(--r-circle); background:var(--surface-muted); color:var(--primary); font-size:var(--fs-h4); transition:background .4s var(--ease), color .4s var(--ease); }
+.irp-doc:hover .irp-ico{ background:var(--overlay-inverse); color:var(--text-inverse); }
+.irp-doc-acts{ flex:none; display:inline-flex; align-items:center; gap:clamp(10px,1vw,14px); }
+.irp-doc-acts .irp-doc-ico{ flex:none; font-size:var(--fs-h4); color:var(--primary); transition:color .4s var(--ease); } .irp-doc:hover .irp-doc-acts .irp-doc-ico{ color:var(--text-inverse); }
+.irp-doc > .irp-arrow{ color:var(--primary); transition:transform .4s var(--ease), color .4s var(--ease); } .irp-doc:hover > .irp-arrow{ color:var(--text-inverse); transform:translateX(4px); }
+
+/* responsive */
+@media (max-width:1199.98px){
+  .irp-bento{ grid-template-columns:repeat(6,minmax(0,1fr)); grid-template-rows:none !important; grid-auto-rows:minmax(var(--R),auto); }
+  .irp-bento > *{ grid-area:auto !important; grid-column:span 6 !important; }
+  .irp-bento > .t-gross, .irp-bento > .t-net, .irp-bento > .t-policy, .irp-bento > .t-fs, .irp-bento > .t-mdna, .irp-bento > .t-web, .irp-bento > .t-cg{ grid-column:span 3 !important; }
+  .irp-bento-docs{ grid-auto-rows:auto; }
+  .irp-doc{ min-height:84px; }
+  .irp-bento > .t-rev, .irp-bento > .t-eq, .irp-bento > .t-eps{ grid-column:span 2 !important; }
+  .irp-bento > .t-hero, .irp-bento > .t-chart, .irp-bento > .t-donut{ min-height:clamp(320px,52vw,440px); }
+  .irp-bento > .t-gross, .irp-bento > .t-net, .irp-bento > .t-rank, .irp-bento > .t-div, .irp-bento > .t-report{ min-height:clamp(260px,40vw,320px); }
+  .irp-jump{ flex:1 1 100%; }
+  .t-cal{ flex-wrap:wrap; }
+  .irp-events li{ flex-wrap:wrap; }
+}
+/* จอ 768–1199px: การ์ดข้อมูลการเงินล่าสุด + กราฟรายได้/สินทรัพย์ อยู่แถวเดียวกัน (แบ่งครึ่ง 3:3 จาก 6 คอลัมน์) */
+/* จอ 768–1199px: ข้อมูลผู้ถือหุ้นเรียงคู่แบบเดียวกัน — สัดส่วนถือหุ้น + ผู้ถือหุ้นรายใหญ่ / นโยบายปันผล + เงินปันผลต่อหุ้น (แบ่งครึ่ง 3:3) */
+@media (min-width:768px) and (max-width:1199.98px){
+  .irp-bento-sh > .t-donut, .irp-bento-sh > .t-rank, .irp-bento-sh > .t-policy, .irp-bento-sh > .t-div{ grid-column:span 3 !important; }
+  .irp-bento-sh > .t-donut, .irp-bento-sh > .t-rank{ min-height:clamp(300px,36vw,400px); }
+  .irp-bento-sh > .t-policy, .irp-bento-sh > .t-div{ min-height:clamp(240px,30vw,320px); }
+}
+@media (min-width:768px) and (max-width:1199.98px){
+  .irp-bento-fin > .t-hero{ grid-column:span 3 !important; }
+  .irp-bento-fin > .t-chart{ grid-column:span 3 !important; }
+  .irp-bento-fin > .t-hero, .irp-bento-fin > .t-chart{ min-height:clamp(300px,34vw,380px); }
+}
+@media (max-width:991.98px){
+  .irp-bento > .t-rev, .irp-bento > .t-eq{ grid-column:span 3 !important; }
+  .irp-bento > .t-eps{ grid-column:span 6 !important; }
+}
+@media (max-width:767.98px){
+  .irp-bento > .t-gross, .irp-bento > .t-net, .irp-bento > .t-policy, .irp-bento > .t-fs, .irp-bento > .t-mdna, .irp-bento > .t-web, .irp-bento > .t-cg, .irp-bento > .t-rev, .irp-bento > .t-eq, .irp-bento > .t-eps{ grid-column:span 6 !important; }
+}
+@media (prefers-reduced-motion:reduce){ .irp-w, .irp-rank-bar u, .irp-doc::before, .irp-report-t img{ transition:none; } .irp-w::after{ display:none; } }
+@media (hover:none){ .irp-w::after{ display:none; } }
+
+/* การ์ดติดต่อ IR + ราคาหลักทรัพย์ (พื้นน้ำเงิน) */
+.irp-contact-card{ padding:0; gap:0; aspect-ratio:123/160; }
+.irp-contact-card:hover{ transform:none; }
+.irp-wg-slides{ position:absolute; inset:0; }
+.irp-wg-slide{ position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; gap:12px; padding:clamp(14px,1.5vw,26px); padding-bottom:clamp(60px,5vw,76px); color:var(--text-inverse); overflow:hidden; visibility:hidden; }
+.irp-wg-media{ position:absolute; inset:0; z-index:-1; overflow:hidden; }
+.irp-wg-media img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+/* เบลอรูปเฉพาะบริเวณข้อความด้านล่าง จางขึ้นด้านบน — ใช้สำเนารูปที่ blur + mask แทน backdrop-filter (backdrop-filter + mask พังเมื่อการ์ดเอียง 3D) */
+.irp-wg-media .irp-wg-blur{ filter:blur(14px); transform:scale(1.08); -webkit-mask-image:linear-gradient(0deg,#000 27%,transparent 60%); mask-image:linear-gradient(0deg,#000 27%,transparent 60%); }
+.irp-wg-copy{ text-shadow:0 1px 10px color-mix(in srgb,var(--primary-deep) 55%,transparent); } /* เงาบางๆ ให้ข้อความขาวอ่านชัดบนรูปสว่าง */
+.irp-wg-copy p{ margin:6px 0 0; max-width:22em; font-size:var(--fs-sm); line-height:var(--lh-ui); color:var(--text-inverse-muted); }
+.irp-wg-go{ position:absolute; right:clamp(14px,1.5vw,26px); bottom:clamp(14px,1.5vw,26px); }
+.irp-wg-head{ position:absolute; z-index:3; left:clamp(14px,1.5vw,26px); top:clamp(14px,1.5vw,26px); right:clamp(14px,1.5vw,26px); display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.irp-wg-dots{ display:flex; gap:6px; }
+.irp-wg-dots button{ position:relative; overflow:hidden; width:8px; height:8px; padding:0; border:0; border-radius:var(--r-pill); background:var(--border-inverse); cursor:pointer; transition:width .5s var(--ease-out), background .4s var(--ease); }
+.irp-wg-dots button.is-active{ width:32px; }
+.irp-wg-nav{ display:flex; gap:6px; }
+@media (max-width:991.98px){
+  .irp-contact-card{ width:min(300px,calc(100% - 2 * var(--gutter))); aspect-ratio:4/5; }
+}
+
+.irp-next-btn{ white-space:normal; text-align:left; align-items:center; max-width:100%; }
+@media (max-width:991.98px){ /* ข้อความยาวให้ไหลเป็นบรรทัดปกติ ไม่แตกเป็นคอลัมน์ flex */
+  .irp-next-btn{ display:block; }
+  .irp-next-btn .irp-live{ display:inline-block; margin-right:8px; vertical-align:middle; }
+  .irp-next-btn .icon{ vertical-align:middle; }
+}
+.irp-next-btn b{ font-weight:var(--fw-bold); }
+
+/* หมายเหตุที่มา / ข้อสงวนของข้อมูล */
+.irp-foot{ display:grid; gap:6px; max-width:78em; padding-top:clamp(4px,.6vw,10px); }
+.irp-foot p{ margin:0; font-size:var(--fs-xs); line-height:var(--lh-ui); color:var(--muted-2); }
+.irp-foot b{ font-weight:var(--fw-bold); color:var(--ink); margin-right:6px; }
+
+/* keyframes */
+@keyframes irpKen{ to{ transform:scale(1); } }
+@keyframes irpIn{ to{ opacity:1; transform:none; } }
+
+
+.irp-quote-stats dd.is-up{ color:var(--brand); } .irp-quote-stats dd.is-down{ color:var(--danger); }
+@media (max-width:575.98px){ .irp-quote-stats{ grid-template-columns:repeat(2,minmax(0,1fr)); row-gap:12px; } .irp-quote-stats > div:nth-child(3){ padding-left:0; } .irp-quote-stats > div + div{ border-left:0; padding-left:0; } }
+
+/* ---------- Band motion (JS: assets/js/ir.js → "Band motion") ----------------------------
+   สไลด์ทางลัด: ภาพเข้าแบบ wipe ตามทิศ + Ken Burns · ข้อความไล่ขึ้น · dot เป็นแถบเวลา autoplay
+   การ์ดเอียงตามเมาส์ + แสงสะท้อน · แสง spotlight บนพื้น band · pill เติมสีจากจุดที่เมาส์เข้า
+   ใช้ property แยก (translate / scale) ใน keyframes เพื่อไม่ชนกับ transform ที่ GSAP เขียน (magnetic) */
+.irp-contact-card{ --wg-autoplay:6s; transition:none; will-change:transform; }
+.irp-wg-slides{ touch-action:pan-y; }
+.irp-wg-slide.is-active{ visibility:visible; z-index:2; }
+.irp-wg-slide.is-leaving{ visibility:visible; z-index:1; }
+.irp-wg-media{ transform-origin:50% 60%; }
+.irp-wg-slide.is-active .irp-wg-media{ animation:wgWipe 1.1s var(--ease-out) both, wgDrift 9s 1.1s var(--ease) infinite alternate; }
+.irp-contact-card[data-dir="prev"] .irp-wg-slide.is-active .irp-wg-media{ animation-name:wgWipePrev, wgDrift; }
+.irp-wg-slide.is-leaving .irp-wg-media{ animation:wgPush 1.1s var(--ease-out) both; }
+.irp-contact-card[data-dir="prev"] .irp-wg-slide.is-leaving .irp-wg-media{ animation-name:wgPushPrev; }
+.irp-wg-slide.is-leaving .irp-wg-copy, .irp-wg-slide.is-leaving .irp-wg-go{ opacity:0; transition:opacity .25s var(--ease); }
+.irp-wg-slide.is-active .irp-wg-copy > *{ animation:wgUp .9s var(--ease-out) both; }
+.irp-wg-slide.is-active .irp-wg-copy > :nth-child(1){ animation-delay:.28s; }
+.irp-wg-slide.is-active .irp-wg-copy > :nth-child(2){ animation-delay:.38s; }
+.irp-wg-slide.is-active .irp-wg-go{ animation:wgPop .8s .48s var(--ease-out) both; }
+@keyframes wgWipe{ from{ clip-path:inset(0 0 0 100%); transform:scale(1.25); } to{ clip-path:inset(0); transform:scale(1); } }
+@keyframes wgWipePrev{ from{ clip-path:inset(0 100% 0 0); transform:scale(1.25); } to{ clip-path:inset(0); transform:scale(1); } }
+@keyframes wgPush{ to{ transform:translateX(-18%) scale(1.05); filter:brightness(.6); } }
+@keyframes wgPushPrev{ to{ transform:translateX(18%) scale(1.05); filter:brightness(.6); } }
+@keyframes wgDrift{ from{ scale:1; } to{ scale:1.08; } }
+@keyframes wgUp{ from{ opacity:0; translate:0 24px; } }
+@keyframes wgPop{ from{ opacity:0; scale:.4; } }
+
+/* dot = แถบเวลา autoplay (หยุดเมื่อ hover / focus / อยู่นอกจอ) */
+.irp-wg-dots button::after{ content:''; position:absolute; inset:0; border-radius:inherit; background:var(--brand); transform:scaleX(0); transform-origin:left; }
+.irp-wg-dots button.is-active::after{ animation:wgProgress var(--wg-autoplay) linear both; }
+.irp-contact-card.is-paused .irp-wg-dots button.is-active::after{ animation-play-state:paused; }
+@keyframes wgProgress{ to{ transform:scaleX(1); } }
+
+/* ปุ่มลูกศร: ลูกศรพุ่งออกขวาบน ตัวใหม่ตามเข้ามาจากซ้ายล่าง */
+.irp-wg-go{ overflow:hidden; }
+.irp-wg-go .icon{ text-shadow:-1.6em 1.6em 0 currentColor; transition:transform .55s var(--ease-out); }
+.irp-wg-go:hover .icon, .irp-wg-go:focus-visible .icon{ transform:translate(1.6em,-1.6em); }
+
+/* แสงสะท้อนบนการ์ดตามตำแหน่งเมาส์ */
+.irp-wg-glare{ position:absolute; inset:0; z-index:2; pointer-events:none; border-radius:inherit; opacity:0; transition:opacity .5s var(--ease);
+  background:radial-gradient(circle at var(--gx,50%) var(--gy,0%), var(--overlay-inverse), transparent 55%); mix-blend-mode:screen; }
+.irp-contact-card.is-hover .irp-wg-glare{ opacity:1; }
+
+/* spotlight บนพื้น band */
+.irp-band-glow{ position:absolute; left:0; top:0; width:clamp(320px,42vw,720px); aspect-ratio:1; margin:calc(-1 * clamp(160px,21vw,360px)) 0 0 calc(-1 * clamp(160px,21vw,360px));
+  border-radius:var(--r-circle); background:radial-gradient(circle, var(--overlay-inverse), transparent 65%); opacity:0; pointer-events:none; transition:opacity .6s var(--ease); }
+.irp-band.is-hover .irp-band-glow{ opacity:1; }
+
+/* หัวข้อ: mask reveal ทีละท่อน (เผื่อที่ให้สระบน/ล่างภาษาไทย) */
+.irp-band-title .irp-mask{ display:inline-block; max-width:100%; overflow:hidden; vertical-align:bottom; padding:.28em .04em .3em 0; margin:-.28em 0 -.3em; }
+.irp-band-title .irp-mask > span{ display:inline-block; }
+
+/* pill ทางลัด: วงสีขาวขยายออกจากจุดที่เมาส์เข้า และหดกลับไปทางที่เมาส์ออก */
+.irp-band .irp-jump .tab{ position:relative; overflow:hidden; isolation:isolate; transition:color .45s var(--ease-out); }
+.irp-band .irp-jump .tab > span{ display:inline-block; }
+.irp-band .irp-jump .tab::before{ content:''; position:absolute; left:var(--fx,50%); top:var(--fy,50%); z-index:-1; width:260%; aspect-ratio:1; border-radius:var(--r-circle);
+  background:var(--text-inverse); transform:translate(-50%,-50%) scale(0); transition:transform .55s var(--ease-out); }
+.irp-band .irp-jump .tab:hover, .irp-band .irp-jump .tab:focus-visible{ color:var(--primary); }
+.irp-band .irp-jump .tab:hover::before, .irp-band .irp-jump .tab:focus-visible::before{ transform:translate(-50%,-50%) scale(1); }
+
+/* จุด live หน้าปุ่มกิจกรรมถัดไป */
+.irp-live{ position:relative; flex:none; width:8px; height:8px; border-radius:var(--r-circle); background:var(--brand); }
+.irp-live::after{ content:''; position:absolute; inset:0; border-radius:inherit; background:var(--brand); animation:irpPulse 1.8s var(--ease-out) infinite; }
+@keyframes irpPulse{ to{ transform:scale(3); opacity:0; } }
+
+@media (prefers-reduced-motion:reduce){
+  .irp-wg-media, .irp-wg-copy > *, .irp-wg-go, .irp-live::after{ animation:none !important; }
+  .irp-wg-dots button.is-active::after{ animation:none; transform:none; }
+  .irp-wg-go .icon, .irp-band .irp-jump .tab::before{ transition:none; }
+}
+
+
+/* หัวข้อข่าวในหน้า IR: ยาวเกิน 2 บรรทัดตัดเป็น ... */
+.irp-w.t-news .news-item h4{ display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; line-clamp:2; overflow:hidden; }
+
+/* การ์ดข่าวหน้า IR: ไอคอนไม่มีวงกลมล้อมรอบ (hover เปลี่ยนแค่สีไอคอน) */
+.irp-w.t-news .news-ic{ border:0; background:none; width:auto; height:auto; }
+.irp-w.t-news .news-item:hover .news-ic{ background:none; border-color:transparent; color:var(--primary-hover); }
+
+/* รายการเอกสาร: hover เปลี่ยนแค่สี ไม่ยกขึ้น */
+.irp-pair .irp-doc:hover, .irp-doc-list .irp-doc:hover{ transform:none; }
+
+/* มือถือ: ปุ่ม "ดูทั้งหมด" / "เอกสารทั้งหมด" / "โครงสร้างผู้ถือหุ้น" ย้ายไปไว้ล่างสุดของแต่ละส่วน */
+@media (max-width:575.98px){
+  .irp-group:has(> .bento-head .button){ display:flex; flex-direction:column; }
+  .irp-group:has(> .bento-head .button) > .bento-head{ display:contents; }
+  .irp-group:has(> .bento-head .button) > .bento-head > div:first-child{ margin-bottom:clamp(20px,6vw,32px); }
+  .irp-group:has(> .bento-head .button) > .bento-head > :last-child{ order:99; align-self:flex-start; margin-top:clamp(20px,6vw,28px); }
+  .irp-group:has(> .bento-head .button) > .bento-head .irp-head-end{ align-items:flex-start; }
+}
+
+/* v2 energy-first: hero lead + revenue by segment */
+.irp-hero-lead{ margin-top:14px; color:var(--text-inverse-muted); font-size:var(--fs-p); }
+.irp-seg{ margin-top:var(--bento-gap); padding:clamp(20px,2.4vw,32px); border-radius:var(--r-lg); background:var(--surface); box-shadow:var(--shadow-sm); }
+.irp-seg-head{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+.irp-seg-head h3{ margin:0; font-size:var(--fs-h4); font-weight:var(--fw-semibold); color:var(--ink); }
+.irp-seg-head span{ font-size:var(--fs-xs); color:var(--muted-2); }
+.irp-seg-bar{ display:flex; height:clamp(44px,5vw,64px); margin-top:18px; border-radius:var(--r-sm); overflow:hidden; background:var(--surface-muted); }
+.irp-seg-bar span{ flex:0 0 var(--w); display:flex; align-items:center; padding:0 14px; min-width:0; color:var(--text-inverse); }
+.irp-seg-bar b{ font-family:var(--ff-display); font-size:var(--fs-h4); font-weight:var(--fw-semibold); white-space:nowrap; }
+.irp-seg-bar .is-energy{ background:linear-gradient(90deg,var(--primary-deep),var(--primary)); }
+.irp-seg-bar .is-estate{ background:var(--brand); padding:0 10px; }
+.irp-seg-bar .is-estate b{ font-size:var(--fs-sm); }
+.irp-seg-bar .is-other{ background:var(--muted-2); padding:0; }
+.irp-seg-key{ list-style:none; display:flex; flex-wrap:wrap; gap:10px 28px; margin:14px 0 0; padding:0; font-size:var(--fs-sm); color:var(--muted-2); }
+.irp-seg-key li{ display:flex; align-items:center; gap:8px; }
+.irp-seg-key b{ color:var(--ink); font-weight:var(--fw-semibold); }
+.irp-seg-key i{ width:12px; height:12px; border-radius:3px; flex:none; }
+.irp-seg-key .is-energy i{ background:var(--primary); } .irp-seg-key .is-estate i{ background:var(--brand); } .irp-seg-key .is-other i{ background:var(--muted-2); }
+@media (max-width:575.98px){ .irp-seg-bar .is-estate b{ display:none; } }
