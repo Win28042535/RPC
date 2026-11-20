@@ -835,7 +835,7 @@ body.rd-plain{ padding-right:0; }
 .fh-kpi .fact-num{ font-size:var(--fs-stat); white-space:nowrap; }
 .fh-kpi.ab-brand-bg .fact-label, .fh-kpi.ab-brand-bg .fact-num{ color:var(--text-inverse); }
 .fh-kpi.ab-brand-bg .fact-label{ opacity:.8; }
-.fh-kpi .ab-wm{ z-index:-1; right:-22%; bottom:-30%; width:80%; color:var(--text-inverse); opacity:.08; }
+.fh-kpi .ab-wm{ z-index:-1; right:clamp(18px,1.8vw,26px); bottom:clamp(18px,1.8vw,26px); width:min(40%,150px); color:var(--text-inverse); opacity:.16; } /* โลโก้เต็มตัว ไม่ถูกตัด อยู่ในระยะ padding ของการ์ด */
 /* กราฟข้อมูลการเงิน: การ์ดซ้าย (ตัวเลข + ปุ่มแคปซูล) | การ์ดขวา (กราฟ) */
 .fh-metric{ display:flex; flex-direction:column; gap:14px; }
 .fh-metric .fact-label{ color:var(--muted-2); }
@@ -1124,7 +1124,7 @@ body.rd-plain{ padding-right:0; }
 .fs-feat{ display:flex; flex-direction:column; gap:12px; padding:var(--card-pad); }
 .fs-feat-top{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:4px; }
 /* ไอคอนไฟล์ใช้ doc-ico มาตรฐาน (พื้นอ่อน) ไม่แย่งเด่นกับปุ่มหลัก · ชี้การ์ดแล้วเติมสีแบบแถวตาราง */
-.fs-feat:hover .doc-ico{ background:var(--primary); color:var(--text-inverse); }
+/* การ์ดเอกสารเด่น: ไอคอนไฟล์คงที่ ไม่เปลี่ยนเมื่อ hover */
 .fs-ok::before{ content:'check_circle' !important; }
 .fs-feat h3{ margin:0; font-size:var(--fs-h3); font-weight:var(--fw-bold); line-height:var(--lh-heading); color:var(--ink); }
 .fs-feat-meta{ margin:0; font-size:var(--fs-sm); color:var(--muted-2); font-variant-numeric:tabular-nums; }
