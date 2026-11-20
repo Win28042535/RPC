@@ -1128,7 +1128,7 @@ body.rd-plain{ padding-right:0; }
 .fs-ok::before{ content:'check_circle' !important; }
 .fs-feat h3{ margin:0; font-size:var(--fs-h3); font-weight:var(--fw-bold); line-height:var(--lh-heading); color:var(--ink); }
 .fs-feat-meta{ margin:0; font-size:var(--fs-sm); color:var(--muted-2); font-variant-numeric:tabular-nums; }
-.fs-feat-inc{ display:flex; align-items:flex-start; gap:10px; margin:4px 0 0; padding-top:14px; border-top:1px solid var(--line-dark); font-size:var(--fs-sm); color:var(--muted); }
+.fs-feat-inc{ display:flex; align-items:center; gap:10px; margin:4px 0 0; padding-top:14px; border-top:1px solid var(--line-dark); font-size:var(--fs-sm); color:var(--muted); }
 .fs-feat-inc .icon{ color:var(--primary); font-size:var(--fs-h4); }
 .fs-feat-acts{ display:flex; flex-wrap:wrap; gap:10px; margin-top:auto; padding-top:10px; }
 .fs-doc{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:clamp(16px,1.8vw,24px) var(--card-pad); }
