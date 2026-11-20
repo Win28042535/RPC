@@ -2180,3 +2180,7 @@ body.ck-open .back-top{ opacity:0; visibility:hidden; }
 
 /* จอแคบมาก: ปุ่มข้อความยาว (EN) ขึ้นบรรทัดใหม่ได้ ไม่ดันหน้าเกินจอ */
 @media (max-width:374.98px){ #news .button{ white-space:normal; text-align:left; } }
+/* เกี่ยวกับ RPC: โลโก้บริษัทแกน (เพียวไทย / PTEC) — ตามเดโม่ Edit1 */
+.about-core{ display:flex; align-items:center; gap:14px; margin:18px 0 6px; }
+.about-core-label{ font-size:var(--fs-xs); font-weight:var(--fw-semibold); letter-spacing:.12em; color:var(--muted-2); }
+.about-core img{ height:36px; width:auto; }

@@ -271,7 +271,7 @@
 .bd-photo::before{ content:''; position:absolute; inset:0; z-index:-2; background:linear-gradient(160deg,var(--primary-hover) 0%,var(--primary) 50%,var(--primary-deep) 100%); transform:translateY(101%); transition:transform .8s var(--ease); }
 .bd-photo .ab-wm{ z-index:-1; left:50%; top:38%; width:120%; color:var(--primary); opacity:.07; transform:translate(-50%,-50%); transition:color .6s var(--ease), opacity .6s var(--ease); }
 /* เว้นระยะเหนือศีรษะ 12% (รูปชิดล่าง ไหล่เต็มความกว้าง) */
-.bd-photo img{ position:absolute; left:0; right:0; bottom:0; top:12%; width:100%; height:88%; object-fit:cover; object-position:50% 0; transform-origin:50% 100%; transition:transform 1.1s var(--ease-out); }
+.bd-photo img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 0; transform-origin:50% 100%; transition:transform 1.1s var(--ease-out); }
 .bd-card:hover .bd-photo::before, .bd-card:focus-within .bd-photo::before{ transform:none; }
 .bd-card:hover .bd-photo .ab-wm{ color:var(--text-inverse); opacity:.16; }
 .bd-card:hover .bd-photo img{ transform:scale(1.04); }
@@ -337,7 +337,7 @@
   background:repeating-linear-gradient(135deg,var(--border-inverse) 0 1px,transparent 1px 14px);
   -webkit-mask-image:radial-gradient(110% 80% at 0% 0%,#000 0%,transparent 70%); mask-image:radial-gradient(110% 80% at 0% 0%,#000 0%,transparent 70%); }
 .cs-portrait .ab-wm{ z-index:-1; left:50%; top:40%; width:118%; color:var(--text-inverse); opacity:.12; transform:translate(-50%,-50%); }
-.cs-portrait img{ position:absolute; inset:0; width:100%; height:100%; object-fit:contain; object-position:50% 100%; }
+.cs-portrait img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 0; }
 /* ชื่อผู้บริหาร = h3 · ตำแหน่ง = sm */
 .cs-sign h3{ font-size:24px; line-height:var(--lh-heading); word-break:keep-all; }
 .cs-sign{ margin-top:20px; padding-top:20px; border-top:1px solid var(--line-dark-strong); }
@@ -1293,3 +1293,4 @@ body.rd-plain{ padding-right:0; }
   .fs-matrix tbody tr:hover .doc-ico{ background:var(--surface-muted); color:var(--primary); }
   .fs-matrix tbody tr:hover .doc-title b{ color:var(--ink); transform:none; }
 }
+@media (max-width:374.98px){ .page-cta .button{ white-space:normal; text-align:left; max-width:100%; } } /* จอแคบมาก: ปุ่มข้อความยาว (EN) ขึ้นบรรทัดใหม่ได้ */
