@@ -1,4 +1,4 @@
-/* คลังงบการเงินย้อนหลัง: 3 รูปแบบสำหรับนำเสนอ (A ปุ่มปี · A2 dropdown · B พับ/กางรายปี)
+/* คลังงบการเงินย้อนหลัง: แบบหลัก C (กางทุกปี) + แบบสำรองสำหรับนำเสนอ (A ปุ่มปี · A2 dropdown · B พับ/กางรายปี)
    C กางทุกปี · ข้อมูลจาก fs-archive-data.js · เลือกแบบด้วยแถบลอย หรือ ?v=a|a2|b|c (ค่าเริ่มต้น a2) · ปีที่เลือกอยู่ใน #yYYYY */
 (() => {
   const root = document.getElementById('fsLib'); const DATA = window.RPCG_FS_ARCHIVE;
@@ -10,14 +10,14 @@
     doc: 'Document', view: 'View', dl: 'Download', na: 'Not yet published', fy: 'Financial year', docs: 'documents',
     pick: 'Select year', more: (n, y) => 'Show ' + n + ' earlier years (to ' + y + ')', capt: y => 'Financial statement documents ' + y,
     pn: (c, y) => c === 3 ? 'full year ' + y : 'Q' + (c + 1) + '/' + y,
-    tog: 'Archive layout', v: { a: ['A', 'Year buttons'], a2: ['A2', 'Dropdown'], b: ['B', 'Expand by year'], c: ['C', 'All years'] }, jump: 'Jump to year'
+    tog: 'Archive layout', v: { a: ['A', 'Year buttons'], a2: ['A2', 'Dropdown'], b: ['B', 'Expand by year'], c: ['C', 'All years'] }, jump: 'Jump to year', prevY: 'Earlier years', nextY: 'Later years'
   } : {
     rows: ['รายงานของผู้สอบบัญชี', 'งบการเงิน', 'หมายเหตุประกอบงบการเงิน'],
     cols: [['ไตรมาส 1', '31 มี.ค.'], ['ไตรมาส 2', '30 มิ.ย.'], ['ไตรมาส 3', '30 ก.ย.'], ['ประจำปี', '31 ธ.ค.']],
     doc: 'เอกสาร', view: 'ดู', dl: 'ดาวน์โหลด', na: 'ยังไม่เผยแพร่', fy: 'ปีงบการเงิน', docs: 'เอกสาร',
     pick: 'เลือกปีงบการเงิน', more: (n, y) => 'แสดงปีก่อนหน้าอีก ' + n + ' ปี (ถึง ' + y + ')', capt: y => 'เอกสารงบการเงินปี ' + y,
     pn: (c, y) => c === 3 ? 'ประจำปี ' + y : 'ไตรมาส ' + (c + 1) + '/' + y,
-    tog: 'ตัวอย่างคลังเอกสาร', v: { a: ['A', 'เลือกทีละปี'], a2: ['A2', 'Dropdown'], b: ['B', 'พับ/กางรายปี'], c: ['C', 'กางทุกปี'] }, jump: 'ไปยังปี'
+    tog: 'ตัวอย่างคลังเอกสาร', v: { a: ['A', 'เลือกทีละปี'], a2: ['A2', 'Dropdown'], b: ['B', 'พับ/กางรายปี'], c: ['C', 'กางทุกปี'] }, jump: 'ไปยังปี', prevY: 'เลื่อนไปปีก่อนหน้า', nextY: 'เลื่อนไปปีล่าสุด'
   };
   const SRC = EN ? DATA.en : DATA.th;
   const lab = y => EN ? String(y) : String(+y + 543);           // ปีที่แสดง
@@ -56,29 +56,73 @@
       show(hashYear() || YEARS[0], false);
     },
     c(box) {
-      /* กางทุกปี: แถบปีติดบน (กดเลื่อนไปปีนั้น + ไฮไลต์ปีที่กำลังดู) · หัวปีติดบนขณะเลื่อน · วาดตารางเมื่อใกล้ถึง */
-      box.innerHTML = '<nav class="fsc-jump" aria-label="' + L.jump + '"><div class="fsc-jump-in">' +
-        YEARS.map(y => '<a href="#y' + lab(y) + '" data-y="' + y + '">' + lab(y) + '</a>').join('') + '</div></nav><div class="fsc-list">' +
+      /* กางทุกปี (แบบหลัก): แถบปีติดบน เลื่อนซ้าย-ขวาได้ (ปุ่ม ‹ › · ลาก · ล้อเมาส์ · ปัด · คีย์บอร์ด) · ไฮไลต์ปีที่กำลังดู
+         กดปี → เลื่อนลงให้หัวปีหยุดใต้แถบพอดี · หัวปีติดบนขณะเลื่อน · วาดตารางเมื่อใกล้ถึง */
+      const arr = (d, ic, t) => '<button type="button" class="fsc-arr fsc-arr-' + d + '" aria-label="' + t + '" title="' + t + '" tabindex="-1"><i class="icon" aria-hidden="true">' + ic + '</i></button>';
+      box.innerHTML = '<nav class="fsc-jump is-start" aria-label="' + L.jump + '">' + arr('prev', 'chevron_left', L.prevY) +
+        '<div class="fsc-jump-in">' + YEARS.map(y => '<a href="#y' + lab(y) + '" data-y="' + y + '" draggable="false">' + lab(y) + '</a>').join('') + '</div>' +
+        arr('next', 'chevron_right', L.nextY) + '</nav><div class="fsc-list">' +
         YEARS.map(y => '<section class="fsc-year" id="y' + lab(y) + '" data-y="' + y + '" aria-label="' + L.fy + ' ' + lab(y) + '"><div class="fs-year-head fsc-head">' + head(y) + '</div><div class="fsc-body"></div></section>').join('') + '</div>';
-      const jump = box.querySelector('.fsc-jump'), jin = jump.firstChild, secs = [...box.querySelectorAll('.fsc-year')];
+      const jump = box.querySelector('.fsc-jump'), jin = jump.querySelector('.fsc-jump-in'), secs = [...box.querySelectorAll('.fsc-year')];
+      const links = [...jin.querySelectorAll('a')], prevB = jump.querySelector('.fsc-arr-prev'), nextB = jump.querySelector('.fsc-arr-next');
       const bg = getComputedStyle(document.getElementById('fsLibSec') || document.body).backgroundColor;
-      const navH = () => { const n = document.querySelector('.rpcg-nav'); if (!n) return 0; const r = n.getBoundingClientRect(); return Math.max(0, Math.round(r.bottom)); }; /* เมนูซ่อนตัวเมื่อเลื่อนลง: ใช้ขอบล่างจริง */
+      const navH = () => { const n = document.querySelector('.rpcg-nav'); if (!n) return 0; return Math.max(0, Math.round(n.getBoundingClientRect().bottom)); };
       const setTops = () => { box.style.setProperty('--fsc-nav', navH() + 'px'); box.style.setProperty('--fsc-jump', jump.offsetHeight + 'px'); box.style.setProperty('--fsc-bg', bg); };
       setTops(); addEventListener('resize', setTops);
+
+      /* วาดตารางเมื่อใกล้ถึง */
       const fill = s => { if (!s._f) { s.querySelector('.fsc-body').innerHTML = table(s.dataset.y); s._f = 1; } };
       if ('IntersectionObserver' in window) {
         const lazy = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { fill(e.target); lazy.unobserve(e.target); } }), { rootMargin: '1200px 0px' });
         secs.forEach(s => lazy.observe(s));
       } else secs.forEach(fill);
-      const mark = y => { jin.querySelectorAll('a').forEach(a => { const on = a.dataset.y === y; a.classList.toggle('is-active', on); if (on) { a.setAttribute('aria-current', 'true'); const l = a.offsetLeft - (jin.clientWidth - a.offsetWidth) / 2; jin.scrollTo({ left: l, behavior: 'smooth' }); } else a.removeAttribute('aria-current'); }); };
-      const spy = () => { const line = navH() + jump.offsetHeight + 80; let cur = secs[0];
+
+      /* แถบปี: สถานะปลายแถบ (ขอบจาง + ปุ่มจาง) */
+      const edges = () => { const max = jin.scrollWidth - jin.clientWidth - 1, x = jin.scrollLeft;
+        jump.classList.toggle('is-start', x <= 1); jump.classList.toggle('is-end', x >= max); jump.classList.toggle('no-scroll', max <= 1);
+        prevB.disabled = x <= 1; nextB.disabled = x >= max; };
+      jin.addEventListener('scroll', edges, { passive: true }); addEventListener('resize', edges); edges();
+      const page = d => jin.scrollBy({ left: d * Math.max(160, jin.clientWidth * 0.6), behavior: 'smooth' });
+      prevB.addEventListener('click', () => page(-1)); nextB.addEventListener('click', () => page(1));
+      /* ล้อเมาส์แนวตั้งขณะชี้แถบ → เลื่อนแนวนอน (ถึงสุดทางแล้วปล่อยให้หน้าเลื่อนต่อ) */
+      jin.addEventListener('wheel', e => { if (Math.abs(e.deltaY) <= Math.abs(e.deltaX) || e.ctrlKey) return;
+        const max = jin.scrollWidth - jin.clientWidth; if ((e.deltaY < 0 && jin.scrollLeft <= 0) || (e.deltaY > 0 && jin.scrollLeft >= max - 1)) return;
+        e.preventDefault(); jin.scrollLeft += e.deltaY; }, { passive: false });
+      /* ลากด้วยเมาส์ (ลากแล้วปล่อยไม่นับเป็นการกดปี) */
+      let drag = null, moved = false;
+      jin.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse' || e.button !== 0) return; drag = { x: e.clientX, l: jin.scrollLeft }; moved = false; });
+      addEventListener('pointermove', e => { if (!drag) return; const dx = e.clientX - drag.x;
+        if (!moved && Math.abs(dx) > 5) { moved = true; jump.classList.add('is-drag'); try { jin.setPointerCapture(e.pointerId); } catch (_) {} }
+        if (moved) jin.scrollLeft = drag.l - dx; });
+      const endDrag = () => { if (!drag) return; drag = null; jump.classList.remove('is-drag'); setTimeout(() => { moved = false; }, 0); };
+      addEventListener('pointerup', endDrag); addEventListener('pointercancel', endDrag);
+
+      /* ไฮไลต์ปีที่กำลังดู + เลื่อนให้อยู่กลางแถบ */
+      const center = (a, smooth) => { const l = a.offsetLeft - (jin.clientWidth - a.offsetWidth) / 2; jin.scrollTo({ left: l, behavior: smooth ? 'smooth' : 'auto' }); };
+      const mark = y => links.forEach(a => { const on = a.dataset.y === y; a.classList.toggle('is-active', on);
+        if (on) { a.setAttribute('aria-current', 'true'); if (!drag) center(a, true); } else a.removeAttribute('aria-current'); });
+      let lock = 0;
+      const spy = () => { if (lock) return; const line = navH() + jump.offsetHeight + 80; let cur = secs[0];
         for (const s of secs) { if (s.getBoundingClientRect().top <= line) cur = s; else break; } if (cur.dataset.y !== box._cy) { box._cy = cur.dataset.y; mark(cur.dataset.y); } };
       let tick = 0, settle = 0; const onScroll = () => { clearTimeout(settle); settle = setTimeout(() => { if (root.dataset.view === 'c') setTops(); }, 450); if (!tick) { tick = 1; requestAnimationFrame(() => { tick = 0; if (root.dataset.view === 'c') { setTops(); spy(); } }); } };
       addEventListener('scroll', onScroll, { passive: true }); spy();
-      const go = (y, smooth) => { const s = secs.find(x => x.dataset.y === y); if (!s) return; secs.slice(0, secs.indexOf(s) + 1).forEach(fill);
-        const top = s.getBoundingClientRect().top + scrollY - navH() - jump.offsetHeight + 1; scrollTo({ top, behavior: smooth ? 'smooth' : 'auto' }); };
-      jin.addEventListener('click', e => { const a = e.target.closest('[data-y]'); if (!a) return; e.preventDefault(); setHash(a.dataset.y); go(a.dataset.y, !matchMedia('(prefers-reduced-motion: reduce)').matches); });
-      const h = hashYear(); if (h && box._ready !== 1) setTimeout(() => go(h, false), 60);
+
+      /* กดปี → เลื่อนให้หัวปีหยุดใต้แถบปีพอดี (คำนวณจากความสูงเมนูตอนเลื่อนแล้ว และแก้ซ้ำเมื่อเลื่อนเสร็จ) */
+      const target = s => s.getBoundingClientRect().top + scrollY - navH() - jump.offsetHeight;
+      const go = (y, smooth) => { const s = secs.find(x => x.dataset.y === y); if (!s) return;
+        secs.slice(0, secs.indexOf(s) + 2).forEach(fill); box._cy = y; mark(y); lock = 1;
+        scrollTo({ top: target(s), behavior: smooth ? 'smooth' : 'auto' });
+        let last = -1, still = 0; const t0 = performance.now();
+        const settleGo = () => { const t = target(s); if (Math.abs(scrollY - last) < 1) still++; else still = 0; last = scrollY;
+          if (still >= 4 || performance.now() - t0 > 2500) { setTops(); if (Math.abs(scrollY - target(s)) > 1) scrollTo({ top: target(s), behavior: 'auto' }); lock = 0; return; }
+          requestAnimationFrame(settleGo); };
+        requestAnimationFrame(settleGo); };
+      jin.addEventListener('click', e => { const a = e.target.closest('[data-y]'); if (!a) return; e.preventDefault(); if (moved) return;
+        setHash(a.dataset.y); go(a.dataset.y, !matchMedia('(prefers-reduced-motion: reduce)').matches); });
+      /* คีย์บอร์ด: ← → ไล่ปี (Enter = ไปยังปี ตามปกติของลิงก์) */
+      jin.addEventListener('keydown', e => { if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return; const i = links.indexOf(document.activeElement); if (i < 0) return;
+        e.preventDefault(); const n = links[Math.min(links.length - 1, Math.max(0, i + (e.key === 'ArrowRight' ? 1 : -1)))]; n.focus(); center(n, true); });
+      const h = hashYear(); if (h) setTimeout(() => go(h, false), 80);
     },
     b(box) {
       const FIRST = 5, open = hashYear() || YEARS[0], oi = YEARS.indexOf(open);
@@ -94,12 +138,14 @@
 
   /* แถบสลับรูปแบบ (ลอยด้านล่าง แสดงเมื่ออยู่ในส่วนคลังเอกสาร) */
   const params = new URLSearchParams(location.search);
-  let cur = VIEWS[params.get('v')] ? params.get('v') : 'a2';
+  /* แบบหลัก = C · แบบ A / A2 / B เก็บไว้ใช้ภายหลัง (เปิดดูได้ด้วย ?v=a|a2|b · แถบสลับเปิดด้วย ?switcher=1) */
+  let cur = VIEWS[params.get('v')] ? params.get('v') : 'c';
+  const SHOW_SWITCHER = params.has('switcher');
   const tog = document.createElement('nav');
   tog.className = 'fsx-tog'; tog.setAttribute('aria-label', L.tog);
   tog.innerHTML = '<span class="fsx-tog-lab">' + L.tog + '</span><div class="fsx-tog-seg">' +
     Object.entries(L.v).map(([k, [s, d]]) => '<a href="?v=' + k + '" data-v="' + k + '"><b>' + s + '</b><span>' + d + '</span></a>').join('') + '</div>';
-  document.body.appendChild(tog);
+  if (SHOW_SWITCHER) document.body.appendChild(tog);
   const render = v => { cur = v; root.dataset.view = v; VIEWS[v](root);
     tog.querySelectorAll('[data-v]').forEach(a => { if (a.dataset.v === v) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); }); };
   tog.addEventListener('click', e => { const a = e.target.closest('[data-v]'); if (!a) return; e.preventDefault(); if (a.dataset.v === cur) return;
