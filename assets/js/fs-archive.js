@@ -26,7 +26,7 @@
   const cnt = y => D(y).flat().filter(Boolean).length;
   const btn = (u, ic, a, t) => '<a class="button button-secondary button-sm button-icon" href="' + u + '" target="_blank" rel="noopener" aria-label="' + a + '" title="' + t + '"><i class="icon" aria-hidden="true">' + ic + '</i></a>';
   const table = y => { const Y = lab(y);
-    return '<div class="data-table-wrap"><table class="data-table fs-matrix"><caption class="visually-hidden">' + L.capt(Y) + '</caption><thead><tr><th scope="col">' + L.doc + '</th>' +
+    return '<div class="data-table-wrap fs-wrap"><table class="data-table fs-matrix"><caption class="visually-hidden">' + L.capt(Y) + '</caption><thead><tr><th scope="col">' + L.doc + '</th>' +
       L.cols.map((c, i) => '<th scope="col" class="fs-col' + (i === 3 ? ' is-fy' : '') + '"><span class="th-stack"><b>' + c[0] + '</b><small>' + c[1] + ' ' + Y + '</small></span></th>').join('') + '</tr></thead><tbody>' +
       D(y).map((r, ri) => '<tr style="--k:' + (ri + 1) + '"><th scope="row"><div class="doc-cell"><span class="doc-ico" aria-hidden="true"><small>PDF</small></span><span class="doc-title"><b>' + L.rows[ri] + '</b></span></div></th>' +
         r.map((u, c) => '<td class="fs-cell' + (u ? '' : ' is-na') + (c === 3 ? ' is-fy' : '') + '" data-col="' + L.cols[c][0] + '">' + (u
@@ -114,7 +114,10 @@
         scrollTo({ top: target(s), behavior: smooth ? 'smooth' : 'auto' });
         let last = -1, still = 0; const t0 = performance.now();
         const settleGo = () => { const t = target(s); if (Math.abs(scrollY - last) < 1) still++; else still = 0; last = scrollY;
-          if (still >= 4 || performance.now() - t0 > 2500) { setTops(); if (Math.abs(scrollY - target(s)) > 1) scrollTo({ top: target(s), behavior: 'auto' }); lock = 0; return; }
+          if (still >= 4 || performance.now() - t0 > 2500) {
+            /* เมนูด้านบนหดความสูงเอง (~0.5 วินาที) หลังเริ่มเลื่อน: รอให้เสร็จ แล้ววัดใหม่และวางหัวปีให้พอดีอีกครั้ง */
+            const fix = n => { setTops(); const t = target(s); if (Math.abs(scrollY - t) > 0.5) scrollTo({ top: t, behavior: 'auto' }); if (n > 0) setTimeout(() => fix(n - 1), 260); else lock = 0; };
+            setTimeout(() => fix(2), 120); return; }
           requestAnimationFrame(settleGo); };
         requestAnimationFrame(settleGo); };
       jin.addEventListener('click', e => { const a = e.target.closest('[data-y]'); if (!a) return; e.preventDefault(); if (moved) return;
@@ -153,7 +156,7 @@
   render(cur);
   /* ยกแถบขึ้นเหนือกล่องแจ้งคุกกี้ขณะที่กล่องแสดงอยู่ */
   const lift = () => { const ck = document.querySelector('.ck'); const on = ck && ck.classList.contains('is-in') && !ck.classList.contains('is-out'); const card = on && ck.querySelector('.ck-card');
-    tog.style.bottom = card ? (card.getBoundingClientRect().height + (innerWidth < 768 ? 24 : 40)) + 'px' : ''; };
+    tog.style.bottom = card ? 'calc(' + (card.getBoundingClientRect().height + (innerWidth < 768 ? 24 : 40)) + 'px + var(--fixed-bottom, 0px))' : ''; };
   new MutationObserver(lift).observe(document.body, { subtree: true, childList: true, attributes: true, attributeFilter: ['class'] }); addEventListener('resize', lift); lift();
   const sec = document.getElementById('fsLibSec') || root;
   if ('IntersectionObserver' in window) new IntersectionObserver(es => es.forEach(en => tog.classList.toggle('is-on', en.isIntersecting)), { rootMargin: '0px 0px -30% 0px' }).observe(sec);

@@ -798,3 +798,17 @@ rpcgReady(() => {
   });
   if (!read()) setTimeout(open, reduce ? 0 : 1200);
 })();
+
+/* ---------- ระยะกันขอบล่าง: แถบเบราว์เซอร์ที่ลอยทับหน้า (iOS Safari แถบล่าง / Chrome-Samsung แถบ URL ล่าง)
+   วัดจาก visualViewport แล้วตั้ง --vv-bottom ให้ปุ่มกลับขึ้นบน · กล่องคุกกี้ · แถบลอยอื่น ๆ ขยับขึ้นตาม (ใช้คู่กับ env(safe-area-inset-bottom)) ---------- */
+(() => {
+  const vv = window.visualViewport; if (!vv) return;
+  const root = document.documentElement; let last = -1, raf = 0;
+  const update = () => { raf = 0;
+    if (vv.scale > 1.01) return; /* ซูมด้วยนิ้วอยู่: ไม่ขยับ */
+    const hidden = Math.max(0, Math.round(window.innerHeight - (vv.height + vv.offsetTop)));
+    const v = hidden > 2 && hidden < 200 ? hidden : 0;
+    if (v !== last) { last = v; root.style.setProperty('--vv-bottom', v + 'px'); } };
+  const queue = () => { if (!raf) raf = requestAnimationFrame(update); };
+  vv.addEventListener('resize', queue); vv.addEventListener('scroll', queue); addEventListener('orientationchange', queue); update();
+})();

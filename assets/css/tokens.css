@@ -80,6 +80,12 @@
   --scrollbar-thumb-hover:  rgba(18,20,28,.32);
   --scrollbar-thumb-active: rgba(18,20,28,.45);
 
+  /* ระยะกันขอบล่างที่แถบเบราว์เซอร์/ขีด home บัง (iOS Safari, Chrome/Samsung แถบ URL ล่าง)
+     --vv-bottom ตั้งค่าโดย main.js จาก visualViewport · ใช้ --fixed-bottom กับทุกอย่างที่ลอยชิดขอบล่าง */
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --vv-bottom: 0px;
+  --fixed-bottom: max(var(--safe-bottom), var(--vv-bottom));
+
   /* สีขาวโปร่งบนพื้นเข้ม — ใช้แทน rgba(255,255,255,x) ทุกที่ */
   --text-inverse-muted:  rgba(255,255,255,.72);   /* ข้อความรอง */
   --text-inverse-subtle: rgba(255,255,255,.6);    /* label, เส้นขอบปุ่ม */

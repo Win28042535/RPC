@@ -1085,7 +1085,7 @@ body > section, body > footer{ position:relative; z-index:1; }
 
 /* back to top */
 .back-top{
-  position:fixed; right:26px; bottom:26px; width:50px; height:50px; border-radius:var(--btn-radius-icon);
+  position:fixed; right:calc(26px + env(safe-area-inset-right, 0px)); bottom:calc(26px + var(--fixed-bottom, 0px)); width:50px; height:50px; border-radius:var(--btn-radius-icon);
   background:var(--ink); color:var(--text-inverse); display:flex; align-items:center; justify-content:center;
   z-index:900; opacity:0; visibility:hidden; transform:translateY(10px);
   transition:all .4s var(--ease); font-size:var(--fs-h4);
@@ -2044,7 +2044,7 @@ body > section, body > footer{ position:relative; z-index:1; }
 /* ==========================================================================
    Cookie consent — แถบลอยด้านล่างจอ (markup อยู่ใน partials/footer*.html · JS: main.js "Cookie consent")
    ========================================================================== */
-.ck{ position:fixed; left:0; right:0; bottom:0; z-index:1150; padding:0 clamp(12px,2vw,24px) clamp(12px,2vw,24px); pointer-events:none; }
+.ck{ position:fixed; left:0; right:0; bottom:0; z-index:1150; padding:0 clamp(12px,2vw,24px) calc(clamp(12px,2vw,24px) + var(--fixed-bottom, 0px)); pointer-events:none; }
 .ck[hidden]{ display:none; }
 .ck-card{ pointer-events:auto; position:relative; isolation:isolate; overflow:hidden; max-width:1180px; margin-inline:auto; padding:clamp(18px,2vw,26px) clamp(18px,2.4vw,32px);
   border-radius:var(--r-lg); background:var(--navy-2); color:var(--text-inverse); border:1px solid var(--line); box-shadow:var(--shadow-lg);
@@ -2185,3 +2185,9 @@ body.ck-open .back-top{ opacity:0; visibility:hidden; }
 .about-core{ display:flex; align-items:center; gap:14px; margin:18px 0 6px; }
 .about-core-label{ font-size:var(--fs-xs); font-weight:var(--fw-semibold); letter-spacing:.12em; color:var(--muted-2); }
 .about-core img{ height:36px; width:auto; }
+
+/* viewport-fit=cover: กันเนื้อหา/เมนูไม่ให้เข้าใต้รอยบากหรือขอบโค้งตอนจอแนวนอน (iPhone) */
+@supports (padding:env(safe-area-inset-left)){
+  body{ padding-left:env(safe-area-inset-left); padding-right:env(safe-area-inset-right); }
+  .rpcg-nav, .rpcg-nav.scrolled{ padding-left:env(safe-area-inset-left); padding-right:env(safe-area-inset-right); }
+}
