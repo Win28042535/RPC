@@ -1,5 +1,5 @@
 /* คลังงบการเงินย้อนหลัง: 3 รูปแบบสำหรับนำเสนอ (A ปุ่มปี · A2 dropdown · B พับ/กางรายปี)
-   ข้อมูลจาก fs-archive-data.js · เลือกแบบด้วยแถบลอย หรือ ?v=a|a2|b (ค่าเริ่มต้น a2) · ปีที่เลือกอยู่ใน #yYYYY */
+   C กางทุกปี · ข้อมูลจาก fs-archive-data.js · เลือกแบบด้วยแถบลอย หรือ ?v=a|a2|b|c (ค่าเริ่มต้น a2) · ปีที่เลือกอยู่ใน #yYYYY */
 (() => {
   const root = document.getElementById('fsLib'); const DATA = window.RPCG_FS_ARCHIVE;
   if (!root || !DATA) return;
@@ -10,14 +10,14 @@
     doc: 'Document', view: 'View', dl: 'Download', na: 'Not yet published', fy: 'Financial year', docs: 'documents',
     pick: 'Select year', more: (n, y) => 'Show ' + n + ' earlier years (to ' + y + ')', capt: y => 'Financial statement documents ' + y,
     pn: (c, y) => c === 3 ? 'full year ' + y : 'Q' + (c + 1) + '/' + y,
-    tog: 'Archive layout', v: { a: ['A', 'Year buttons'], a2: ['A2', 'Dropdown'], b: ['B', 'Expand by year'] }
+    tog: 'Archive layout', v: { a: ['A', 'Year buttons'], a2: ['A2', 'Dropdown'], b: ['B', 'Expand by year'], c: ['C', 'All years'] }, jump: 'Jump to year'
   } : {
     rows: ['รายงานของผู้สอบบัญชี', 'งบการเงิน', 'หมายเหตุประกอบงบการเงิน'],
     cols: [['ไตรมาส 1', '31 มี.ค.'], ['ไตรมาส 2', '30 มิ.ย.'], ['ไตรมาส 3', '30 ก.ย.'], ['ประจำปี', '31 ธ.ค.']],
     doc: 'เอกสาร', view: 'ดู', dl: 'ดาวน์โหลด', na: 'ยังไม่เผยแพร่', fy: 'ปีงบการเงิน', docs: 'เอกสาร',
     pick: 'เลือกปีงบการเงิน', more: (n, y) => 'แสดงปีก่อนหน้าอีก ' + n + ' ปี (ถึง ' + y + ')', capt: y => 'เอกสารงบการเงินปี ' + y,
     pn: (c, y) => c === 3 ? 'ประจำปี ' + y : 'ไตรมาส ' + (c + 1) + '/' + y,
-    tog: 'ตัวอย่างคลังเอกสาร', v: { a: ['A', 'เลือกทีละปี'], a2: ['A2', 'Dropdown'], b: ['B', 'พับ/กางรายปี'] }
+    tog: 'ตัวอย่างคลังเอกสาร', v: { a: ['A', 'เลือกทีละปี'], a2: ['A2', 'Dropdown'], b: ['B', 'พับ/กางรายปี'], c: ['C', 'กางทุกปี'] }, jump: 'ไปยังปี'
   };
   const SRC = EN ? DATA.en : DATA.th;
   const lab = y => EN ? String(y) : String(+y + 543);           // ปีที่แสดง
@@ -54,6 +54,31 @@
       const show = (y, push) => { sel.value = y; box.querySelector('.fsd-title').innerHTML = head(y); box.querySelector('.fsd-table').innerHTML = table(y); if (push) setHash(y); };
       sel.addEventListener('change', () => show(sel.value, true));
       show(hashYear() || YEARS[0], false);
+    },
+    c(box) {
+      /* กางทุกปี: แถบปีติดบน (กดเลื่อนไปปีนั้น + ไฮไลต์ปีที่กำลังดู) · หัวปีติดบนขณะเลื่อน · วาดตารางเมื่อใกล้ถึง */
+      box.innerHTML = '<nav class="fsc-jump" aria-label="' + L.jump + '"><div class="fsc-jump-in">' +
+        YEARS.map(y => '<a href="#y' + lab(y) + '" data-y="' + y + '">' + lab(y) + '</a>').join('') + '</div></nav><div class="fsc-list">' +
+        YEARS.map(y => '<section class="fsc-year" id="y' + lab(y) + '" data-y="' + y + '" aria-label="' + L.fy + ' ' + lab(y) + '"><div class="fs-year-head fsc-head">' + head(y) + '</div><div class="fsc-body"></div></section>').join('') + '</div>';
+      const jump = box.querySelector('.fsc-jump'), jin = jump.firstChild, secs = [...box.querySelectorAll('.fsc-year')];
+      const bg = getComputedStyle(document.getElementById('fsLibSec') || document.body).backgroundColor;
+      const navH = () => { const n = document.querySelector('.rpcg-nav'); if (!n) return 0; const r = n.getBoundingClientRect(); return Math.max(0, Math.round(r.bottom)); }; /* เมนูซ่อนตัวเมื่อเลื่อนลง: ใช้ขอบล่างจริง */
+      const setTops = () => { box.style.setProperty('--fsc-nav', navH() + 'px'); box.style.setProperty('--fsc-jump', jump.offsetHeight + 'px'); box.style.setProperty('--fsc-bg', bg); };
+      setTops(); addEventListener('resize', setTops);
+      const fill = s => { if (!s._f) { s.querySelector('.fsc-body').innerHTML = table(s.dataset.y); s._f = 1; } };
+      if ('IntersectionObserver' in window) {
+        const lazy = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { fill(e.target); lazy.unobserve(e.target); } }), { rootMargin: '1200px 0px' });
+        secs.forEach(s => lazy.observe(s));
+      } else secs.forEach(fill);
+      const mark = y => { jin.querySelectorAll('a').forEach(a => { const on = a.dataset.y === y; a.classList.toggle('is-active', on); if (on) { a.setAttribute('aria-current', 'true'); const l = a.offsetLeft - (jin.clientWidth - a.offsetWidth) / 2; jin.scrollTo({ left: l, behavior: 'smooth' }); } else a.removeAttribute('aria-current'); }); };
+      const spy = () => { const line = navH() + jump.offsetHeight + 80; let cur = secs[0];
+        for (const s of secs) { if (s.getBoundingClientRect().top <= line) cur = s; else break; } if (cur.dataset.y !== box._cy) { box._cy = cur.dataset.y; mark(cur.dataset.y); } };
+      let tick = 0, settle = 0; const onScroll = () => { clearTimeout(settle); settle = setTimeout(() => { if (root.dataset.view === 'c') setTops(); }, 450); if (!tick) { tick = 1; requestAnimationFrame(() => { tick = 0; if (root.dataset.view === 'c') { setTops(); spy(); } }); } };
+      addEventListener('scroll', onScroll, { passive: true }); spy();
+      const go = (y, smooth) => { const s = secs.find(x => x.dataset.y === y); if (!s) return; secs.slice(0, secs.indexOf(s) + 1).forEach(fill);
+        const top = s.getBoundingClientRect().top + scrollY - navH() - jump.offsetHeight + 1; scrollTo({ top, behavior: smooth ? 'smooth' : 'auto' }); };
+      jin.addEventListener('click', e => { const a = e.target.closest('[data-y]'); if (!a) return; e.preventDefault(); setHash(a.dataset.y); go(a.dataset.y, !matchMedia('(prefers-reduced-motion: reduce)').matches); });
+      const h = hashYear(); if (h && box._ready !== 1) setTimeout(() => go(h, false), 60);
     },
     b(box) {
       const FIRST = 5, open = hashYear() || YEARS[0], oi = YEARS.indexOf(open);
