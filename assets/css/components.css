@@ -16,6 +16,8 @@
 .theme-tint   { --bg:var(--surface-muted); --fg:var(--ink); --fg-muted:var(--muted-2); --border:var(--line-dark); background:var(--bg); color:var(--fg); }
 .theme-dark   { --bg:var(--navy-2);  --fg:var(--text-inverse); --fg-muted:var(--text-inverse-muted); --border:var(--line); background:var(--bg); color:var(--fg); }
 .theme-primary{ --bg:var(--primary); --fg:var(--text-inverse); --fg-muted:var(--text-inverse-muted); --border:var(--line); background:var(--bg); color:var(--fg); }
+/* แถบเลื่อนบนพื้นเข้ม: ขาวโปร่ง */
+.theme-dark, .theme-primary, .on-dark{ --scrollbar-thumb:rgba(255,255,255,.22); --scrollbar-thumb-hover:rgba(255,255,255,.38); --scrollbar-thumb-active:rgba(255,255,255,.52); }
 
 /* โหมดพื้นเข้ม — ใช้ได้ทั้งที่ section (theme-dark / theme-primary) หรือใส่ .on-dark ที่ตัวปุ่ม / กลุ่มปุ่มเอง */
 .theme-dark, .theme-primary, .on-dark{

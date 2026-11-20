@@ -40,10 +40,11 @@ img{ max-width:100%; display:block; }
 /* scrollbar — เส้นบาง ลอยเป็นแคปซูล ไม่มีราง (เส้นจริงกว้าง 6px, ขอบโปร่งใสช่วยเว้นระยะ) */
 ::-webkit-scrollbar{ width:10px; height:10px; }
 ::-webkit-scrollbar-track{ background:transparent; }
-::-webkit-scrollbar-thumb{ background:var(--muted); border:2px solid transparent; background-clip:padding-box; border-radius:var(--r-pill); transition:background-color .3s var(--ease); }
-::-webkit-scrollbar-thumb:hover{ background:var(--muted-2); background-clip:padding-box; }
+::-webkit-scrollbar-thumb{ background:var(--scrollbar-thumb); border:2px solid transparent; background-clip:padding-box; border-radius:var(--r-pill); transition:background-color .3s var(--ease); }
+::-webkit-scrollbar-thumb:hover{ background:var(--scrollbar-thumb-hover); background-clip:padding-box; }
+::-webkit-scrollbar-thumb:active{ background:var(--scrollbar-thumb-active); background-clip:padding-box; }
 ::-webkit-scrollbar-corner{ background:transparent; }
-@supports not selector(::-webkit-scrollbar){ *{ scrollbar-width:thin; scrollbar-color:var(--muted) transparent; } }
+@supports not selector(::-webkit-scrollbar){ *{ scrollbar-width:thin; scrollbar-color:var(--scrollbar-thumb) transparent; } }
 /* เมนูที่เลื่อนในตัว (navbar มือถือ / mega-menu): ซ่อนแถบ แต่ยังเลื่อนได้ */
 .rpcg-nav .navbar-collapse, .ir-oc-panel{ scrollbar-width:none; }
 .rpcg-nav .navbar-collapse::-webkit-scrollbar, .ir-oc-panel::-webkit-scrollbar{ display:none; }
