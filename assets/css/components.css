@@ -203,8 +203,8 @@
 .data-table tbody td, .data-table tbody th{ border-bottom:1px solid var(--table-row-border); transition:background .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease); }
 .data-table tbody tr:last-child > *{ border-bottom:0; }
 .data-table tbody tr > :first-child{ border-left:2px solid transparent; }
-.data-table tr > :first-child{ border-right:1px solid var(--table-row-border); }
-.data-table .row-group > :first-child{ border-right:0; }
+.data-table tr > :first-child{ box-shadow:inset -1px 0 0 var(--table-row-border); } /* เส้นแบ่งคอลัมน์แรกเป็นเงาด้านใน: ไม่ตัดมุมเส้นแนวนอน เส้นหัวตาราง/แถวจึงต่อเนื่อง */
+.data-table .row-group > :first-child{ box-shadow:none; }
 .data-table tbody tr:not(.row-group):hover > *{ background:var(--table-row-hover); }
 .data-table tbody tr:not(.row-group):hover > :first-child{ border-left-color:var(--table-accent); }
 .data-table tbody tr:not(.row-group):hover > th{ color:var(--table-accent); font-weight:var(--fw-semibold); }

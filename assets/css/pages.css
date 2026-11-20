@@ -1231,6 +1231,10 @@ body.rd-plain{ padding-right:0; }
   .fs-matrix .is-fy{ border-left:6px solid var(--card-bg); background-clip:padding-box; }
   .fs-matrix thead th.is-new, .fs-matrix thead th.is-fy{ border-radius:var(--card-radius) var(--card-radius) 0 0; }
   .fs-matrix tbody tr:last-child > td.is-new, .fs-matrix tbody tr:last-child > td.is-fy{ border-radius:0 0 var(--card-radius) var(--card-radius); }
+  /* ต่อเส้นแนวนอนข้ามช่องว่างคั่นแถบ (ขอบซ้ายสีพื้นการ์ด) ให้เส้นหัวตารางและเส้นแถวเชื่อมกันตลอด */
+  .fs-matrix .is-fy::after{ content:""; position:absolute; left:-6px; bottom:-1px; width:6px; height:1px; background:var(--table-row-border); pointer-events:none; }
+  .fs-matrix thead .is-fy::after{ background:var(--table-head-border); }
+  .fs-matrix tbody tr:last-child > .is-fy::after{ display:none; }
 }
 /* ข้อมูลสำคัญทางการเงิน: badge อยู่บรรทัดใต้ชื่อรายการเสมอ ทุกการ์ดตรงแนวกัน */
 .fh-yoy .fh-kpi-top{ flex-direction:column; align-items:flex-start; gap:8px; }
@@ -1296,3 +1300,42 @@ body.rd-plain{ padding-right:0; }
   .fs-matrix tbody tr:hover .doc-title b{ color:var(--ink); transform:none; }
 }
 @media (max-width:374.98px){ .page-cta .button{ white-space:normal; text-align:left; max-width:100%; } } /* จอแคบมาก: ปุ่มข้อความยาว (EN) ขึ้นบรรทัดใหม่ได้ */
+
+/* ===== คลังงบการเงิน: 3 รูปแบบนำเสนอ ===== */
+/* A: ปุ่มปี */
+.fsa-bar{ display:flex; align-items:flex-start; gap:16px; margin-bottom:clamp(24px,3vw,36px); }
+.fsa-lab{ flex:none; padding-top:7px; font-size:var(--fs-sm); font-weight:var(--fw-semibold); color:var(--muted); }
+.fsa-years .tab{ font-variant-numeric:tabular-nums; }
+@media (max-width:767.98px){ .fsa-bar{ flex-direction:column; gap:10px; } .fsa-years{ flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; width:100%; padding-bottom:2px; -webkit-mask-image:linear-gradient(90deg,#000 85%,transparent); mask-image:linear-gradient(90deg,#000 85%,transparent); } .fsa-years::-webkit-scrollbar{ display:none; } .fsa-years .tab{ flex:none; } }
+/* A2: dropdown */
+.fsd-head{ flex-wrap:wrap; }
+.fsd-title{ display:flex; align-items:center; gap:12px; }
+.fsd-pick{ margin-left:auto; display:flex; }
+.fsd-sel{ min-width:180px; }
+.fsd-sel .field-input{ height:48px; padding-top:0; padding-bottom:0; font-variant-numeric:tabular-nums; font-weight:var(--fw-semibold); }
+@media (max-width:575.98px){ .fsd-pick{ margin-left:0; width:100%; } .fsd-sel{ flex:1; min-width:0; } }
+/* B: พับ/กางรายปี */
+.fsb-list{ border-top:1px solid var(--line); }
+.fsb-year{ border-bottom:1px solid var(--line); }
+.fsb-year > summary{ list-style:none; display:flex; align-items:center; gap:12px; padding:clamp(16px,1.8vw,22px) 4px; cursor:pointer; border-radius:var(--r-sm); transition:background-color .25s var(--ease); }
+.fsb-year > summary::-webkit-details-marker{ display:none; }
+.fsb-year > summary:hover{ background:var(--table-row-hover); }
+.fsb-year > summary:focus-visible{ outline:2px solid var(--primary); outline-offset:2px; }
+.fsb-year > summary h3{ margin:0; font-size:var(--fs-h5,1.125rem); font-weight:var(--fw-bold); font-variant-numeric:tabular-nums; }
+.fsb-ico{ margin-left:auto; display:grid; place-items:center; width:36px; height:36px; border-radius:var(--r-circle); border:1px solid var(--line); color:var(--primary); transition:transform .3s var(--ease), background-color .25s var(--ease); }
+.fsb-year[open] > summary .fsb-ico{ transform:rotate(180deg); background:var(--tab-pill-bg); }
+.fsb-year .data-table-wrap{ margin-bottom:clamp(20px,2.4vw,32px); }
+.fsb-more{ margin-top:clamp(20px,2.4vw,28px); display:flex; justify-content:center; }
+/* แถบสลับรูปแบบ (ใช้ระหว่างนำเสนอ) */
+.fsx-tog{ position:fixed; left:50%; bottom:20px; z-index:95; display:flex; align-items:center; gap:12px; padding:8px 8px 8px 18px; border-radius:var(--r-pill); background:rgba(255,255,255,.92); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px); border:1px solid var(--line-dark); box-shadow:0 12px 32px rgba(10,20,60,.18); font-size:14px; opacity:0; visibility:hidden; transform:translate(-50%,16px); transition:opacity .3s var(--ease), transform .3s var(--ease), bottom .35s var(--ease), visibility 0s .3s; }
+.fsx-tog.is-on{ opacity:1; visibility:visible; transform:translate(-50%,0); transition:opacity .3s var(--ease), transform .3s var(--ease), bottom .35s var(--ease); }
+.fsx-tog-lab{ font-weight:var(--fw-semibold); color:var(--muted); white-space:nowrap; }
+.fsx-tog-seg{ display:flex; gap:4px; padding:4px; border-radius:var(--r-pill); background:var(--tab-pill-bg); }
+.fsx-tog-seg a{ display:inline-flex; align-items:center; gap:6px; height:40px; padding:0 18px; border-radius:var(--r-pill); color:var(--ink); font-weight:var(--fw-semibold); white-space:nowrap; transition:background-color .2s, color .2s, box-shadow .2s; }
+.fsx-tog-seg a b{ display:inline-grid; place-items:center; min-width:24px; height:24px; padding:0 6px; border-radius:var(--r-pill); background:rgba(0,0,0,.07); font-size:12px; }
+.fsx-tog-seg a:hover{ background:rgba(0,0,0,.06); }
+.fsx-tog-seg a:focus-visible{ outline:2px solid var(--primary); outline-offset:2px; }
+.fsx-tog-seg a[aria-current]{ background:var(--primary); color:var(--text-inverse); box-shadow:0 4px 12px rgba(20,50,140,.3); }
+.fsx-tog-seg a[aria-current] b{ background:rgba(255,255,255,.22); }
+@media (max-width:767.98px){ .fsx-tog{ left:12px; right:12px; bottom:12px; padding:6px; transform:translateY(16px); } .fsx-tog.is-on{ transform:none; } .fsx-tog-lab{ display:none; } .fsx-tog-seg{ flex:1; } .fsx-tog-seg a{ flex:1; justify-content:center; padding:0 8px; } .fsx-tog-seg a span{ display:none; } .fsx-tog-seg a b, .fsx-tog-seg a[aria-current] b{ background:none; font-size:15px; } }
+@media (prefers-reduced-motion:reduce){ .fsx-tog, .fsx-tog.is-on{ transition:none; } }
