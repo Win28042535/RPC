@@ -1123,7 +1123,8 @@ body.rd-plain{ padding-right:0; }
 .gap-bento{ gap:var(--bento-gap); }
 .fs-feat{ display:flex; flex-direction:column; gap:12px; padding:var(--card-pad); }
 .fs-feat-top{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:4px; }
-.fs-feat-top .doc-ico{ background:var(--primary); color:var(--text-inverse); }
+/* ไอคอนไฟล์ใช้ doc-ico มาตรฐาน (พื้นอ่อน) ไม่แย่งเด่นกับปุ่มหลัก · ชี้การ์ดแล้วเติมสีแบบแถวตาราง */
+.fs-feat:hover .doc-ico{ background:var(--primary); color:var(--text-inverse); }
 .fs-ok::before{ content:'check_circle' !important; }
 .fs-feat h3{ margin:0; font-size:var(--fs-h3); font-weight:var(--fw-bold); line-height:var(--lh-heading); color:var(--ink); }
 .fs-feat-meta{ margin:0; font-size:var(--fs-sm); color:var(--muted-2); font-variant-numeric:tabular-nums; }
@@ -1155,11 +1156,8 @@ body.rd-plain{ padding-right:0; }
 .fs-matrix .fs-col .th-stack{ align-items:center; }
 .fs-matrix .fs-col small{ font-weight:var(--fw-regular); white-space:nowrap; }
 .fs-matrix tbody th{ font-weight:inherit; }
-.fs-matrix .doc-ico{ width:38px; height:44px; padding-bottom:5px; }
-.fs-matrix .doc-ico::before{ top:5px; }
-.fs-matrix .doc-title b{ font-size:var(--fs-sm); }
 .fs-cell{ text-align:center; }
-.fs-cell-in{ position:relative; display:inline-flex; align-items:center; justify-content:center; gap:6px; }
+.fs-cell-in{ position:relative; display:inline-flex; align-items:center; justify-content:center; gap:8px; }
 .fs-matrix .is-fy{ background:color-mix(in srgb,var(--primary) 5%,transparent); }
 .fs-na{ display:inline-block; min-width:2em; color:var(--line-dark-strong); font-weight:var(--fw-semibold); }
 .fs-new{ position:absolute; bottom:calc(100% + 4px); left:50%; transform:translateX(-50%); padding:1px 8px; border-radius:var(--r-pill); background:var(--brand); color:var(--ink); font-size:10px; font-weight:var(--fw-bold); letter-spacing:.04em; line-height:1.5; white-space:nowrap; }
@@ -1174,9 +1172,9 @@ body.rd-plain{ padding-right:0; }
   .fs-year .data-table-wrap{ overflow:visible; }
   .fs-matrix, .fs-matrix tbody, .fs-matrix tr{ display:block; min-width:0; width:100%; }
   .fs-matrix thead{ display:none; }
-  .fs-matrix tr{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; padding:16px 0; border-top:1px solid var(--table-row-border); }
+  .fs-matrix tr{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; padding:22px 0; border-top:1px solid var(--table-row-border); }
   .fs-matrix tbody th{ grid-column:1 / -1; padding:0 0 4px; border:0; }
-  .fs-matrix td.fs-cell{ display:flex; align-items:center; justify-content:space-between; gap:8px; padding:8px 10px; border:1px solid var(--line-dark); border-radius:var(--r-sm); text-align:left; }
+  .fs-matrix td.fs-cell{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px; border:1px solid var(--line-dark); border-radius:var(--r-sm); text-align:left; }
   .fs-matrix td.fs-cell::before{ content:attr(data-col); font-size:var(--fs-xs); font-weight:var(--fw-semibold); color:var(--muted-2); white-space:nowrap; }
   .fs-matrix td.fs-cell.is-fy{ background:color-mix(in srgb,var(--primary) 5%,transparent); }
   .fs-new{ position:static; transform:none; margin-right:2px; }
@@ -1226,3 +1224,72 @@ body.rd-plain{ padding-right:0; }
 .cg-text p + p{ margin-top:1em; }
 .ab-head > .chip{ align-self:flex-end; }
 @media (max-width:374.98px){ .bd-filter .tab{ white-space:normal; text-align:left; max-width:100%; } } /* ชื่อคณะกรรมการยาวขึ้นบรรทัดใหม่ได้บนจอแคบ */
+/* งบการเงิน: แถบเขียว (งวดล่าสุด) กับแถบเทา (ประจำปี) แยกกัน มีช่องว่างคั่น + มุมโค้งแบบการ์ด */
+@media (min-width:768px){
+  .fs-matrix .is-fy{ border-left:6px solid var(--card-bg); background-clip:padding-box; }
+  .fs-matrix thead th.is-new, .fs-matrix thead th.is-fy{ border-radius:var(--card-radius) var(--card-radius) 0 0; }
+  .fs-matrix tbody tr:last-child > td.is-new, .fs-matrix tbody tr:last-child > td.is-fy{ border-radius:0 0 var(--card-radius) var(--card-radius); }
+}
+/* ข้อมูลสำคัญทางการเงิน: badge อยู่บรรทัดใต้ชื่อรายการเสมอ ทุกการ์ดตรงแนวกัน */
+.fh-yoy .fh-kpi-top{ flex-direction:column; align-items:flex-start; gap:8px; }
+.fh-yoy .chip{ white-space:normal; }
+/* งบการเงิน: ก้อนตัวเลข 9 เดือนสูงเท่าฝั่งซ้าย การ์ด 4 ใบแบ่งความสูงเท่ากัน */
+@media (min-width:992px){
+  .fs-kpi-col{ display:flex; flex-direction:column; }
+  .fs-kpi-col .fs-kpis{ flex:1 1 auto; align-content:stretch; }
+  .fs-kpi-col .fs-kpis > [class*="col-"]{ display:flex; }
+  .fs-kpi-col .fs-kpis .fh-kpi{ flex:1; }
+}
+@media (max-width:991.98px){ .fs-kpi-col{ margin-top:clamp(16px,3vw,24px); } } /* จอเรียงลง: เว้นระยะก่อนหัวข้อตัวเลขสำคัญ */
+/* งบการเงิน: ระยะหายใจของตาราง — หัวคอลัมน์ไม่ชิดขอบแถบ · แถวสุดท้ายเว้นก่อนมุมโค้ง · มือถือหัวการ์ดเว้นจากช่องงวด */
+@media (min-width:768px){ .fs-matrix thead th{ padding-top:18px; } .fs-matrix tbody tr:last-child > *{ padding-bottom:24px; } }
+@media (max-width:767.98px){ .fs-matrix tbody th{ padding-bottom:8px; } }
+
+/* ==========================================================================
+   งบการเงิน: hover / focus ของตาราง (ตรวจ interaction แล้ว)
+   1) แถบสีคงอยู่เมื่อ hover แถว (เข้มขึ้นแทนการถูกทับด้วยสีเทา)
+   2) ปุ่มดู/ดาวน์โหลดตอบสนองแบบเดียวกับ .doc-actions (เส้นน้ำเงิน → พื้นน้ำเงิน)
+   3) ชี้ช่องงวด = ช่องนั้นมีพื้นอ่อน + หัวคอลัมน์เป็นสีน้ำเงิน
+   4) hover เฉพาะอุปกรณ์ที่มีเมาส์ · 5) คีย์บอร์ด (:focus-within) ได้ผลเหมือน hover
+   ========================================================================== */
+.fs-matrix .fs-cell .button-icon:hover, .fs-matrix .fs-cell .button-icon:focus-visible{ background:var(--table-accent); border-color:var(--table-accent); color:var(--text-inverse); }
+@media (hover:hover) and (min-width:768px){
+  .fs-matrix tbody tr:hover > td.is-new{ background:color-mix(in srgb,var(--brand) 16%,transparent); }
+  .fs-matrix tbody tr:hover > td.is-fy{ background:color-mix(in srgb,var(--primary) 9%,transparent); }
+  .fs-matrix tbody tr:hover .fs-cell .button-icon{ border-color:var(--table-accent); color:var(--table-accent); }
+  .fs-matrix tbody tr:hover .fs-cell .button-icon:hover{ color:var(--text-inverse); }
+  .fs-matrix tbody td.fs-cell:not(.is-na):hover{ background:color-mix(in srgb,var(--primary) 8%,transparent); }
+  .fs-matrix tbody td.fs-cell.is-new:not(.is-na):hover{ background:color-mix(in srgb,var(--brand) 24%,transparent); }
+  .fs-matrix tbody td.fs-cell.is-fy:not(.is-na):hover{ background:color-mix(in srgb,var(--primary) 13%,transparent); }
+  .fs-matrix:has(tbody td:nth-child(2):not(.is-na):hover) thead th:nth-child(2) b,
+  .fs-matrix:has(tbody td:nth-child(3):not(.is-na):hover) thead th:nth-child(3) b,
+  .fs-matrix:has(tbody td:nth-child(4):not(.is-na):hover) thead th:nth-child(4) b,
+  .fs-matrix:has(tbody td:nth-child(5):not(.is-na):hover) thead th:nth-child(5) b{ color:var(--table-accent); }
+}
+@media (min-width:768px){
+  .fs-matrix tbody tr:focus-within > *{ background:var(--table-row-hover); }
+  .fs-matrix tbody tr:focus-within > :first-child{ border-left-color:var(--table-accent); }
+  .fs-matrix tbody tr:focus-within > td.is-new{ background:color-mix(in srgb,var(--brand) 16%,transparent); }
+  .fs-matrix tbody tr:focus-within > td.is-fy{ background:color-mix(in srgb,var(--primary) 9%,transparent); }
+  .fs-matrix tbody tr:focus-within .doc-ico{ background:var(--primary); color:var(--text-inverse); }
+  .fs-matrix tbody tr:focus-within .doc-title b{ color:var(--primary); }
+  .fs-matrix tbody tr:focus-within .fs-cell .button-icon{ border-color:var(--table-accent); color:var(--table-accent); }
+  .fs-matrix tbody tr:focus-within .fs-cell .button-icon:focus-visible{ color:var(--text-inverse); }
+  .fs-matrix tbody td.fs-cell:focus-within{ background:color-mix(in srgb,var(--primary) 8%,transparent); }
+  .fs-matrix tbody td.fs-cell.is-new:focus-within{ background:color-mix(in srgb,var(--brand) 24%,transparent); }
+  .fs-matrix tbody td.fs-cell.is-fy:focus-within{ background:color-mix(in srgb,var(--primary) 13%,transparent); }
+  .fs-matrix:has(tbody td:nth-child(2):focus-within) thead th:nth-child(2) b,
+  .fs-matrix:has(tbody td:nth-child(3):focus-within) thead th:nth-child(3) b,
+  .fs-matrix:has(tbody td:nth-child(4):focus-within) thead th:nth-child(4) b,
+  .fs-matrix:has(tbody td:nth-child(5):focus-within) thead th:nth-child(5) b{ color:var(--table-accent); }
+}
+/* จอสัมผัส / มือถือ: ไม่ค้างสถานะ hover หลังแตะ */
+@media (hover:none), (max-width:767.98px){
+  .fs-matrix tbody tr:not(.row-group):hover > *{ background:transparent; }
+  .fs-matrix tbody tr:not(.row-group):hover > td.is-new{ background:color-mix(in srgb,var(--brand) 10%,transparent); }
+  .fs-matrix tbody tr:not(.row-group):hover > td.is-fy{ background:color-mix(in srgb,var(--primary) 5%,transparent); }
+  .fs-matrix tbody tr:not(.row-group):hover > :first-child{ border-left-color:transparent; }
+  .fs-matrix tbody tr:not(.row-group):hover > th{ color:inherit; font-weight:inherit; }
+  .fs-matrix tbody tr:hover .doc-ico{ background:var(--surface-muted); color:var(--primary); }
+  .fs-matrix tbody tr:hover .doc-title b{ color:var(--ink); transform:none; }
+}

@@ -233,8 +233,8 @@
 .data-table .row-latest > :first-child{ border-left-color:var(--table-accent); font-weight:var(--fw-semibold); }
 /* คอลัมน์เน้น */
 .data-table .col-highlight, .data-table tbody tr:not(.row-group):hover > .col-highlight{ background:var(--table-col-bg); color:var(--table-col-fg); border-bottom-color:var(--line); }
-.data-table thead .col-highlight{ border-radius:var(--r-sm) var(--r-sm) 0 0; border-bottom-color:var(--border-inverse); }
-.data-table tbody tr:last-child > .col-highlight{ border-radius:0 0 var(--r-sm) var(--r-sm); }
+.data-table thead .col-highlight{ border-radius:var(--card-radius) var(--card-radius) 0 0; border-bottom-color:var(--border-inverse); }
+.data-table tbody tr:last-child > .col-highlight{ border-radius:0 0 var(--card-radius) var(--card-radius); }
 .data-table td.col-highlight{ font-weight:var(--fw-bold); }
 .data-table td.col-highlight.is-down{ color:color-mix(in srgb,var(--danger) 30%,var(--table-col-fg)); }
 .data-table tbody tr:not(.row-group):hover > .col-highlight{ filter:brightness(1.12); }
