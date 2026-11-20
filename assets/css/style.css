@@ -2178,3 +2178,5 @@ body.ck-open .back-top{ opacity:0; visibility:hidden; }
 @media (max-width:575.98px){ .biz-affil{ flex-wrap:wrap; } .biz-affil-go{ margin-left:calc(clamp(96px,12vw,168px) + 16px); } }
 @media (max-width:575.98px){ .hero-sim-more{ display:none; } }
 
+/* จอแคบมาก: ปุ่มข้อความยาว (EN) ขึ้นบรรทัดใหม่ได้ ไม่ดันหน้าเกินจอ */
+@media (max-width:374.98px){ #news .button{ white-space:normal; text-align:left; } }

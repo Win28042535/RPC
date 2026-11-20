@@ -431,8 +431,8 @@
   }));
 
   /* ---------- กราฟแท่ง: <div class="bars" data-bars='{"labels":[…],"values":[…],"partial":[i]}' data-dec="2"> ----------
-     วาดด้วย ECharts ผ่านสคริปต์กลาง assets/js/charts.js (RPCCharts.bars) เหมือนกราฟทุกตัวในเว็บ — หน้าต้องโหลด echarts + charts.js ก่อน pages.js */
-  const drawBars = (el, cfg) => { if (window.RPCCharts) window.RPCCharts.bars(el, cfg); };
+     วาดด้วย ECharts ผ่านสคริปต์กลาง assets/js/charts.js (RPCGCharts.bars) เหมือนกราฟทุกตัวในเว็บ — หน้าต้องโหลด echarts + charts.js ก่อน pages.js */
+  const drawBars = (el, cfg) => { if (window.RPCGCharts) window.RPCGCharts.bars(el, cfg); };
   document.querySelectorAll('[data-bars]').forEach((el) => {
     let cfg; try { cfg = JSON.parse(el.dataset.bars); } catch (e) { return; }
     drawBars(el, cfg);
