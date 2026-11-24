@@ -1553,7 +1553,7 @@ body > section, body > footer{ position:relative; z-index:1; }
 .biz-figures > div{ flex:1; padding-right:clamp(16px,2vw,28px); }
 .biz-figures > div + div{ padding-left:clamp(16px,2vw,28px); border-left:1px solid var(--line); }
 .biz-figures b{ font-size:calc(var(--fs-stat) * .9); }
-.biz-site{ margin-top:clamp(16px,2vw,24px); }
+.biz-site{ margin-top:20px; }
 .biz-show-ctrl{ margin-top:clamp(16px,1.8vw,24px); padding-top:16px; border-top:1px solid var(--line); }
 @media (max-width:991.98px){
   .biz-show-panels{ width:auto; right:auto; bottom:auto; }
@@ -2176,7 +2176,7 @@ body.ck-open .back-top{ opacity:0; visibility:hidden; }
 .biz-affil-copy strong{ font-family:var(--ff-display); font-size:var(--fs-h4); font-weight:var(--fw-semibold); color:var(--primary); }
 .biz-affil-copy span{ font-size:var(--fs-sm); color:var(--muted-2); }
 .biz-affil-go{ flex:none; display:inline-flex; align-items:center; gap:8px; font-family:var(--ff-display); font-weight:var(--fw-semibold); color:var(--ink); border-bottom:1px solid currentColor; padding:4px 0; }
-@media (max-width:575.98px){ .biz-affil{ flex-wrap:wrap; } .biz-affil-go{ margin-left:calc(clamp(96px,12vw,168px) + 16px); } }
+@media (max-width:575.98px){ .biz-affil{ flex-wrap:wrap; align-items:flex-start; } .biz-affil-go{ margin-left:calc(clamp(96px,12vw,168px) + 16px); } }
 @media (max-width:575.98px){ .hero-sim-more{ display:none; } }
 
 /* จอแคบมาก: ปุ่มข้อความยาว (EN) ขึ้นบรรทัดใหม่ได้ ไม่ดันหน้าเกินจอ */
@@ -2191,3 +2191,5 @@ body.ck-open .back-top{ opacity:0; visibility:hidden; }
   body{ padding-left:env(safe-area-inset-left); padding-right:env(safe-area-inset-right); }
   .rpcg-nav, .rpcg-nav.scrolled{ padding-left:env(safe-area-inset-left); padding-right:env(safe-area-inset-right); }
 }
+/* หัวส่วน: ปุ่มต่อจากคำอธิบายต้องมีระยะหายใจ (จังหวะ ป้าย 16 → หัวข้อ 18 → คำอธิบาย 24 → ปุ่ม) */
+.section-desc + .button{ margin-top:24px; }
