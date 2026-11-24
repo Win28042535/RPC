@@ -2193,3 +2193,5 @@ body.ck-open .back-top{ opacity:0; visibility:hidden; }
 }
 /* หัวส่วน: ปุ่มต่อจากคำอธิบายต้องมีระยะหายใจ (จังหวะ ป้าย 16 → หัวข้อ 18 → คำอธิบาย 24 → ปุ่ม) */
 .section-desc + .button{ margin-top:24px; }
+/* hero statement: คงไว้ 2 บรรทัดเสมอบนจอแคบ (ย่อขนาดตามความกว้างจอแทนการตัดบรรทัดเพิ่ม) */
+@media (max-width:419.98px){ .hero-statement{ white-space:nowrap; font-size:min(var(--fs-h3), 6vw); } }
