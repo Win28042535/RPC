@@ -1373,3 +1373,39 @@ body.rd-plain{ padding-right:0; }
   .fs-wrap{ padding-left:0; padding-right:0; }
   .fs-matrix tr{ padding-left:clamp(10px,1.4vw,20px); padding-right:clamp(10px,1.4vw,20px); }
 }
+/* งบการเงิน: เอกสารในชุดงวดล่าสุด (แทนตัวเลขสำคัญ 9 เดือน — ข้อมูลตัวเลขอยู่ที่หน้าข้อมูลสำคัญทางการเงิน) */
+.fs-latest .fs-feat{ flex:1 1 auto; }
+.fs-set{ display:flex; flex-direction:column; width:100%; padding:var(--card-pad); }
+.fs-set-h{ display:flex; align-items:center; gap:12px; margin:0 0 6px; font-size:var(--fs-h4); font-weight:var(--fw-bold); line-height:var(--lh-heading); color:var(--ink); }
+.fs-set-list{ list-style:none; margin:0; padding:0; flex:1 1 auto; display:flex; flex-direction:column; justify-content:space-around; }
+.fs-set-item{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:18px 0; border-top:1px solid var(--table-row-border); }
+.fs-set-item:first-child{ border-top:0; }
+.fs-set-item .doc-cell{ min-width:0; }
+.fs-set-item .doc-title span{ font-size:var(--fs-xs); color:var(--muted-2); }
+.fs-set-item:hover .doc-ico{ background:var(--primary); color:var(--text-inverse); }
+@media (max-width:374.98px){ .fs-set-item{ flex-wrap:wrap; } .fs-set-item .doc-actions{ margin-left:auto; } }
+/* ตัวอย่าง A: แถบเดียวเต็มความกว้าง (ZIP + SET) · B2: ซ่อนปุ่ม ZIP */
+.fs-band{ display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:center; gap:clamp(16px,2.4vw,32px); padding:var(--card-pad); }
+.fs-band-copy h3{ margin:0; font-size:var(--fs-h3); font-weight:var(--fw-bold); line-height:var(--lh-heading); color:var(--ink); }
+.fs-band-copy .fs-feat-meta{ margin-top:8px; }
+.fs-band-inc{ display:flex; align-items:center; gap:10px; margin:12px 0 0; font-size:var(--fs-sm); color:var(--muted); }
+.fs-band-inc .icon{ color:var(--primary); font-size:var(--fs-h4); }
+.fs-band-acts{ display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end; }
+@media (max-width:991.98px){ .fs-band{ grid-template-columns:auto minmax(0,1fr); } .fs-band-acts{ grid-column:1 / -1; justify-content:flex-start; } }
+@media (max-width:575.98px){ .fs-band{ grid-template-columns:minmax(0,1fr); } .fs-band > .doc-ico{ justify-self:start; } }
+/* ตัวอย่าง B2: การ์ดเดียว — หัว (ชื่องบ + วันที่) แล้วเอกสาร 3 ชิ้นเรียงเป็นช่องเท่ากัน แต่ละช่องมีปุ่มดู / ดาวน์โหลดชัดเจน */
+.fs-rel{ padding:var(--card-pad); }
+.fs-rel-head{ display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:clamp(20px,2.4vw,28px); }
+.fs-rel-head h3{ margin:0; font-size:var(--fs-h3); font-weight:var(--fw-bold); line-height:var(--lh-heading); color:var(--ink); }
+.fs-rel-head .fs-feat-meta{ margin-top:8px; }
+.fs-rel-docs{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--bento-gap); }
+.fs-rel-doc{ display:flex; flex-direction:column; gap:14px; padding:clamp(18px,1.8vw,24px); border:1px solid var(--line-dark); border-radius:var(--r-md,12px); background:var(--card-bg); transition:border-color .25s var(--ease), box-shadow .25s var(--ease); }
+.fs-rel-doc:hover{ border-color:color-mix(in srgb,var(--primary) 40%,transparent); box-shadow:var(--shadow-sm); }
+.fs-rel-doc:hover .doc-ico{ background:var(--primary); color:var(--text-inverse); }
+.fs-rel-name{ display:flex; flex-direction:column; gap:4px; flex:1 1 auto; }
+.fs-rel-name b{ font-size:var(--fs-p); font-weight:var(--fw-semibold); line-height:var(--lh-ui); color:var(--ink); }
+.fs-rel-name span{ font-size:var(--fs-xs); color:var(--muted-2); }
+.fs-rel-acts{ display:flex; flex-wrap:wrap; gap:8px; }
+.fs-rel-acts .button{ flex:1 1 auto; justify-content:center; }
+@media (max-width:991.98px){ .fs-rel-docs{ grid-template-columns:minmax(0,1fr); } .fs-rel-doc{ display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:center; } .fs-rel-acts .button{ flex:none; } }
+@media (max-width:575.98px){ .fs-rel-head{ flex-direction:column; gap:10px; } .fs-rel-doc{ grid-template-columns:auto minmax(0,1fr); } .fs-rel-acts{ grid-column:1 / -1; } .fs-rel-acts .button{ flex:1 1 0; } }
